@@ -3,9 +3,10 @@ version: "alpha"
 name: "Nocturne — Aurora palette × Stitch system"
 description: "A hybrid identity: the Aurora cool-palette story (navy → blue → violet → magenta on near-black, neutral grayscale on white) wired into the Stitch typographic and component DNA (Inter, 88px display headlines, label-md uppercase eyebrows, 6px button radius, flat surfaces, minimal motion)."
 colors:
-  primary: "#171717"
-  secondary: "#404040"
-  tertiary: "#6B2EC7"
+  primary: "#1E3A8A"
+  primary-hover: "#162E6F"
+  secondary: "#6B2EC7"
+  tertiary: "#B8187A"
   neutral: "#FFFFFF"
   background: "#FFFFFF"
   surface: "#FFFFFF"
@@ -14,31 +15,32 @@ colors:
   text-secondary: "#404040"
   text-muted: "#737373"
   text-on-inverted: "#FFFFFF"
+  text-on-primary: "#FFFFFF"
   border: "#D4D4D4"
   border-subtle: "#E8E8E8"
-  accent: "#6B2EC7"
+  accent: "#1E3A8A"
   hero-glow-1: "#0A1A4A"
   hero-glow-2: "#1E3A8A"
   hero-glow-3: "#6B2EC7"
   hero-glow-4: "#B8187A"
 typography:
   display-lg:
-    fontFamily: "Inter"
+    fontFamily: "Newsreader"
     fontSize: "88px"
-    fontWeight: 500
-    lineHeight: "88px"
-    letterSpacing: "-0.05em"
+    fontWeight: 400
+    lineHeight: "92px"
+    letterSpacing: "-0.03em"
   display-md:
-    fontFamily: "Inter"
+    fontFamily: "Newsreader"
     fontSize: "56px"
-    fontWeight: 500
-    lineHeight: "60px"
-    letterSpacing: "-0.04em"
+    fontWeight: 400
+    lineHeight: "62px"
+    letterSpacing: "-0.025em"
   heading-md:
-    fontFamily: "Inter"
-    fontSize: "20px"
-    fontWeight: 600
-    lineHeight: "28px"
+    fontFamily: "Newsreader"
+    fontSize: "22px"
+    fontWeight: 500
+    lineHeight: "30px"
     letterSpacing: "-0.01em"
   body-lg:
     fontFamily: "Inter"
@@ -99,8 +101,8 @@ components:
     rounded: "{rounded.md}"
     padding: "10px 28px"
   button-accent:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.text-on-inverted}"
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.text-on-primary}"
     typography: "{typography.label-md}"
     rounded: "{rounded.md}"
     padding: "10px 28px"
@@ -126,7 +128,7 @@ components:
 
 ## Overview
 
-Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-black hero/footer wrapping a paper-white reading zone, with a cool navy-to-magenta gradient as the only chromatic moment — but rebuilds the typographic and component layer on the Stitch system: Inter at 88px for display, label-md uppercase for eyebrows, 6px-radius buttons, flat surfaces, and a minimal motion budget that the hero shader explicitly overrides.
+Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-black hero/footer wrapping a paper-white reading zone, with a cool navy-to-magenta gradient as the only chromatic moment — and adds Aurora Blue (`#1E3A8A`) pulled directly from the hero's `blob--mid` layer as the brand primary. The typographic and component layer is borrowed from Stitch and refined into an editorial pair: **Newsreader** serif for every heading H1–H6, **Inter** sans for body, labels, and chrome. Buttons sit at 6px radius, surfaces stay flat, and the minimal motion budget is explicitly overridden by the hero shader.
 
 - **Composition cues:**
   - Layout: Grid
@@ -137,31 +139,34 @@ Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-blac
 
 ## Colors
 
-The palette is dichromatic with a single accent. Two material zones — pure black and paper white — hold the page together; a violet-to-magenta arc lives only inside the hero gradient and the rare interactive accent. Neutral grayscale carries everything else.
+The palette is anchored by a single brand color — Aurora Blue (`#1E3A8A`), pulled directly from the hero shader's `blob--mid` layer. Two material zones (paper white body, pure-black hero/footer) hold the page together; the brand blue is the one chromatic note that ties the body back to the hero. Violet and magenta remain in the hero's gradient as supporting hues but are not used as flat colors elsewhere.
 
-- **Primary (#171717):** Near-black ink for headlines, body copy, and high-emphasis text on white surfaces.
-- **Secondary (#404040):** Medium neutral for body copy and supporting text.
-- **Tertiary (#6B2EC7):** Aurora violet — the system's only chromatic accent. Use sparingly: focus rings, link hover states, optional accent CTAs. Most pages can ship without it.
+- **Primary (#1E3A8A):** Aurora Blue — the brand color. Used for the primary action CTA on white surfaces, focus rings, link hover states, and any UI moment that needs to feel "Nocturne-branded". This blue exists in the hero blobs already, so when it appears flat below the hero, the whole page reads as the same identity.
+- **Primary Hover (#162E6F):** A 1-step-darker blue for hover/pressed states on `button-accent`. Avoid using as a fill color anywhere else.
+- **Secondary (#6B2EC7):** Aurora violet. Optional accent for one moment per page if a second chromatic pull is needed (e.g. an inline link, a tag). Not a default — most pages should ship without it.
+- **Tertiary (#B8187A):** Aurora magenta. Decorative only — lives inside the hero shader. Do not use as a flat color.
 - **Neutral (#FFFFFF):** Paper white — the dominant body canvas.
 - **Surface Inverted (#000000):** Pure black hero/footer surface that hosts the shader gradients.
 - **Aurora hues (#0A1A4A, #1E3A8A, #6B2EC7, #B8187A):** Deep navy → blue → violet → magenta. Reserved for the animated hero blobs and the SVG noise grain.
-- **Text scale on white:** Primary `#171717`, Secondary `#404040`, Muted `#737373`. Use Muted for `label-md` eyebrows; Secondary for body copy under a heading; Primary for the heading itself.
+- **Text scale on white:** Primary text `#171717` (near-black ink, NOT the brand blue), Secondary `#404040`, Muted `#737373`. Use Muted for `label-md` eyebrows; Secondary for body copy under a heading; near-black for the heading itself. Headlines do not use the brand blue — type stays neutral, blue belongs to action.
 - **Borders:** `#D4D4D4` for input chrome and clear edges; `#E8E8E8` for subtle dividers.
-- **Accent (#6B2EC7):** The same violet that lives in the hero blobs. When it appears as a flat color (focus ring, accent button, link hover), it ties the body back to the hero's chromatic identity.
+- **Accent (#1E3A8A):** Alias of `primary`. The same blue that lives in `blob--mid`. When it appears as a flat color (focus ring, accent button, link hover), it ties the body back to the hero.
 
 ## Typography
 
-Typography uses Inter across the entire system. The scale is borrowed wholesale from Stitch — a wide range that lets a single hero headline dominate at 88px while body copy stays at a calm 16px. Weights are 400 / 500 / 600.
+Typography is a sanctioned two-family pair: **Newsreader** (a screen-optimized serif from Google Fonts) for every heading H1–H6, and **Inter** for body, labels, navigation, and buttons. The serif/sans split is the editorial signature of the system — a literary headline against a quiet sans body. Both families are loaded with weights 400 and 500 only; bold headlines are not part of the system.
 
-- **Display LG (`display-lg`):** Inter, 88px, weight 500, line-height 88px, letter-spacing −0.05em. Hero headline. Use sparingly — once per page.
-- **Display MD (`display-md`):** Inter, 56px, weight 500, line-height 60px, letter-spacing −0.04em. Section headlines (h2) on white surfaces.
-- **Heading MD (`heading-md`):** Inter, 20px, weight 600, line-height 28px, letter-spacing −0.01em. Card titles and three-up feature headings (h3).
+- **Display LG (`display-lg`):** Newsreader, 88px, weight 400, line-height 92px, letter-spacing −0.03em. Hero headline (h1). Once per page.
+- **Display MD (`display-md`):** Newsreader, 56px, weight 400, line-height 62px, letter-spacing −0.025em. Section headlines (h2) on white surfaces.
+- **Heading MD (`heading-md`):** Newsreader, 22px, weight 500, line-height 30px, letter-spacing −0.01em. Card titles and three-up feature headings (h3 and below — h4/h5/h6 reuse this token at the same size unless a deeper hierarchy genuinely needs a smaller serif step).
 - **Body LG (`body-lg`):** Inter, 18px, weight 400, line-height 29px. Lead paragraphs that follow a section headline.
 - **Body MD (`body-md`):** Inter, 16px, weight 400, line-height 26px. Default running text.
 - **Body SM (`body-sm`):** Inter, 14px, weight 400, line-height 21px. Card descriptions, footer links, mobile nav.
 - **Label MD (`label-md`):** Inter, 12px, weight 500, line-height 16px, letter-spacing 0.3px, uppercase. Eyebrow over every section headline; also the typography baseline for buttons.
 
-Display weight is 500 (medium), not 700 — visual weight comes from size and tight letter-spacing, not stroke heaviness. Hero headlines carry a soft drop shadow (`drop-shadow(0 2px 40px rgba(0,0,0,0.7))`) so they remain legible against the moving gradient.
+Display weight is 400 (regular) — the serif's natural stroke contrast already provides visual weight; a 500 or 600 cut would over-darken the page. Tight negative letter-spacing on display sizes keeps Newsreader from feeling sprawling at 88px.
+
+Hero headlines carry a soft drop shadow (`drop-shadow(0 2px 40px rgba(0,0,0,0.7))`) so they remain legible against the moving gradient. Apply `font-feature-settings: 'ss01'` on Newsreader to enable the alternate styles where available.
 
 ## Layout
 
@@ -208,12 +213,12 @@ Components are deliberately few. The hero CTA, the inverted CTA on white surface
 
 - **Primary (on dark hero):** background `#FFFFFF`, text `#171717`, radius 6px, padding 10px 28px, `label-md` typography (12px / 0.3px tracking / uppercase). Atmospheric glow `box-shadow: 0 0 40px rgba(255,255,255,0.18)`. Hover transitions to `#FAFAFA`.
 - **Inverted (primary on white):** background `#000000`, text `#FFFFFF`, radius 6px, padding 10px 28px, `label-md` typography. No shadow. Hover to `#171717`. Use as the contact form submit and any other primary action on white.
-- **Accent (optional, on white):** background `#6B2EC7`, text `#FFFFFF`, radius 6px, padding 10px 28px, `label-md` typography. Reserve for one moment per page where the chromatic accent earns its place — never as the default CTA.
+- **Accent (primary on white):** background `#1E3A8A` (Aurora Blue), text `#FFFFFF`, radius 6px, padding 10px 28px, `label-md` typography. Hover transitions to `#162E6F`. This is the standard primary action on white surfaces — the contact form submit, any "Get started" CTA. The inverted (black) button is the alternate when the section needs to lean editorial-neutral instead of branded.
 - **Nav links (in hero):** white text at 90% opacity, `body-sm`, 0px radius, 0px padding, 40px column gap. Hover bumps opacity to 100%.
 
 ### Inputs
 
-- **Email field:** background `#FFFFFF`, text `#171717`, placeholder `#A3A3A3`, 1px border `#D4D4D4`, radius 6px, padding 14px 20px, `body-md` typography. Focus uses a 2px ring at `rgba(107,46,199,0.25)` and a violet `#6B2EC7` border — the one place the accent shows up by default.
+- **Email field:** background `#FFFFFF`, text `#171717`, placeholder `#A3A3A3`, 1px border `#D4D4D4`, radius 6px, padding 14px 20px, `body-md` typography. Focus uses a 2px ring at `rgba(30,58,138,0.25)` and a blue `#1E3A8A` border — pulling the brand color into the form interaction.
 
 ### Cards & Surfaces
 
@@ -269,8 +274,9 @@ Use these constraints to keep future generations aligned with the current system
 
 - Don't introduce drop shadows on white-surface cards. The system uses material contrast, not elevation.
 - Don't recolor the hero shader with warm hues (orange/red/amber). The blobs must stay inside the cool palette so the system reads as a night-sky identity, not a sunrise.
-- Don't bold a display headline. Bold belongs to `heading-md` (h3) only.
-- Don't mix non-Inter fonts. The entire system is single-family.
+- Don't bold a display headline. The serif is set at weight 400; weight 500 is reserved for `heading-md` (h3 and below).
+- Don't introduce a third typeface. The system is exactly two families: Newsreader (every heading) and Inter (everything else). No display sans for headlines, no script accents, no UI serif for body.
+- Don't set body copy in Newsreader. The serif belongs to headings. Body, labels, navigation, and buttons stay in Inter.
 - Don't add a third surface tone. The page is white-and-black; introducing gray cards or tinted sections breaks the editorial bookend.
 - Don't speed up or shorten the blob animations. Their slowness (32–50s cycles) is what keeps the hero from feeling like a screensaver.
 - Don't let the violet accent take over. If `button-accent`, focus rings, and link-hover all light up violet at once, the page reads as chromatic noise. One accent moment per section, max.
