@@ -19,7 +19,11 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts are loaded via CSS @font-face -->
+  <!-- Fonts: Inter (body) + Newsreader (headings H1–H6). See design-nocturne.md. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- FOUC-free dark mode: must run before first paint -->
@@ -94,16 +98,16 @@
 
         <!-- Hero body: bottom of hero, 2fr title / 1fr subtitle+CTA -->
         <div class="mt-auto grid grid-cols-1 items-center gap-8 pb-16 md:grid-cols-[2fr_1fr] md:gap-16">
-          <h1 class="max-w-[18ch] text-5xl font-normal leading-[1.1] tracking-tight drop-shadow-[0_2px_40px_rgba(0,0,0,0.7)] sm:text-6xl md:text-7xl">
+          <h1 class="max-w-[16ch] text-5xl font-normal leading-[1.05] tracking-[-0.02em] drop-shadow-[0_2px_40px_rgba(0,0,0,0.7)] sm:text-6xl md:text-7xl lg:text-[88px] lg:leading-[92px] lg:tracking-[-0.03em]">
             Begin this journey with us and immerse yourself in limitless inspiration
           </h1>
 
           <div class="flex flex-col gap-5">
-            <p class="text-base leading-relaxed opacity-95 drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)]">
+            <p class="font-sans text-base leading-relaxed opacity-95 drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)]">
               Join us in crafting a digital experience<br>
               that truly distinguishes you from others
             </p>
-            <a href="#contact" class="block w-full rounded-sm border border-white bg-white px-7 py-4 text-center font-semibold text-neutral-900 shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-colors hover:bg-neutral-100">
+            <a href="#contact" class="block w-full rounded-md border border-white bg-white px-7 py-3 text-center font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-900 shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-colors hover:bg-neutral-100">
               Our services
             </a>
           </div>
@@ -132,8 +136,8 @@
     <!-- ===== First Content Section (white, below hero) ===== -->
     <section id="about" class="bg-white px-8 py-24 text-neutral-900 md:py-28">
       <div class="mx-auto max-w-[1200px]">
-        <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-neutral-500" data-animate>Our approach</p>
-        <h2 class="mb-12 max-w-[22ch] text-4xl font-normal leading-[1.15] tracking-tight md:text-5xl" data-animate data-delay="1">
+        <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Our approach</p>
+        <h2 class="mb-12 max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
           Design that respects the people using it
         </h2>
         <p class="max-w-[60ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
@@ -142,19 +146,19 @@
 
         <div class="mt-16 grid gap-12 md:grid-cols-3">
           <div data-animate data-delay="1">
-            <h3 class="mb-3 text-xl font-semibold tracking-tight">Research-led</h3>
+            <h3 class="mb-3 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Research-led</h3>
             <p class="text-[0.95rem] leading-relaxed text-neutral-600">
               Every project begins with understanding the audience. We talk to users, map their workflows, and identify where friction lives before writing a single line of code.
             </p>
           </div>
           <div data-animate data-delay="2">
-            <h3 class="mb-3 text-xl font-semibold tracking-tight">Craft-focused</h3>
+            <h3 class="mb-3 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Craft-focused</h3>
             <p class="text-[0.95rem] leading-relaxed text-neutral-600">
               Details compound. Typography, spacing, motion, micro-interactions — each decision is considered and tested, because collectively they shape how a product feels.
             </p>
           </div>
           <div data-animate data-delay="3">
-            <h3 class="mb-3 text-xl font-semibold tracking-tight">Built to last</h3>
+            <h3 class="mb-3 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Built to last</h3>
             <p class="text-[0.95rem] leading-relaxed text-neutral-600">
               We design systems, not just screens. The result is a foundation that grows with your product rather than needing to be rebuilt every few years.
             </p>
@@ -191,8 +195,8 @@
     <!-- ===== Card Carousel (over-the-edge) ===== -->
     <section id="work" class="bg-white px-8 py-24 text-neutral-900 md:py-28">
       <div class="mx-auto mb-12 max-w-[1200px]">
-        <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-neutral-500" data-animate>Selected work</p>
-        <h2 class="max-w-[22ch] text-4xl font-normal leading-[1.15] tracking-tight md:text-5xl" data-animate data-delay="1">
+        <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Selected work</p>
+        <h2 class="max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
           Projects that get quieter the longer you look
         </h2>
       </div>
@@ -210,8 +214,8 @@
                 <img src="img/woman-working-at-desk.jpg" alt="Polaris Records identity system" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Identity</p>
-                <h3 class="mt-2 text-lg font-semibold tracking-tight">Polaris Records</h3>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Identity</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Polaris Records</h3>
                 <p class="mt-1 text-sm leading-relaxed text-neutral-600">A modular visual language spanning album art, event posters, and digital platforms.</p>
               </div>
             </article>
@@ -221,8 +225,8 @@
                 <img src="img/man-laughing-at-laptop.jpg" alt="Rivet analytics dashboard" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Product</p>
-                <h3 class="mt-2 text-lg font-semibold tracking-tight">Rivet — operations dashboard</h3>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Product</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Rivet — operations dashboard</h3>
                 <p class="mt-1 text-sm leading-relaxed text-neutral-600">An operations command center built around the three questions operators actually ask.</p>
               </div>
             </article>
@@ -232,8 +236,8 @@
                 <img src="img/woman-executive-portrait.jpg" alt="Field &amp; Form storefront redesign" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">E-commerce</p>
-                <h3 class="mt-2 text-lg font-semibold tracking-tight">Field &amp; Form</h3>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">E-commerce</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Field &amp; Form</h3>
                 <p class="mt-1 text-sm leading-relaxed text-neutral-600">A storefront that lets the product photography do the work. +28% conversion in ninety days.</p>
               </div>
             </article>
@@ -243,8 +247,8 @@
                 <img src="img/17df7053-a8e3-4561-8eff-9cb87098fa49.jpg" alt="Atlas Quarterly editorial platform" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Editorial</p>
-                <h3 class="mt-2 text-lg font-semibold tracking-tight">Atlas Quarterly</h3>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Editorial</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Atlas Quarterly</h3>
                 <p class="mt-1 text-sm leading-relaxed text-neutral-600">A reading experience that treats long-form writing as a craft, not a feed.</p>
               </div>
             </article>
@@ -254,8 +258,8 @@
                 <img src="img/woman-presenting-whiteboard.jpg" alt="Mossline field app for ecologists" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Mobile</p>
-                <h3 class="mt-2 text-lg font-semibold tracking-tight">Mossline</h3>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Mobile</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Mossline</h3>
                 <p class="mt-1 text-sm leading-relaxed text-neutral-600">Field data collection for ecologists working in places without cell service.</p>
               </div>
             </article>
@@ -265,8 +269,8 @@
                 <img src="img/69b075bf-a322-4950-8b47-6f30df277b92.jpg" alt="Meridian hospitality brand refresh" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Brand</p>
-                <h3 class="mt-2 text-lg font-semibold tracking-tight">Meridian</h3>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Brand</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Meridian</h3>
                 <p class="mt-1 text-sm leading-relaxed text-neutral-600">A hospitality group repositioning itself for a more discerning audience.</p>
               </div>
             </article>
@@ -428,8 +432,8 @@
     <section id="contact" class="bg-white px-8 py-24 text-neutral-900 md:py-32">
       <div class="mx-auto grid max-w-[1200px] items-center gap-12 md:grid-cols-[3fr_2fr]">
         <div>
-          <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-neutral-500" data-animate>Start a conversation</p>
-          <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.1] tracking-tight md:text-5xl" data-animate data-delay="1">
+          <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Start a conversation</p>
+          <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
             Let&rsquo;s build something worth using
           </h2>
           <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
@@ -445,9 +449,9 @@
             type="email"
             required
             placeholder="you@company.com"
-            class="w-full rounded-sm border border-neutral-300 bg-white px-5 py-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
+            class="w-full rounded-md border border-neutral-300 bg-white px-5 py-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-[#1E3A8A] focus:outline-none focus:ring-2 focus:ring-[#1E3A8A]/25"
           >
-          <button type="submit" class="w-full rounded-sm bg-black px-7 py-4 text-center font-semibold text-white transition-colors hover:bg-neutral-800">
+          <button type="submit" class="w-full rounded-md bg-[#1E3A8A] px-7 py-3 text-center text-xs font-medium uppercase tracking-[0.3px] text-white transition-colors hover:bg-[#162E6F]">
             Get in touch
           </button>
           <p class="mt-1 text-xs text-neutral-500">We only use your email to reply. No lists, no follow-ups.</p>

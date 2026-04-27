@@ -1,52 +1,43 @@
 @import "tailwindcss";
 
-/* ===== Fonts ===== */
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins-500.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins-600.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
+/* Inter (body, labels, chrome) and Newsreader (headings H1–H6) are loaded
+ * via <link> in index.html (Google Fonts). See design-nocturne.md.
+ */
 
 /* ===== Dark Mode Variant ===== */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ===== Theme: Light Mode (Default) ===== */
+/* ===== Theme: Nocturne (design-nocturne.md) =====
+ * Paper white body, pure-black hero/footer, Aurora Blue (#1E3A8A) brand —
+ * pulled from the hero shader's blob--mid layer. Two-family typography:
+ * Newsreader serif for headings, Inter sans for body and chrome.
+ */
 
 @theme {
-  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif:   'Newsreader', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(9.8% 0 0);
-  --color-muted: oklch(96% 0 0);
-  --color-muted-foreground: oklch(40% 0 0);
-  --color-border: oklch(91% 0 0);
-  --color-primary: oklch(11% 0 0);
-  --color-primary-foreground: oklch(98% 0 0);
-  --color-accent: oklch(96% 0 0);
-  --color-accent-foreground: oklch(11% 0 0);
+  /* Nocturne palette */
+  --color-background:        #FFFFFF;
+  --color-surface:            #FFFFFF;
+  --color-surface-inverted:   #000000;
+  --color-foreground:         #171717;  /* primary ink for body/headlines */
+  --color-muted:              #F5F5F5;
+  --color-muted-foreground:   #737373;
+  --color-border:             #D4D4D4;
+  --color-border-subtle:      #E8E8E8;
+  --color-primary:            #1E3A8A;  /* Aurora Blue, from blob--mid */
+  --color-primary-hover:      #162E6F;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary:          #6B2EC7;  /* aurora violet, decorative only */
+  --color-tertiary:           #B8187A;  /* aurora magenta, decorative only */
+  --color-accent:             #1E3A8A;
+  --color-accent-foreground:  #FFFFFF;
+  --color-text-on-inverted:   #FFFFFF;
 
-  /* Aurora palette — used by the shader-style hero */
+  /* Hero shader glow palette — cool side of the spectrum */
   --color-aurora-dark:    #0a1a4a;
   --color-aurora-mid:     #1e3a8a;
   --color-aurora-violet:  #6b2ec7;
@@ -56,15 +47,27 @@
 /* ===== Dark Mode Overrides ===== */
 
 .dark {
-  --color-background: oklch(7% 0 0);
-  --color-foreground: oklch(98% 0 0);
-  --color-muted: oklch(13% 0 0);
-  --color-muted-foreground: oklch(65% 0 0);
-  --color-border: oklch(22% 0 0);
-  --color-primary: oklch(98% 0 0);
-  --color-primary-foreground: oklch(7% 0 0);
-  --color-accent: oklch(13% 0 0);
-  --color-accent-foreground: oklch(98% 0 0);
+  --color-background:        #0A0A0A;
+  --color-surface:            #171717;
+  --color-foreground:         #FAFAFA;
+  --color-muted:              #171717;
+  --color-muted-foreground:   #A3A3A3;
+  --color-border:             #262626;
+  --color-primary:            #3B5FBF;  /* lifted blue for dark mode contrast */
+  --color-primary-foreground: #FFFFFF;
+  --color-accent:             #3B5FBF;
+  --color-accent-foreground:  #FFFFFF;
+}
+
+/* ===== Headings: Newsreader serif by default for H1–H6 =====
+ * design-nocturne.md mandates the serif on every heading. Using a base
+ * rule here keeps markup clean — no per-element font class needed.
+ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-feature-settings: 'ss01';
+  letter-spacing: -0.02em;
 }
 
 /* ===== Base Styles ===== */
@@ -75,10 +78,12 @@
 
 body {
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.625;
   color: var(--color-foreground);
   background-color: var(--color-background);
+  font-feature-settings: 'cv11', 'ss01';
 }
 
 /* ===== Section Variants ===== */
