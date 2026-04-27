@@ -243,6 +243,18 @@ A flat white "paper" container that mirrors the hero glass panel's geometry on t
 - **Section frame:** Wrap the panel in a section that uses `bg-stone-100` (the gray canvas, `#F5F5F4`). When the panel directly follows the hero, the section uses `pt-0 pb-12 md:pb-16` so the panel sits flush against the bottom of the hero with no gray gap above; otherwise use `py-12 md:py-16` so the panel reads as floating on the gray with a visible gap on all sides.
 - **When to use:** On the editorially loaded sections — typically the studio intro and the contact form. The white panel says "stop and read", the flat gray says "scroll through". Mix them deliberately: a content panel sandwich (panel → flat gray → panel) gives the page a clear pacing instead of an unbroken white scroll. Two panels per page is the comfortable maximum.
 
+### Footer Panel (`.footer-panel`)
+
+The dark counterpart of the content panel — same geometry, opposite material. Used to bookend the page in the same Polar-Night surface as the hero, so the dark hero opens and a dark footer closes.
+
+- **Background:** `#1C1917` — the same near-black stone the hero uses. Visually ties the bottom of the page to the top.
+- **Edges:** A single hairline `1px solid #292524` border on all four sides — slightly lighter than the panel fill, almost invisible against the dark surface but just enough to define the panel's edges as it floats on the gray canvas.
+- **Width:** Identical responsive sizing to `.content-panel` and `.hero-glass-panel` — `max-width: calc(1200px + 96px)` default, `1200 + 240` at `≥1440px`, `1200 + 400` at `≥1800px`. The three panels read as siblings.
+- **Centering:** `margin: 0 auto`.
+- **Internal padding:** `padding-top` / `padding-bottom: 96px`. Horizontal padding handled by the inner `mx-auto max-w-[1200px]` wrapper.
+- **Text:** `#FAFAFA` (paper white on the near-black surface).
+- **Section frame:** Wrap the panel in `<footer class="bg-stone-100 px-8 py-12 md:py-16">` so a small gray gap shows above and below the dark panel — making it read as a floating Polar-Night card rather than a full-bleed footer.
+
 ### Section Eyebrow Pattern
 
 Every white section opens with the same three-line stack:

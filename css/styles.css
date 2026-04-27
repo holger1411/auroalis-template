@@ -222,6 +222,9 @@
   }
 }
 @layer utilities {
+  .invisible {
+    visibility: hidden;
+  }
   .visible {
     visibility: visible;
   }
@@ -677,6 +680,9 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
+  .py-0 {
+    padding-block: calc(var(--spacing) * 0);
+  }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
   }
@@ -700,9 +706,6 @@
   }
   .py-24 {
     padding-block: calc(var(--spacing) * 24);
-  }
-  .py-32 {
-    padding-block: calc(var(--spacing) * 32);
   }
   .pt-0 {
     padding-top: calc(var(--spacing) * 0);
@@ -1228,16 +1231,6 @@
       padding-block: calc(var(--spacing) * 28);
     }
   }
-  .md\:py-32 {
-    @media (width >= 48rem) {
-      padding-block: calc(var(--spacing) * 32);
-    }
-  }
-  .md\:py-40 {
-    @media (width >= 48rem) {
-      padding-block: calc(var(--spacing) * 40);
-    }
-  }
   .md\:pb-16 {
     @media (width >= 48rem) {
       padding-bottom: calc(var(--spacing) * 16);
@@ -1592,6 +1585,26 @@ html:not(.js) [data-animate] {
 }
 @media (min-width: 1800px) {
   .content-panel {
+    max-width: calc(1200px + 400px);
+  }
+}
+.footer-panel {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(1200px + 96px);
+  background: #1C1917;
+  color: #FAFAFA;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  border: 1px solid #292524;
+}
+@media (min-width: 1440px) {
+  .footer-panel {
+    max-width: calc(1200px + 240px);
+  }
+}
+@media (min-width: 1800px) {
+  .footer-panel {
     max-width: calc(1200px + 400px);
   }
 }
