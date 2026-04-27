@@ -339,6 +339,9 @@
   .mt-24 {
     margin-top: calc(var(--spacing) * 24);
   }
+  .mt-32 {
+    margin-top: calc(var(--spacing) * 32);
+  }
   .mt-auto {
     margin-top: auto;
   }
@@ -641,6 +644,9 @@
   }
   .border-neutral-300 {
     border-color: var(--color-neutral-300);
+  }
+  .border-stone-200 {
+    border-color: var(--color-stone-200);
   }
   .border-stone-300 {
     border-color: var(--color-stone-300);
