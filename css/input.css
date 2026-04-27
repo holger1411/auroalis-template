@@ -353,7 +353,11 @@ html:not(.js) [data-animate] {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1200px;
+  /* 1200px content + 48px breathing room on each side, so the headline
+   * and CTA sit comfortably inside the glass instead of touching its
+   * vertical edges. The panel still narrows to viewport width on
+   * smaller screens via the section's px-8 padding. */
+  max-width: calc(1200px + 96px);
   pointer-events: none;
   background: linear-gradient(
     to bottom,
