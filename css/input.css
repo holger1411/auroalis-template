@@ -401,6 +401,13 @@ html:not(.js) [data-animate] {
   background: var(--color-surface);
   padding-top: 96px;
   padding-bottom: 96px;
+  /* Hairline borders on left, right, and bottom only — slightly darker
+   * than the surrounding stone-100 canvas so the panel reads as a
+   * defined card. Top is intentionally bare so the panel meets the
+   * hero/preceding section without a hard line. */
+  border-left: 1px solid #E7E5E4;
+  border-right: 1px solid #E7E5E4;
+  border-bottom: 1px solid #E7E5E4;
 }
 
 @media (min-width: 1440px) {

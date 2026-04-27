@@ -235,11 +235,12 @@ Components are deliberately few. The hero CTA, the inverted CTA on white surface
 
 A flat white "paper" container that mirrors the hero glass panel's geometry on the gray content canvas. Used to lift a featured section (e.g. the studio overview / "The work" intro) off the surrounding gray as a single white card.
 
-- **Background:** `#FFFFFF` (paper white). No tint, no backdrop-filter, no border, no shadow — this is the plain counterpart of the glass panel.
+- **Background:** `#FFFFFF` (paper white). No tint, no backdrop-filter, no shadow.
+- **Edges:** Hairline `1px solid #E7E5E4` (stone-200, one step darker than the surrounding stone-100 canvas) on the **left, right, and bottom only**. Top edge is intentionally bare so the panel can meet the hero or a preceding section flush, without a hard horizontal line interrupting the transition.
 - **Width:** Matches the hero glass panel's responsive sizing exactly. `max-width: calc(1200px + 96px)` by default; `calc(1200px + 240px)` at `≥1440px`; `calc(1200px + 400px)` at `≥1800px`.
 - **Centering:** `margin-left: auto; margin-right: auto`.
 - **Internal padding:** `padding-top` / `padding-bottom: 96px`. No horizontal padding — the inner `mx-auto max-w-[1200px]` wrapper provides the same horizontal breathing room (48px → 200px responsive) the content gets inside the hero glass.
-- **Section frame:** Wrap the panel in a section that uses `bg-stone-100` (the gray canvas, `#F5F5F4`) and modest vertical padding (`py-12 md:py-16`) so the white panel reads as floating on the gray with a small visible gap above and below.
+- **Section frame:** Wrap the panel in a section that uses `bg-stone-100` (the gray canvas, `#F5F5F4`). When the panel directly follows the hero, the section uses `pt-0 pb-12 md:pb-16` so the panel sits flush against the bottom of the hero with no gray gap above; otherwise use `py-12 md:py-16` so the panel reads as floating on the gray with a visible gap on all sides.
 - **When to use:** One panel per page maximum, on the most editorially loaded section (the studio intro). Other content sections sit flat on the gray canvas without a panel — the white card is the visual emphasis that says "this is the lede".
 
 ### Section Eyebrow Pattern
