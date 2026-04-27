@@ -236,7 +236,10 @@ Components are deliberately few. The hero CTA, the inverted CTA on white surface
 A flat white "paper" container that mirrors the hero glass panel's geometry on the gray content canvas. Used to lift a featured section (e.g. the studio overview / "The work" intro) off the surrounding gray as a single white card.
 
 - **Background:** `#FFFFFF` (paper white). No tint, no backdrop-filter, no shadow.
-- **Edges:** Hairline `1px solid #E7E5E4` (stone-200, one step darker than the surrounding stone-100 canvas) on the **left, right, and bottom only**. Top edge is intentionally bare so the panel can meet the hero or a preceding section flush, without a hard horizontal line interrupting the transition.
+- **Edges:** Hairline `1px solid #E7E5E4` (stone-200, one step darker than the surrounding stone-100 canvas) on three sides — the open side flips depending on which neighbour the panel is flush against:
+  - **Default (`.content-panel`):** left, right, **bottom**. Top is bare. Use when the panel sits flush against the section *above* it (the hero or another panel).
+  - **Bottom-flush variant (`.content-panel--bottom-flush`):** left, right, **top**. Bottom is bare. Use when the panel sits flush against the section *below* it (the footer panel). Apply this on the contact panel.
+  Three sides always carry the hairline; the open edge faces the neighbour the panel meets without a gap.
 - **Width:** Matches the hero glass panel's responsive sizing exactly. `max-width: calc(1200px + 96px)` by default; `calc(1200px + 240px)` at `≥1440px`; `calc(1200px + 400px)` at `≥1800px`.
 - **Centering:** `margin-left: auto; margin-right: auto`.
 - **Internal padding:** `padding-top` / `padding-bottom: 96px`. No horizontal padding — the inner `mx-auto max-w-[1200px]` wrapper provides the same horizontal breathing room (48px → 200px responsive) the content gets inside the hero glass.
@@ -248,7 +251,7 @@ A flat white "paper" container that mirrors the hero glass panel's geometry on t
 The dark counterpart of the content panel — same geometry, opposite material. Used to bookend the page in the same Polar-Night surface as the hero, so the dark hero opens and a dark footer closes.
 
 - **Background:** `rgba(255, 255, 255, 0.05)` — white at 5% opacity over the black outer footer. Just enough lift to read as a panel (the dark-mode equivalent of the white content panel sitting on gray); subtle enough that the vertical hairlines are what really define the edges.
-- **Edges:** Vertical hairlines only. `border-left` and `border-right` at `1px solid rgba(255, 255, 255, 0.2)` — identical to the hero glass panel's edges. Top and bottom are bare so the page's polar-night bookends share exactly the same border treatment.
+- **Edges:** Three-sided hairline at `1px solid rgba(255, 255, 255, 0.2)` — `border-left`, `border-right`, and `border-bottom`. Top is bare so the footer panel sits flush against the contact panel above without a visible line at the seam. The vertical edges share the hero glass panel's exact border weight; the bottom edge closes the page.
 - **Width:** Identical responsive sizing to `.content-panel` and `.hero-glass-panel` — `max-width: calc(1200px + 96px)` default, `1200 + 240` at `≥1440px`, `1200 + 400` at `≥1800px`. The three panels read as siblings.
 - **Centering:** `margin: 0 auto`.
 - **Internal padding:** `padding-top` / `padding-bottom: 96px`. Horizontal padding handled by the inner `mx-auto max-w-[1200px]` wrapper.

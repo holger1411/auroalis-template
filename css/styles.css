@@ -1575,6 +1575,10 @@ html:not(.js) [data-animate] {
   border-right: 1px solid #E7E5E4;
   border-bottom: 1px solid #E7E5E4;
 }
+.content-panel--bottom-flush {
+  border-top: 1px solid #E7E5E4;
+  border-bottom: 0;
+}
 @media (min-width: 1440px) {
   .content-panel {
     max-width: calc(1200px + 240px);
@@ -1595,6 +1599,7 @@ html:not(.js) [data-animate] {
   padding-bottom: 96px;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 @media (min-width: 1440px) {
   .footer-panel {
