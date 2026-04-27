@@ -353,10 +353,10 @@ html:not(.js) [data-animate] {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  /* 1200px content + 48px breathing room on each side, so the headline
-   * and CTA sit comfortably inside the glass instead of touching its
-   * vertical edges. The panel still narrows to viewport width on
-   * smaller screens via the section's px-8 padding. */
+  /* 1200px content + 48px breathing room on each side by default; on
+   * wide screens the breathing room grows so the glass column doesn't
+   * feel cramped against an otherwise-vast aurora. The panel narrows
+   * to viewport width on smaller screens via the section's px-8. */
   max-width: calc(1200px + 96px);
   pointer-events: none;
   background: linear-gradient(
@@ -366,6 +366,20 @@ html:not(.js) [data-animate] {
   );
   backdrop-filter: blur(16px) saturate(120%);
   -webkit-backdrop-filter: blur(16px) saturate(120%);
+  /* Hairline vertical edges — white at 20% opacity. Top and bottom
+   * are intentionally left bare so the panel reads as a glass column
+   * the page passes through, not a framed card. */
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Larger screens get progressively more breathing room around the
+ * glass so the aurora has more room to read at the edges. */
+@media (min-width: 1440px) {
+  .hero-glass-panel { max-width: calc(1200px + 240px); }   /* 120px each side */
+}
+@media (min-width: 1800px) {
+  .hero-glass-panel { max-width: calc(1200px + 400px); }   /* 200px each side */
 }
 
 /* Subtle SVG-noise grain overlay — keeps the gradients from looking plasticky */
