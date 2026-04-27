@@ -438,7 +438,11 @@ html:not(.js) [data-animate] {
   color: #FAFAFA;
   padding-top: 96px;
   padding-bottom: 96px;
-  border: 1px solid #292524;
+  /* Vertical-only hairlines, identical to the hero glass panel's
+   * edges. The two dark panels (hero + footer) share exactly the same
+   * border treatment so the page's polar-night bookends rhyme. */
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (min-width: 1440px) {
