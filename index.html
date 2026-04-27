@@ -441,33 +441,35 @@
     </template>
 
     <!-- ===== CTA — start a conversation ===== -->
-    <section id="contact" class="bg-stone-100 px-8 py-24 text-neutral-900 md:py-32">
-      <div class="mx-auto grid max-w-[1200px] items-center gap-12 md:grid-cols-[3fr_2fr]">
-        <div>
-          <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Open a study</p>
-          <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
-            Send a signal. We listen for it.
-          </h2>
-          <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
-            Tell us about the program — the site, the instrument, the question you&rsquo;re trying to answer at 3 AM with a sensor that won&rsquo;t hold calibration. We reply within two days during the polar night.
-          </p>
-        </div>
+    <section id="contact" class="bg-stone-100 px-8 pt-0 pb-12 text-neutral-900 md:pb-16">
+      <div class="content-panel">
+        <div class="mx-auto grid max-w-[1200px] items-center gap-12 md:grid-cols-[3fr_2fr]">
+          <div>
+            <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Open a study</p>
+            <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
+              Send a signal. We listen for it.
+            </h2>
+            <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
+              Tell us about the program — the site, the instrument, the question you&rsquo;re trying to answer at 3 AM with a sensor that won&rsquo;t hold calibration. We reply within two days during the polar night.
+            </p>
+          </div>
 
-        <form class="flex flex-col gap-3" action="#" method="post" data-animate data-delay="2">
-          <label for="email" class="sr-only">Email address</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="you@company.com"
-            class="w-full rounded-md border border-neutral-300 bg-white px-5 py-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-[#6B2EC7] focus:outline-none focus:ring-2 focus:ring-[#6B2EC7]/25"
-          >
-          <button type="submit" class="w-full rounded-md bg-[#6B2EC7] px-7 py-3 text-center text-xs font-medium uppercase tracking-[0.3px] text-white transition-colors hover:bg-[#5928A8]">
-            Get in touch
-          </button>
-          <p class="mt-1 text-xs text-neutral-500">We only use your email to reply. No lists, no follow-ups.</p>
-        </form>
+          <form class="flex flex-col gap-3" action="#" method="post" data-animate data-delay="2">
+            <label for="email" class="sr-only">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="you@company.com"
+              class="w-full rounded-md border border-neutral-300 bg-white px-5 py-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-[#6B2EC7] focus:outline-none focus:ring-2 focus:ring-[#6B2EC7]/25"
+            >
+            <button type="submit" class="w-full rounded-md bg-[#6B2EC7] px-7 py-3 text-center text-xs font-medium uppercase tracking-[0.3px] text-white transition-colors hover:bg-[#5928A8]">
+              Get in touch
+            </button>
+            <p class="mt-1 text-xs text-neutral-500">We only use your email to reply. No lists, no follow-ups.</p>
+          </form>
+        </div>
       </div>
     </section>
 

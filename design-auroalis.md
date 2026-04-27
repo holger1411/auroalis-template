@@ -241,7 +241,7 @@ A flat white "paper" container that mirrors the hero glass panel's geometry on t
 - **Centering:** `margin-left: auto; margin-right: auto`.
 - **Internal padding:** `padding-top` / `padding-bottom: 96px`. No horizontal padding — the inner `mx-auto max-w-[1200px]` wrapper provides the same horizontal breathing room (48px → 200px responsive) the content gets inside the hero glass.
 - **Section frame:** Wrap the panel in a section that uses `bg-stone-100` (the gray canvas, `#F5F5F4`). When the panel directly follows the hero, the section uses `pt-0 pb-12 md:pb-16` so the panel sits flush against the bottom of the hero with no gray gap above; otherwise use `py-12 md:py-16` so the panel reads as floating on the gray with a visible gap on all sides.
-- **When to use:** One panel per page maximum, on the most editorially loaded section (the studio intro). Other content sections sit flat on the gray canvas without a panel — the white card is the visual emphasis that says "this is the lede".
+- **When to use:** On the editorially loaded sections — typically the studio intro and the contact form. The white panel says "stop and read", the flat gray says "scroll through". Mix them deliberately: a content panel sandwich (panel → flat gray → panel) gives the page a clear pacing instead of an unbroken white scroll. Two panels per page is the comfortable maximum.
 
 ### Section Eyebrow Pattern
 
