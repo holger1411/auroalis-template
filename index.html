@@ -576,9 +576,10 @@
   </main>
 
   <!-- ===== Footer ===== -->
-  <footer class="bg-black px-8 pt-0 pb-12 md:pb-16">
-    <div class="footer-panel">
-      <div class="mx-auto max-w-[1200px]">
+  <footer class="bg-black">
+    <div class="px-8 pt-0 pb-8">
+      <div class="footer-panel">
+        <div class="mx-auto max-w-[1200px]">
       <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <!-- Brand -->
         <div>
@@ -616,6 +617,17 @@
         </div>
       </div>
       <p class="mt-20 text-sm text-white/40">&copy; 2026 Auroalis Observation Studio. All rights reserved.</p>
+        </div>
+
+        <!-- Giant brand mark — Newsreader serif stretched via SVG
+             textLength to span exactly 100% of the footer panel's
+             inner width. Sits at the bottom of the panel, above the
+             panel's vertical padding edge. -->
+        <div class="mt-16 w-full overflow-hidden leading-none">
+          <svg viewBox="0 0 1000 180" preserveAspectRatio="xMidYMax meet" class="block w-full text-white/95" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="500" y="160" text-anchor="middle" font-family="Newsreader, ui-serif, serif" font-size="180" font-weight="500" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="currentColor">Auroalis</text>
+          </svg>
+        </div>
       </div>
     </div>
   </footer>
