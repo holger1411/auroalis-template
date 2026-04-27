@@ -60,27 +60,13 @@
       <div class="blob blob--violet-2"></div>
       <div class="blob blob--green"></div>
 
-      <!-- Glass louvre — 5 vertical slices fading from opaque (left) to
-           nearly transparent (right). Sits above every blob so it softens
-           the moving gradients, below the content (text + CTA) which keep
-           full crispness. Each slice has its own backdrop-blur depth so
-           the right edge reveals more aurora than the left. -->
-      <div class="absolute inset-0 flex">
-        <!-- Slice 1: opaque, blends with the polar-night base -->
-        <div class="h-full flex-1 relative border-l border-transparent" style="background: linear-gradient(to right, rgba(3,7,18,1) 0%, rgba(3,7,18,0.85) 100%);"></div>
-
-        <!-- Slice 2 -->
-        <div class="h-full flex-1 relative border-l border-white/10 shadow-[-15px_0_30px_-10px_rgba(0,0,0,0.5)]" style="background: linear-gradient(to right, rgba(3,7,18,0.85), rgba(3,7,18,0.65)); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"></div>
-
-        <!-- Slice 3 -->
-        <div class="h-full flex-1 relative border-l border-white/5 shadow-[-15px_0_30px_-10px_rgba(0,0,0,0.4)]" style="background: linear-gradient(to right, rgba(3,7,18,0.65), rgba(3,7,18,0.4)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"></div>
-
-        <!-- Slice 4 -->
-        <div class="h-full flex-1 relative border-l border-white/5 shadow-[-15px_0_30px_-10px_rgba(0,0,0,0.3)]" style="background: linear-gradient(to right, rgba(3,7,18,0.4), rgba(3,7,18,0.15)); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);"></div>
-
-        <!-- Slice 5: rightmost, nearly transparent — the aurora reads strongest here -->
-        <div class="h-full flex-1 relative border-l border-white/5 shadow-[-15px_0_30px_-10px_rgba(0,0,0,0.2)]" style="background: linear-gradient(to right, rgba(3,7,18,0.15), rgba(3,7,18,0.02)); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);"></div>
-      </div>
+      <!-- Glass panel — sits behind the content container only.
+           Centered at the same 1200px max-width as the content so on
+           wider screens the aurora blobs are visible at the edges and
+           the glass appears as a frosted reading surface in the middle.
+           Painted above the blobs (DOM order) but below the content's
+           z-10 layer. -->
+      <div class="hero-glass-panel"></div>
 
       <!-- Subtle SVG grain overlay -->
       <div class="hero-grain"></div>
