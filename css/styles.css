@@ -15,6 +15,7 @@
     --color-neutral-700: oklch(37.1% 0 0);
     --color-neutral-800: oklch(26.9% 0 0);
     --color-neutral-900: oklch(20.5% 0 0);
+    --color-stone-100: oklch(97% 0.001 106.424);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -62,6 +63,7 @@
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-background: #FFFFFF;
+    --color-surface: #FFFFFF;
     --color-foreground: #171717;
     --color-muted: #F5F5F5;
     --color-muted-foreground: #737373;
@@ -645,6 +647,9 @@
   .bg-primary {
     background-color: var(--color-primary);
   }
+  .bg-stone-100 {
+    background-color: var(--color-stone-100);
+  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -1207,6 +1212,11 @@
       gap: calc(var(--spacing) * 16);
     }
   }
+  .md\:py-16 {
+    @media (width >= 48rem) {
+      padding-block: calc(var(--spacing) * 16);
+    }
+  }
   .md\:py-28 {
     @media (width >= 48rem) {
       padding-block: calc(var(--spacing) * 28);
@@ -1550,6 +1560,24 @@ html:not(.js) [data-animate] {
 }
 @media (min-width: 1800px) {
   .hero-glass-panel {
+    max-width: calc(1200px + 400px);
+  }
+}
+.content-panel {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(1200px + 96px);
+  background: var(--color-surface);
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+@media (min-width: 1440px) {
+  .content-panel {
+    max-width: calc(1200px + 240px);
+  }
+}
+@media (min-width: 1800px) {
+  .content-panel {
     max-width: calc(1200px + 400px);
   }
 }

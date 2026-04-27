@@ -382,6 +382,34 @@ html:not(.js) [data-animate] {
   .hero-glass-panel { max-width: calc(1200px + 400px); }   /* 200px each side */
 }
 
+/* Content panel — the white "paper" version of the glass panel.
+ * Same horizontal sizing rules as .hero-glass-panel (so a content
+ * section reads as a peer of the hero in width and breathing room),
+ * but flat white on the gray content canvas. No backdrop-filter, no
+ * tint — just a plain white card.
+ *
+ * Internal vertical padding gives the content room to breathe within
+ * the panel; horizontal padding is handled by the inner mx-auto
+ * max-w-[1200px] wrapper, so the 1200px content has the same 48/120/
+ * 200px responsive breathing room inside the panel that it has inside
+ * the hero glass.
+ */
+.content-panel {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(1200px + 96px);
+  background: var(--color-surface);
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (min-width: 1440px) {
+  .content-panel { max-width: calc(1200px + 240px); }
+}
+@media (min-width: 1800px) {
+  .content-panel { max-width: calc(1200px + 400px); }
+}
+
 /* Subtle SVG-noise grain overlay — keeps the gradients from looking plasticky */
 .hero-grain {
   position: absolute;

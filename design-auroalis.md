@@ -231,6 +231,17 @@ Components are deliberately few. The hero CTA, the inverted CTA on white surface
 - **Mobile menu panel:** background `rgba(0,0,0,0.6)` with `backdrop-blur-md`, 1px white border at 10% opacity, radius 8px, padding 24px. Only inside the hero.
 - **Hero content frame:** No card chrome — a centered 1200px max-width column anchored to the bottom of the section with `mt-auto`.
 
+### Content Panel (`.content-panel`)
+
+A flat white "paper" container that mirrors the hero glass panel's geometry on the gray content canvas. Used to lift a featured section (e.g. the studio overview / "The work" intro) off the surrounding gray as a single white card.
+
+- **Background:** `#FFFFFF` (paper white). No tint, no backdrop-filter, no border, no shadow — this is the plain counterpart of the glass panel.
+- **Width:** Matches the hero glass panel's responsive sizing exactly. `max-width: calc(1200px + 96px)` by default; `calc(1200px + 240px)` at `≥1440px`; `calc(1200px + 400px)` at `≥1800px`.
+- **Centering:** `margin-left: auto; margin-right: auto`.
+- **Internal padding:** `padding-top` / `padding-bottom: 96px`. No horizontal padding — the inner `mx-auto max-w-[1200px]` wrapper provides the same horizontal breathing room (48px → 200px responsive) the content gets inside the hero glass.
+- **Section frame:** Wrap the panel in a section that uses `bg-stone-100` (the gray canvas, `#F5F5F4`) and modest vertical padding (`py-12 md:py-16`) so the white panel reads as floating on the gray with a small visible gap above and below.
+- **When to use:** One panel per page maximum, on the most editorially loaded section (the studio intro). Other content sections sit flat on the gray canvas without a panel — the white card is the visual emphasis that says "this is the lede".
+
 ### Section Eyebrow Pattern
 
 Every white section opens with the same three-line stack:
