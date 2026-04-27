@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+/* ===== Fonts ===== */
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Dark Mode Variant ===== */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== Theme: Light Mode (Default) ===== */
+
+@theme {
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --color-background: oklch(100% 0 0);
+  --color-foreground: oklch(9.8% 0 0);
+  --color-muted: oklch(96% 0 0);
+  --color-muted-foreground: oklch(40% 0 0);
+  --color-border: oklch(91% 0 0);
+  --color-primary: oklch(11% 0 0);
+  --color-primary-foreground: oklch(98% 0 0);
+  --color-accent: oklch(96% 0 0);
+  --color-accent-foreground: oklch(11% 0 0);
+
+  /* Aurora palette — used by the shader-style hero */
+  --color-aurora-dark:    #0a1a4a;
+  --color-aurora-mid:     #1e3a8a;
+  --color-aurora-violet:  #6b2ec7;
+  --color-aurora-magenta: #b8187a;
+}
+
+/* ===== Dark Mode Overrides ===== */
+
+.dark {
+  --color-background: oklch(7% 0 0);
+  --color-foreground: oklch(98% 0 0);
+  --color-muted: oklch(13% 0 0);
+  --color-muted-foreground: oklch(65% 0 0);
+  --color-border: oklch(22% 0 0);
+  --color-primary: oklch(98% 0 0);
+  --color-primary-foreground: oklch(7% 0 0);
+  --color-accent: oklch(13% 0 0);
+  --color-accent-foreground: oklch(98% 0 0);
+}
+
+/* ===== Base Styles ===== */
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+
+/* ===== Section Variants ===== */
+
+.section-muted {
+  background-color: var(--color-muted);
+}
+
+.section-inverted {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+
+/* ===== Scroll Animations ===== */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-animate="fade"] {
+  transform: none;
+}
+[data-animate="fade"].is-visible {
+  opacity: 1;
+}
+
+[data-animate="slide-left"] {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+[data-animate="slide-left"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-animate="slide-right"] {
+  opacity: 0;
+  transform: translateX(30px);
+}
+[data-animate="slide-right"].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-animate="scale"] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+[data-animate="scale"].is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger delay utilities */
+[data-delay="1"] { transition-delay: 100ms; }
+[data-delay="2"] { transition-delay: 200ms; }
+[data-delay="3"] { transition-delay: 300ms; }
+[data-delay="4"] { transition-delay: 400ms; }
+[data-delay="5"] { transition-delay: 500ms; }
+
+/* JS-off fallback: elements visible when JS hasn't loaded */
+html:not(.js) [data-animate] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  [data-delay="1"],
+  [data-delay="2"],
+  [data-delay="3"],
+  [data-delay="4"],
+  [data-delay="5"] {
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ===== Card Carousel ===== */
+
+.carousel {
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 2px;
+  border-radius: 0.75rem;
+}
+
+/* ===== Image Placeholders ===== */
+
+.img-placeholder {
+  background-color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-placeholder svg {
+  color: var(--color-muted-foreground);
+  opacity: 0.5;
+}
+
+/* ===== Aurora Hero — shader-style animated gradient blobs ===== */
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.blob--mid {
+  top: -20%;
+  right: -30%;
+  width: 120vw;
+  height: 70vh;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%,
+    var(--color-aurora-mid) 0%,
+    rgba(30, 58, 138, 0.8)  25%,
+    rgba(30, 58, 138, 0.4)  50%,
+    rgba(30, 58, 138, 0.12) 72%,
+    rgba(30, 58, 138, 0)    88%);
+  animation: morph-mid 32s ease-in-out infinite;
+}
+
+.blob--dark {
+  top: 15%;
+  right: -10%;
+  width: 100vw;
+  height: 65vh;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%,
+    var(--color-aurora-dark) 0%,
+    rgba(10, 26, 74, 0.85) 28%,
+    rgba(10, 26, 74, 0.4)  55%,
+    rgba(10, 26, 74, 0)    80%);
+  animation: morph-dark 40s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.blob--accent {
+  top: 20%;
+  left: 15%;
+  width: 85vw;
+  height: 55vh;
+  background: radial-gradient(ellipse 55% 40% at 50% 50%,
+    rgba(100, 150, 230, 0.5) 0%,
+    rgba(75, 110, 200, 0.3)  30%,
+    rgba(50, 85, 165, 0.12)  60%,
+    rgba(0, 0, 0, 0)         85%);
+  animation: morph-accent 48s ease-in-out infinite;
+  animation-delay: -22s;
+}
+
+.blob--violet {
+  bottom: -15%;
+  right: -20%;
+  width: 110vw;
+  height: 70vh;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%,
+    var(--color-aurora-violet) 0%,
+    rgba(107, 46, 199, 0.7)  25%,
+    rgba(107, 46, 199, 0.35) 50%,
+    rgba(107, 46, 199, 0.1)  72%,
+    rgba(107, 46, 199, 0)    88%);
+  animation: morph-violet 36s ease-in-out infinite;
+  animation-delay: -14s;
+}
+
+.blob--violet-2 {
+  top: 30%;
+  left: 10%;
+  width: 75vw;
+  height: 50vh;
+  background: radial-gradient(ellipse 55% 40% at 50% 50%,
+    rgba(140, 75, 220, 0.55) 0%,
+    rgba(107, 46, 199, 0.3)  35%,
+    rgba(80, 30, 160, 0.1)   62%,
+    rgba(0, 0, 0, 0)         85%);
+  animation: morph-violet-2 44s ease-in-out infinite;
+  animation-delay: -28s;
+}
+
+.blob--magenta {
+  top: 45%;
+  right: 0%;
+  width: 55vw;
+  height: 45vh;
+  background: radial-gradient(ellipse 50% 45% at 50% 50%,
+    rgba(184, 24, 122, 0.75) 0%,
+    rgba(184, 24, 122, 0.4)  30%,
+    rgba(184, 24, 122, 0.15) 55%,
+    rgba(184, 24, 122, 0)    80%);
+  animation: morph-magenta 42s ease-in-out infinite;
+  animation-delay: -18s;
+}
+
+.blob--magenta-2 {
+  bottom: 15%;
+  left: 40%;
+  width: 40vw;
+  height: 35vh;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%,
+    rgba(220, 50, 140, 0.4) 0%,
+    rgba(184, 24, 122, 0.2) 35%,
+    rgba(140, 15, 95, 0.08) 62%,
+    rgba(0, 0, 0, 0)        85%);
+  animation: morph-magenta-2 50s ease-in-out infinite;
+  animation-delay: -32s;
+}
+
+.blob--shadow {
+  top: -15%;
+  left: -25%;
+  width: 95vw;
+  height: 75vh;
+  background: radial-gradient(ellipse 45% 55% at 50% 50%,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 30%,
+    rgba(0, 0, 0, 0.7)  55%,
+    rgba(0, 0, 0, 0.25) 75%,
+    rgba(0, 0, 0, 0)    88%);
+  animation: morph-shadow 38s ease-in-out infinite;
+  animation-delay: -12s;
+}
+
+.blob--shadow-2 {
+  bottom: -10%;
+  left: -10%;
+  width: 75vw;
+  height: 55vh;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.6)  32%,
+    rgba(0, 0, 0, 0.2)  60%,
+    rgba(0, 0, 0, 0)    82%);
+  animation: morph-shadow-2 46s ease-in-out infinite;
+  animation-delay: -25s;
+}
+
+/* Subtle SVG-noise grain overlay — keeps the gradients from looking plasticky */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Big rotation ranges + x/y translation + 0.75–1.4 scale variation for a liquid feel */
+@keyframes morph-mid {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  20%  { transform: translate(-12vw, 6vh)  scale(1.2)  rotate(25deg); }
+  45%  { transform: translate(-5vw, -8vh)  scale(0.9)  rotate(-15deg); }
+  70%  { transform: translate(-18vw, 4vh)  scale(1.15) rotate(45deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-dark {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  25%  { transform: translate(-15vw, 10vh) scale(1.25) rotate(-35deg); }
+  55%  { transform: translate(8vw, -6vh)   scale(0.85) rotate(20deg); }
+  80%  { transform: translate(-6vw, 8vh)   scale(1.1)  rotate(-50deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-accent {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  22%  { transform: translate(18vw, -10vh) scale(1.3)  rotate(40deg); }
+  50%  { transform: translate(-8vw, 12vh)  scale(0.8)  rotate(-30deg); }
+  78%  { transform: translate(10vw, -4vh)  scale(1.15) rotate(60deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-violet {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  20%  { transform: translate(-8vw, -10vh) scale(1.2)  rotate(-28deg); }
+  50%  { transform: translate(6vw, 6vh)    scale(0.9)  rotate(35deg); }
+  75%  { transform: translate(-4vw, -4vh)  scale(1.1)  rotate(-45deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-violet-2 {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  30%  { transform: translate(12vw, 8vh)   scale(1.25) rotate(-55deg); }
+  60%  { transform: translate(-10vw, -6vh) scale(0.85) rotate(30deg); }
+  85%  { transform: translate(8vw, 4vh)    scale(1.1)  rotate(-20deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-magenta {
+  0%   { transform: translate(0, 0)       scale(1)    rotate(0deg); }
+  25%  { transform: translate(-6vw, 10vh) scale(1.2)  rotate(45deg); }
+  55%  { transform: translate(8vw, -6vh)  scale(0.8)  rotate(-35deg); }
+  80%  { transform: translate(-4vw, 4vh)  scale(1.1)  rotate(20deg); }
+  100% { transform: translate(0, 0)       scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-magenta-2 {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  35%  { transform: translate(-14vw, -8vh) scale(1.35) rotate(40deg); }
+  65%  { transform: translate(10vw, 6vh)   scale(0.75) rotate(-50deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-shadow {
+  0%   { transform: translate(0, 0)       scale(1)    rotate(0deg); }
+  25%  { transform: translate(10vw, -6vh) scale(1.2)  rotate(-40deg); }
+  55%  { transform: translate(-6vw, 8vh)  scale(0.9)  rotate(30deg); }
+  80%  { transform: translate(14vw, 2vh)  scale(1.15) rotate(-55deg); }
+  100% { transform: translate(0, 0)       scale(1)    rotate(0deg); }
+}
+
+@keyframes morph-shadow-2 {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  30%  { transform: translate(-12vw, 10vh) scale(1.3)  rotate(45deg); }
+  65%  { transform: translate(8vw, -6vh)   scale(0.85) rotate(-35deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+/* Freeze the shader motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none !important;
+  }
+}
