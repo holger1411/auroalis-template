@@ -28,12 +28,12 @@
   --color-muted-foreground:   #737373;
   --color-border:             #D4D4D4;
   --color-border-subtle:      #E8E8E8;
-  --color-primary:            #1E3A8A;  /* Aurora Blue, from blob--mid */
-  --color-primary-hover:      #162E6F;
+  --color-primary:            #6B2EC7;  /* Aurora Violet, from blob--violet */
+  --color-primary-hover:      #5928A8;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary:          #6B2EC7;  /* aurora violet, decorative only */
+  --color-secondary:          #1E3A8A;  /* aurora dark blue, decorative only */
   --color-tertiary:           #B8187A;  /* aurora magenta, decorative only */
-  --color-accent:             #1E3A8A;
+  --color-accent:             #6B2EC7;
   --color-accent-foreground:  #FFFFFF;
   --color-text-on-inverted:   #FFFFFF;
 
@@ -53,9 +53,9 @@
   --color-muted:              #171717;
   --color-muted-foreground:   #A3A3A3;
   --color-border:             #262626;
-  --color-primary:            #3B5FBF;  /* lifted blue for dark mode contrast */
+  --color-primary:            #8B57E0;  /* lifted violet for dark mode contrast */
   --color-primary-foreground: #FFFFFF;
-  --color-accent:             #3B5FBF;
+  --color-accent:             #8B57E0;
   --color-accent-foreground:  #FFFFFF;
 }
 

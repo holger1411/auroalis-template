@@ -3,9 +3,9 @@ version: "alpha"
 name: "Nocturne — Aurora palette × Stitch system"
 description: "A hybrid identity: the Aurora cool-palette story (navy → blue → violet → magenta on near-black, neutral grayscale on white) wired into the Stitch typographic and component DNA (Inter, 88px display headlines, label-md uppercase eyebrows, 6px button radius, flat surfaces, minimal motion)."
 colors:
-  primary: "#1E3A8A"
-  primary-hover: "#162E6F"
-  secondary: "#6B2EC7"
+  primary: "#6B2EC7"
+  primary-hover: "#5928A8"
+  secondary: "#1E3A8A"
   tertiary: "#B8187A"
   neutral: "#FFFFFF"
   background: "#FFFFFF"
@@ -18,7 +18,7 @@ colors:
   text-on-primary: "#FFFFFF"
   border: "#D4D4D4"
   border-subtle: "#E8E8E8"
-  accent: "#1E3A8A"
+  accent: "#6B2EC7"
   hero-glow-1: "#0A1A4A"
   hero-glow-2: "#1E3A8A"
   hero-glow-3: "#6B2EC7"
@@ -128,7 +128,7 @@ components:
 
 ## Overview
 
-Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-black hero/footer wrapping a paper-white reading zone, with a cool navy-to-magenta gradient as the only chromatic moment — and adds Aurora Blue (`#1E3A8A`) pulled directly from the hero's `blob--mid` layer as the brand primary. The typographic and component layer is borrowed from Stitch and refined into an editorial pair: **Newsreader** serif for every heading H1–H6, **Inter** sans for body, labels, and chrome. Buttons sit at 6px radius, surfaces stay flat, and the minimal motion budget is explicitly overridden by the hero shader.
+Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-black hero/footer wrapping a paper-white reading zone, with a cool navy-to-magenta gradient as the only chromatic moment — and adds Aurora Violet (`#6B2EC7`) pulled directly from the hero's `blob--violet` layer as the brand primary. The typographic and component layer is borrowed from Stitch and refined into an editorial pair: **Newsreader** serif for every heading H1–H6, **Inter** sans for body, labels, and chrome. Buttons sit at 6px radius, surfaces stay flat, and the minimal motion budget is explicitly overridden by the hero shader.
 
 - **Composition cues:**
   - Layout: Grid
@@ -139,18 +139,18 @@ Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-blac
 
 ## Colors
 
-The palette is anchored by a single brand color — Aurora Blue (`#1E3A8A`), pulled directly from the hero shader's `blob--mid` layer. Two material zones (paper white body, pure-black hero/footer) hold the page together; the brand blue is the one chromatic note that ties the body back to the hero. Violet and magenta remain in the hero's gradient as supporting hues but are not used as flat colors elsewhere.
+The palette is anchored by a single brand color — Aurora Violet (`#6B2EC7`), pulled directly from the hero shader's `blob--violet` layer. Two material zones (paper white body, pure-black hero/footer) hold the page together; the brand violet is the one chromatic note that ties the body back to the hero. Navy, blue, and magenta remain in the hero's gradient as supporting hues but are not used as flat colors elsewhere.
 
-- **Primary (#1E3A8A):** Aurora Blue — the brand color. Used for the primary action CTA on white surfaces, focus rings, link hover states, and any UI moment that needs to feel "Nocturne-branded". This blue exists in the hero blobs already, so when it appears flat below the hero, the whole page reads as the same identity.
-- **Primary Hover (#162E6F):** A 1-step-darker blue for hover/pressed states on `button-accent`. Avoid using as a fill color anywhere else.
-- **Secondary (#6B2EC7):** Aurora violet. Optional accent for one moment per page if a second chromatic pull is needed (e.g. an inline link, a tag). Not a default — most pages should ship without it.
+- **Primary (#6B2EC7):** Aurora Violet — the brand color. Used for the primary action CTA on white surfaces, focus rings, link hover states, and any UI moment that needs to feel "Nocturne-branded". This violet exists in the hero blobs already, so when it appears flat below the hero, the whole page reads as the same identity.
+- **Primary Hover (#5928A8):** A 1-step-darker violet for hover/pressed states on `button-accent`. Avoid using as a fill color anywhere else.
+- **Secondary (#1E3A8A):** Aurora dark blue. Optional accent for one moment per page if a second chromatic pull is needed (e.g. a quiet badge or tag). Not a default — most pages should ship without it.
 - **Tertiary (#B8187A):** Aurora magenta. Decorative only — lives inside the hero shader. Do not use as a flat color.
 - **Neutral (#FFFFFF):** Paper white — the dominant body canvas.
 - **Surface Inverted (#000000):** Pure black hero/footer surface that hosts the shader gradients.
 - **Aurora hues (#0A1A4A, #1E3A8A, #6B2EC7, #B8187A):** Deep navy → blue → violet → magenta. Reserved for the animated hero blobs and the SVG noise grain.
-- **Text scale on white:** Primary text `#171717` (near-black ink, NOT the brand blue), Secondary `#404040`, Muted `#737373`. Use Muted for `label-md` eyebrows; Secondary for body copy under a heading; near-black for the heading itself. Headlines do not use the brand blue — type stays neutral, blue belongs to action.
+- **Text scale on white:** Primary text `#171717` (near-black ink, NOT the brand violet), Secondary `#404040`, Muted `#737373`. Use Muted for `label-md` eyebrows; Secondary for body copy under a heading; near-black for the heading itself. Headlines do not use the brand violet — type stays neutral, violet belongs to action.
 - **Borders:** `#D4D4D4` for input chrome and clear edges; `#E8E8E8` for subtle dividers.
-- **Accent (#1E3A8A):** Alias of `primary`. The same blue that lives in `blob--mid`. When it appears as a flat color (focus ring, accent button, link hover), it ties the body back to the hero.
+- **Accent (#6B2EC7):** Alias of `primary`. The same violet that lives in `blob--violet`. When it appears as a flat color (focus ring, accent button, link hover), it ties the body back to the hero.
 
 ## Typography
 
@@ -213,12 +213,12 @@ Components are deliberately few. The hero CTA, the inverted CTA on white surface
 
 - **Primary (on dark hero):** background `#FFFFFF`, text `#171717`, radius 6px, padding 10px 28px, `label-md` typography (12px / 0.3px tracking / uppercase). Atmospheric glow `box-shadow: 0 0 40px rgba(255,255,255,0.18)`. Hover transitions to `#FAFAFA`.
 - **Inverted (primary on white):** background `#000000`, text `#FFFFFF`, radius 6px, padding 10px 28px, `label-md` typography. No shadow. Hover to `#171717`. Use as the contact form submit and any other primary action on white.
-- **Accent (primary on white):** background `#1E3A8A` (Aurora Blue), text `#FFFFFF`, radius 6px, padding 10px 28px, `label-md` typography. Hover transitions to `#162E6F`. This is the standard primary action on white surfaces — the contact form submit, any "Get started" CTA. The inverted (black) button is the alternate when the section needs to lean editorial-neutral instead of branded.
+- **Accent (primary on white):** background `#6B2EC7` (Aurora Violet), text `#FFFFFF`, radius 6px, padding 10px 28px, `label-md` typography. Hover transitions to `#5928A8`. This is the standard primary action on white surfaces — the contact form submit, any "Get started" CTA. The inverted (black) button is the alternate when the section needs to lean editorial-neutral instead of branded.
 - **Nav links (in hero):** white text at 90% opacity, `body-sm`, 0px radius, 0px padding, 40px column gap. Hover bumps opacity to 100%.
 
 ### Inputs
 
-- **Email field:** background `#FFFFFF`, text `#171717`, placeholder `#A3A3A3`, 1px border `#D4D4D4`, radius 6px, padding 14px 20px, `body-md` typography. Focus uses a 2px ring at `rgba(30,58,138,0.25)` and a blue `#1E3A8A` border — pulling the brand color into the form interaction.
+- **Email field:** background `#FFFFFF`, text `#171717`, placeholder `#A3A3A3`, 1px border `#D4D4D4`, radius 6px, padding 14px 20px, `body-md` typography. Focus uses a 2px ring at `rgba(107,46,199,0.25)` and a violet `#6B2EC7` border — pulling the brand color into the form interaction.
 
 ### Cards & Surfaces
 
