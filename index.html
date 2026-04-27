@@ -19,11 +19,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts: Inter from Google Fonts (see design-stitch.md) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <!-- Fonts are loaded via CSS @font-face -->
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- FOUC-free dark mode: must run before first paint -->
@@ -47,7 +43,7 @@
   <main id="main">
 
     <!-- ===== Hero Section (shader-style animated gradients + nav) ===== -->
-    <section class="relative h-screen w-full overflow-hidden bg-[#1C1917] px-8 py-8 text-[#FAFAF9]">
+    <section class="relative h-screen w-full overflow-hidden bg-black px-8 py-8 text-white">
       <!-- Animated shader blobs (stack order matters: later elements paint on top) -->
       <div class="blob blob--mid"></div>
       <div class="blob blob--dark"></div>
@@ -98,16 +94,16 @@
 
         <!-- Hero body: bottom of hero, 2fr title / 1fr subtitle+CTA -->
         <div class="mt-auto grid grid-cols-1 items-center gap-8 pb-16 md:grid-cols-[2fr_1fr] md:gap-16">
-          <h1 class="max-w-[16ch] text-5xl font-medium leading-[1.05] tracking-[-0.04em] drop-shadow-[0_2px_40px_rgba(0,0,0,0.6)] sm:text-6xl md:text-7xl lg:text-[88px] lg:leading-[88px] lg:tracking-[-0.05em]">
+          <h1 class="max-w-[18ch] text-5xl font-normal leading-[1.1] tracking-tight drop-shadow-[0_2px_40px_rgba(0,0,0,0.7)] sm:text-6xl md:text-7xl">
             Begin this journey with us and immerse yourself in limitless inspiration
           </h1>
 
           <div class="flex flex-col gap-5">
-            <p class="text-base leading-relaxed opacity-95 drop-shadow-[0_2px_20px_rgba(0,0,0,0.6)]">
+            <p class="text-base leading-relaxed opacity-95 drop-shadow-[0_2px_20px_rgba(0,0,0,0.7)]">
               Join us in crafting a digital experience<br>
               that truly distinguishes you from others
             </p>
-            <a href="#contact" class="block w-full rounded-md border border-[#E7E5E4] bg-white px-7 py-3 text-center text-xs font-medium uppercase tracking-[0.3px] text-[#1C1917] shadow-[0_0_40px_rgba(255,255,255,0.18)] transition-colors hover:bg-[#FAFAF9]">
+            <a href="#contact" class="block w-full rounded-sm border border-white bg-white px-7 py-4 text-center font-semibold text-neutral-900 shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-colors hover:bg-neutral-100">
               Our services
             </a>
           </div>
@@ -134,32 +130,32 @@
     </template>
 
     <!-- ===== First Content Section (white, below hero) ===== -->
-    <section id="about" class="bg-stone-100 px-8 py-24 text-stone-900 md:py-28">
+    <section id="about" class="bg-white px-8 py-24 text-neutral-900 md:py-28">
       <div class="mx-auto max-w-[1200px]">
-        <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-stone-500" data-animate>Our approach</p>
+        <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-neutral-500" data-animate>Our approach</p>
         <h2 class="mb-12 max-w-[22ch] text-4xl font-normal leading-[1.15] tracking-tight md:text-5xl" data-animate data-delay="1">
           Design that respects the people using it
         </h2>
-        <p class="max-w-[60ch] text-lg leading-relaxed text-stone-700" data-animate data-delay="2">
+        <p class="max-w-[60ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
           We build digital experiences by starting with the question that matters most — what do people actually need from this product? Everything else follows from there: the visual language, the interaction patterns, the technical foundation.
         </p>
 
         <div class="mt-16 grid gap-12 md:grid-cols-3">
           <div data-animate data-delay="1">
             <h3 class="mb-3 text-xl font-semibold tracking-tight">Research-led</h3>
-            <p class="text-[0.95rem] leading-relaxed text-stone-600">
+            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
               Every project begins with understanding the audience. We talk to users, map their workflows, and identify where friction lives before writing a single line of code.
             </p>
           </div>
           <div data-animate data-delay="2">
             <h3 class="mb-3 text-xl font-semibold tracking-tight">Craft-focused</h3>
-            <p class="text-[0.95rem] leading-relaxed text-stone-600">
+            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
               Details compound. Typography, spacing, motion, micro-interactions — each decision is considered and tested, because collectively they shape how a product feels.
             </p>
           </div>
           <div data-animate data-delay="3">
             <h3 class="mb-3 text-xl font-semibold tracking-tight">Built to last</h3>
-            <p class="text-[0.95rem] leading-relaxed text-stone-600">
+            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
               We design systems, not just screens. The result is a foundation that grows with your product rather than needing to be rebuilt every few years.
             </p>
           </div>
@@ -193,9 +189,9 @@
     </template>
 
     <!-- ===== Card Carousel (over-the-edge) ===== -->
-    <section id="work" class="bg-stone-100 px-8 py-24 text-stone-900 md:py-28">
+    <section id="work" class="bg-white px-8 py-24 text-neutral-900 md:py-28">
       <div class="mx-auto mb-12 max-w-[1200px]">
-        <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-stone-500" data-animate>Selected work</p>
+        <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-neutral-500" data-animate>Selected work</p>
         <h2 class="max-w-[22ch] text-4xl font-normal leading-[1.15] tracking-tight md:text-5xl" data-animate data-delay="1">
           Projects that get quieter the longer you look
         </h2>
@@ -210,68 +206,68 @@
         >
           <div class="flex gap-6">
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="1">
-              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-200">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
                 <img src="img/woman-working-at-desk.jpg" alt="Polaris Records identity system" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-stone-500">Identity</p>
+                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Identity</p>
                 <h3 class="mt-2 text-lg font-semibold tracking-tight">Polaris Records</h3>
-                <p class="mt-1 text-sm leading-relaxed text-stone-600">A modular visual language spanning album art, event posters, and digital platforms.</p>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A modular visual language spanning album art, event posters, and digital platforms.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="2">
-              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-200">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
                 <img src="img/man-laughing-at-laptop.jpg" alt="Rivet analytics dashboard" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-stone-500">Product</p>
+                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Product</p>
                 <h3 class="mt-2 text-lg font-semibold tracking-tight">Rivet — operations dashboard</h3>
-                <p class="mt-1 text-sm leading-relaxed text-stone-600">An operations command center built around the three questions operators actually ask.</p>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">An operations command center built around the three questions operators actually ask.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="3">
-              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-200">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
                 <img src="img/woman-executive-portrait.jpg" alt="Field &amp; Form storefront redesign" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-stone-500">E-commerce</p>
+                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">E-commerce</p>
                 <h3 class="mt-2 text-lg font-semibold tracking-tight">Field &amp; Form</h3>
-                <p class="mt-1 text-sm leading-relaxed text-stone-600">A storefront that lets the product photography do the work. +28% conversion in ninety days.</p>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A storefront that lets the product photography do the work. +28% conversion in ninety days.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="4">
-              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-200">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
                 <img src="img/17df7053-a8e3-4561-8eff-9cb87098fa49.jpg" alt="Atlas Quarterly editorial platform" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-stone-500">Editorial</p>
+                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Editorial</p>
                 <h3 class="mt-2 text-lg font-semibold tracking-tight">Atlas Quarterly</h3>
-                <p class="mt-1 text-sm leading-relaxed text-stone-600">A reading experience that treats long-form writing as a craft, not a feed.</p>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A reading experience that treats long-form writing as a craft, not a feed.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="5">
-              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-200">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
                 <img src="img/woman-presenting-whiteboard.jpg" alt="Mossline field app for ecologists" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-stone-500">Mobile</p>
+                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Mobile</p>
                 <h3 class="mt-2 text-lg font-semibold tracking-tight">Mossline</h3>
-                <p class="mt-1 text-sm leading-relaxed text-stone-600">Field data collection for ecologists working in places without cell service.</p>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Field data collection for ecologists working in places without cell service.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate>
-              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-200">
+              <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
                 <img src="img/69b075bf-a322-4950-8b47-6f30df277b92.jpg" alt="Meridian hospitality brand refresh" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="text-xs font-medium uppercase tracking-[0.08em] text-stone-500">Brand</p>
+                <p class="text-xs font-medium uppercase tracking-[0.08em] text-neutral-500">Brand</p>
                 <h3 class="mt-2 text-lg font-semibold tracking-tight">Meridian</h3>
-                <p class="mt-1 text-sm leading-relaxed text-stone-600">A hospitality group repositioning itself for a more discerning audience.</p>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A hospitality group repositioning itself for a more discerning audience.</p>
               </div>
             </article>
 
@@ -429,14 +425,14 @@
     </template>
 
     <!-- ===== CTA — start a conversation ===== -->
-    <section id="contact" class="bg-stone-100 px-8 py-24 text-stone-900 md:py-32">
+    <section id="contact" class="bg-white px-8 py-24 text-neutral-900 md:py-32">
       <div class="mx-auto grid max-w-[1200px] items-center gap-12 md:grid-cols-[3fr_2fr]">
         <div>
-          <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-stone-500" data-animate>Start a conversation</p>
+          <p class="mb-6 text-sm font-medium uppercase tracking-[0.08em] text-neutral-500" data-animate>Start a conversation</p>
           <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.1] tracking-tight md:text-5xl" data-animate data-delay="1">
             Let&rsquo;s build something worth using
           </h2>
-          <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-stone-700" data-animate data-delay="2">
+          <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
             Tell us about your project — the rough shape, the constraints, what you wish already existed. We&rsquo;ll reply within two business days.
           </p>
         </div>
@@ -449,12 +445,12 @@
             type="email"
             required
             placeholder="you@company.com"
-            class="w-full rounded-md border border-[#E7E5E4] bg-white px-5 py-4 text-base text-stone-900 placeholder:text-stone-400 focus:border-[#F97316] focus:outline-none focus:ring-2 focus:ring-[#F97316]/20"
+            class="w-full rounded-sm border border-neutral-300 bg-white px-5 py-4 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
           >
-          <button type="submit" class="w-full rounded-md bg-[#F97316] px-7 py-3 text-center text-xs font-medium uppercase tracking-[0.3px] text-white transition-colors hover:bg-[#EA580C]">
+          <button type="submit" class="w-full rounded-sm bg-black px-7 py-4 text-center font-semibold text-white transition-colors hover:bg-neutral-800">
             Get in touch
           </button>
-          <p class="mt-1 text-xs text-stone-500">We only use your email to reply. No lists, no follow-ups.</p>
+          <p class="mt-1 text-xs text-neutral-500">We only use your email to reply. No lists, no follow-ups.</p>
         </form>
       </div>
     </section>
@@ -462,7 +458,7 @@
   </main>
 
   <!-- ===== Footer ===== -->
-  <footer class="bg-[#1C1917] px-8 py-32 text-[#FAFAF9] md:py-40">
+  <footer class="bg-black px-8 py-32 text-white md:py-40">
     <div class="mx-auto max-w-[1200px]">
       <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <!-- Brand -->
