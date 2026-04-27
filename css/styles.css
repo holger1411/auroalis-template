@@ -63,7 +63,6 @@
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
-    --radius-2xl: 1rem;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --blur-sm: 8px;
@@ -335,9 +334,6 @@
   }
   .mt-20 {
     margin-top: calc(var(--spacing) * 20);
-  }
-  .mt-24 {
-    margin-top: calc(var(--spacing) * 24);
   }
   .mt-32 {
     margin-top: calc(var(--spacing) * 32);
@@ -644,9 +640,6 @@
   }
   .border-neutral-300 {
     border-color: var(--color-neutral-300);
-  }
-  .border-stone-200 {
-    border-color: var(--color-stone-200);
   }
   .border-stone-300 {
     border-color: var(--color-stone-300);
@@ -1769,13 +1762,13 @@ html:not(.js) [data-animate] {
   background-position: center;
 }
 .card-wave--violet {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240' preserveAspectRatio='none'><defs><linearGradient id='vA' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%230A1A4A'/><stop offset='1' stop-color='%232A1B5A'/></linearGradient><filter id='vB'><feGaussianBlur stdDeviation='8'/></filter><filter id='vG'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter></defs><rect width='400' height='240' fill='url(%23vA)'/><g filter='url(%23vB)'><path d='M0,80 Q100,50 200,85 T400,80 L400,240 L0,240 Z' fill='%236B2EC7' fill-opacity='0.6'/><path d='M0,135 Q90,100 180,140 T400,130 L400,240 L0,240 Z' fill='%233DDC97' fill-opacity='0.55'/><path d='M0,185 Q110,210 200,180 T400,185 L400,240 L0,240 Z' fill='%236B2EC7' fill-opacity='0.4'/></g><ellipse cx='120' cy='8' rx='180' ry='55' fill='white' fill-opacity='0.13'/><ellipse cx='340' cy='200' rx='90' ry='30' fill='%233DDC97' fill-opacity='0.18' filter='url(%23vB)'/><rect width='400' height='240' filter='url(%23vG)' opacity='0.16'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240' preserveAspectRatio='none'><defs><linearGradient id='vA' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%230A1A4A'/><stop offset='1' stop-color='%232A1B5A'/></linearGradient><radialGradient id='vR' cx='0.22' cy='0.22' r='0.5'><stop offset='0' stop-color='%231E3A8A' stop-opacity='0.85'/><stop offset='0.6' stop-color='%231E3A8A' stop-opacity='0.25'/><stop offset='1' stop-color='%231E3A8A' stop-opacity='0'/></radialGradient><filter id='vB'><feGaussianBlur stdDeviation='8'/></filter><filter id='vBig'><feGaussianBlur stdDeviation='28'/></filter><filter id='vG'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter></defs><rect width='400' height='240' fill='url(%23vA)'/><ellipse cx='90' cy='50' rx='180' ry='110' fill='url(%23vR)' filter='url(%23vBig)'/><g filter='url(%23vB)'><path d='M0,80 Q100,50 200,85 T400,80 L400,240 L0,240 Z' fill='%236B2EC7' fill-opacity='0.6'/><path d='M0,135 Q90,100 180,140 T400,130 L400,240 L0,240 Z' fill='%233DDC97' fill-opacity='0.55'/><path d='M0,185 Q110,210 200,180 T400,185 L400,240 L0,240 Z' fill='%236B2EC7' fill-opacity='0.4'/></g><ellipse cx='120' cy='8' rx='180' ry='55' fill='white' fill-opacity='0.13'/><ellipse cx='340' cy='200' rx='90' ry='30' fill='%233DDC97' fill-opacity='0.18' filter='url(%23vB)'/><rect width='400' height='240' filter='url(%23vG)' opacity='0.16'/></svg>");
 }
 .card-wave--green {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240' preserveAspectRatio='none'><defs><linearGradient id='gA' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%230A1A4A'/><stop offset='1' stop-color='%231A3F5A'/></linearGradient><filter id='gB'><feGaussianBlur stdDeviation='8'/></filter><filter id='gG'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter></defs><rect width='400' height='240' fill='url(%23gA)'/><g filter='url(%23gB)'><path d='M0,90 Q150,55 200,95 T400,85 L400,240 L0,240 Z' fill='%233DDC97' fill-opacity='0.6'/><path d='M0,150 Q120,180 200,145 T400,155 L400,240 L0,240 Z' fill='%231E3A8A' fill-opacity='0.55'/><path d='M0,200 Q120,170 200,205 T400,200 L400,240 L0,240 Z' fill='%233DDC97' fill-opacity='0.4'/></g><ellipse cx='160' cy='10' rx='200' ry='60' fill='white' fill-opacity='0.14'/><ellipse cx='80' cy='195' rx='100' ry='35' fill='%233DDC97' fill-opacity='0.22' filter='url(%23gB)'/><rect width='400' height='240' filter='url(%23gG)' opacity='0.16'/></svg>");
 }
 .card-wave--blue {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240' preserveAspectRatio='none'><defs><linearGradient id='bA' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%230A1A4A'/><stop offset='1' stop-color='%233D2860'/></linearGradient><filter id='bB'><feGaussianBlur stdDeviation='8'/></filter><filter id='bG'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter></defs><rect width='400' height='240' fill='url(%23bA)'/><g filter='url(%23bB)'><path d='M0,90 Q120,115 200,80 T400,90 L400,240 L0,240 Z' fill='%231E3A8A' fill-opacity='0.7'/><path d='M0,145 Q110,115 200,150 T400,140 L400,240 L0,240 Z' fill='%233DDC97' fill-opacity='0.55'/><path d='M0,200 Q130,225 200,195 T400,205 L400,240 L0,240 Z' fill='%236B2EC7' fill-opacity='0.5'/></g><ellipse cx='100' cy='5' rx='200' ry='55' fill='white' fill-opacity='0.13'/><ellipse cx='320' cy='160' rx='110' ry='40' fill='%233DDC97' fill-opacity='0.2' filter='url(%23bB)'/><rect width='400' height='240' filter='url(%23bG)' opacity='0.16'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240' preserveAspectRatio='none'><defs><linearGradient id='bA' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%230A1A4A'/><stop offset='1' stop-color='%233D2860'/></linearGradient><radialGradient id='bR' cx='0.22' cy='0.22' r='0.5'><stop offset='0' stop-color='%231E3A8A' stop-opacity='0.95'/><stop offset='0.6' stop-color='%231E3A8A' stop-opacity='0.3'/><stop offset='1' stop-color='%231E3A8A' stop-opacity='0'/></radialGradient><filter id='bB'><feGaussianBlur stdDeviation='8'/></filter><filter id='bBig'><feGaussianBlur stdDeviation='28'/></filter><filter id='bG'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter></defs><rect width='400' height='240' fill='url(%23bA)'/><ellipse cx='90' cy='50' rx='180' ry='110' fill='url(%23bR)' filter='url(%23bBig)'/><g filter='url(%23bB)'><path d='M0,90 Q120,115 200,80 T400,90 L400,240 L0,240 Z' fill='%231E3A8A' fill-opacity='0.7'/><path d='M0,145 Q110,115 200,150 T400,140 L400,240 L0,240 Z' fill='%233DDC97' fill-opacity='0.55'/><path d='M0,200 Q130,225 200,195 T400,205 L400,240 L0,240 Z' fill='%236B2EC7' fill-opacity='0.5'/></g><ellipse cx='100' cy='5' rx='200' ry='55' fill='white' fill-opacity='0.13'/><ellipse cx='320' cy='160' rx='110' ry='40' fill='%233DDC97' fill-opacity='0.2' filter='url(%23bB)'/><rect width='400' height='240' filter='url(%23bG)' opacity='0.16'/></svg>");
 }
 @media (min-width: 1440px) {
   .content-panel {
