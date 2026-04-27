@@ -430,7 +430,11 @@ html:not(.js) [data-animate] {
   margin-left: auto;
   margin-right: auto;
   max-width: calc(1200px + 96px);
-  background: #1C1917;
+  /* White at 10% over the black outer footer — a very subtle lift
+   * that reads as the dark-mode equivalent of the white content
+   * panel (which is white over gray). The 8% lighter hairline border
+   * is just enough to define the edges. */
+  background: rgba(255, 255, 255, 0.1);
   color: #FAFAFA;
   padding-top: 96px;
   padding-bottom: 96px;

@@ -247,13 +247,13 @@ A flat white "paper" container that mirrors the hero glass panel's geometry on t
 
 The dark counterpart of the content panel — same geometry, opposite material. Used to bookend the page in the same Polar-Night surface as the hero, so the dark hero opens and a dark footer closes.
 
-- **Background:** `#1C1917` — the same near-black stone the hero uses. Visually ties the bottom of the page to the top.
+- **Background:** `rgba(255, 255, 255, 0.1)` — white at 10% opacity over the black outer footer. Reads as a near-black with a faint cool lift (the dark-mode equivalent of the white content panel sitting on gray).
 - **Edges:** A single hairline `1px solid #292524` border on all four sides — slightly lighter than the panel fill, almost invisible against the dark surface but just enough to define the panel's edges as it floats on the gray canvas.
 - **Width:** Identical responsive sizing to `.content-panel` and `.hero-glass-panel` — `max-width: calc(1200px + 96px)` default, `1200 + 240` at `≥1440px`, `1200 + 400` at `≥1800px`. The three panels read as siblings.
 - **Centering:** `margin: 0 auto`.
 - **Internal padding:** `padding-top` / `padding-bottom: 96px`. Horizontal padding handled by the inner `mx-auto max-w-[1200px]` wrapper.
 - **Text:** `#FAFAFA` (paper white on the near-black surface).
-- **Section frame:** Wrap the panel in `<footer class="bg-black px-8 py-12 md:py-16">`. The outer footer surface stays pure black at full bleed (different from the rest of the content area, which is gray) so the page literally ends in night. The slightly-lighter `#1C1917` panel sits inside that black on a small black gap above and below, with its `#292524` hairline border just visible against the surrounding black — a quiet stone-on-night composition that closes the page in the same Polar-Night register the hero opened with.
+- **Section frame:** Wrap the panel in `<footer class="bg-black px-8 pt-0 pb-12 md:pb-16">`. The outer footer surface stays pure black at full bleed (different from the rest of the content area, which is gray) so the page literally ends in night. `pt-0` makes the dark panel sit flush against the bottom of the contact section above; the bottom padding leaves a small black gap below the panel before the page edge.
 
 ### Section Eyebrow Pattern
 
