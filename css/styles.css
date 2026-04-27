@@ -482,6 +482,12 @@
   .flex-1 {
     flex: 1;
   }
+  .flex-\[4\] {
+    flex: 4;
+  }
+  .flex-\[6\] {
+    flex: 6;
+  }
   .flex-shrink {
     flex-shrink: 1;
   }
