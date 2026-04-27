@@ -253,7 +253,7 @@ The dark counterpart of the content panel — same geometry, opposite material. 
 - **Centering:** `margin: 0 auto`.
 - **Internal padding:** `padding-top` / `padding-bottom: 96px`. Horizontal padding handled by the inner `mx-auto max-w-[1200px]` wrapper.
 - **Text:** `#FAFAFA` (paper white on the near-black surface).
-- **Section frame:** Wrap the panel in `<footer class="bg-stone-100 px-8 py-12 md:py-16">` so a small gray gap shows above and below the dark panel — making it read as a floating Polar-Night card rather than a full-bleed footer.
+- **Section frame:** Wrap the panel in `<footer class="bg-black px-8 py-12 md:py-16">`. The outer footer surface stays pure black at full bleed (different from the rest of the content area, which is gray) so the page literally ends in night. The slightly-lighter `#1C1917` panel sits inside that black on a small black gap above and below, with its `#292524` hairline border just visible against the surrounding black — a quiet stone-on-night composition that closes the page in the same Polar-Night register the hero opened with.
 
 ### Section Eyebrow Pattern
 
