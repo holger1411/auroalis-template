@@ -9,10 +9,16 @@ colors:
   neutral: "#1C1917"
   background: "#F5F5F4"
   surface: "#FFFFFF"
+  surface-inverted: "#1C1917"
   text-primary: "#1C1917"
   text-secondary: "#78716C"
+  text-on-inverted: "#FAFAF9"
   border: "#E7E5E4"
   accent: "#F97316"
+  hero-glow-1: "#F97316"
+  hero-glow-2: "#EA580C"
+  hero-glow-3: "#FFEDD5"
+  hero-glow-4: "#FB923C"
 typography:
   display-lg:
     fontFamily: "Inter"
@@ -62,6 +68,9 @@ components:
   card:
     rounded: "0px"
     padding: "8px"
+  hero-shader:
+    backgroundColor: "{colors.surface-inverted}"
+    textColor: "{colors.text-on-inverted}"
 ---
 
 ## Overview
@@ -145,6 +154,21 @@ Anchor interactions to the detected button styles. Reuse the existing card surfa
 - **Treatment:** Linear.
 - **Sets:** Solar.
 
+### Hero — Aurora Shader (motion exception)
+
+The hero is the one place in this system where motion goes beyond "minimal". A shader-style field of animated radial-gradient blobs runs continuously behind the headline, recolored from the warm side of the palette so it reads as a slow sunrise rather than a screensaver. Treat it as a single, isolated component that lives at the very top of the page; nothing else in the system inherits from it.
+
+- **Surface:** `surface-inverted` (`#1C1917`) full-bleed, edge-to-edge. The hero is the only dark surface in the system.
+- **Foreground typography:** `text-on-inverted` (`#FAFAF9`) for headline and nav. Add a soft drop shadow (`drop-shadow(0 2px 40px rgba(0,0,0,0.6))`) on the headline only, so it stays legible against the moving blobs.
+- **Blob palette:** Reuse the warm palette only — `hero-glow-1` (`#F97316`), `hero-glow-2` (`#EA580C`), `hero-glow-3` (`#FFEDD5`), `hero-glow-4` (`#FB923C`). No blue, no violet, no magenta. The aurora effect should feel like the brand color leaking light, not a separate accent system.
+- **Layer count:** 6–9 absolutely-positioned blob divs, each 40–120vw wide and 35–75vh tall, with a single radial-gradient background (60–88% transparent at the edge), `filter: blur(60px)`, and `pointer-events: none`.
+- **Animation:** Each blob runs its own `morph-*` keyframe — translate ±8–18vw / ±4–12vh, scale 0.75–1.35, rotate ±20–60°. Cycles 32–50s, `ease-in-out`, `infinite`, with negative `animation-delay` to desynchronize layers. `will-change: transform`.
+- **Grain:** A 200×200 inline SVG `feTurbulence` tile (baseFrequency 0.9, 2 octaves, stitched), data-URL'd and overlaid at 5% opacity with `mix-blend-mode: overlay`, keeps the gradients from looking plasticky.
+- **CTA inside hero:** Use `button-primary` (white surface, neutral text, 6px radius). Optionally add an atmospheric glow `box-shadow: 0 0 40px rgba(255,255,255,0.18)` to lift it from the moving field.
+- **Reduced motion:** Under `prefers-reduced-motion: reduce`, freeze every blob (`animation: none`). The orange glow stays — the movement does not.
+
+This component overrides the system-wide "Motion Level: minimal" budget and is the only sanctioned exception. Do not borrow its blur/blob recipe for any other section.
+
 ## Do's and Don'ts
 
 Use these constraints to keep future generations aligned with the current system instead of drifting into adjacent styles.
@@ -158,16 +182,22 @@ Use these constraints to keep future generations aligned with the current system
 ### Don't
 - Don't introduce extra accent colors outside the core palette roles unless the page needs a new semantic state.
 - Don't mix unrelated shadow or blur recipes that break the current depth system.
-- Don't exceed the detected minimal motion intensity without a deliberate reason.
+- Don't exceed the detected minimal motion intensity outside the sanctioned `hero-shader` component.
+- Don't reuse the hero shader's blur/blob recipe in any other section. It is a one-place exception, not a pattern.
+- Don't recolor the hero shader with cool hues (blue/violet/magenta). The blobs must stay inside the warm palette so the hero reads as the same brand voice as the rest of the page.
 
 ## Motion
 
-Motion stays restrained and interface-led across text, layout, and scroll transitions. Timing clusters around 150ms. Easing favors ease and cubic-bezier(0.4. Hover behavior focuses on text and color changes.
+Motion has two registers. Interface motion stays restrained and is the default. Ambient motion is permitted in exactly one place: the hero shader.
 
-**Motion Level:** minimal
+**Motion Level (system default):** minimal — applies to every section except the hero.
 
-**Durations:** 150ms
+**Motion Level (hero only):** ambient continuous — see the `hero-shader` component spec.
 
-**Easings:** ease, cubic-bezier(0.4, 0, 0.2, 1)
+**Durations:** 150ms for hover/focus, ~600ms for scroll-reveal entrances, 32–50s cycles for hero blob animations.
 
-**Hover Patterns:** text, color
+**Easings:** `ease`, `cubic-bezier(0.4, 0, 0.2, 1)` for interface; `ease-in-out` for hero blobs.
+
+**Hover Patterns:** text color, background color, opacity. No transforms, no shadow shifts.
+
+**Reduced motion:** Both registers respect `prefers-reduced-motion: reduce` — hero blobs freeze, scroll reveals show instantly.

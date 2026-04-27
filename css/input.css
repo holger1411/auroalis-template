@@ -1,70 +1,59 @@
 @import "tailwindcss";
 
-/* ===== Fonts ===== */
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins-500.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins-600.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
+/* Inter is loaded via <link> in index.html (Google Fonts, weights 400/500/600/700). */
 
 /* ===== Dark Mode Variant ===== */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ===== Theme: Light Mode (Default) ===== */
+/* ===== Theme: Stitch (design-stitch.md) =====
+ * Warm stone background, paper-white surface, orange accent system, near-black ink.
+ * Hero uses an inverted surface (#1C1917) with warm shader blobs — see .blob--* below.
+ */
 
 @theme {
-  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(9.8% 0 0);
-  --color-muted: oklch(96% 0 0);
-  --color-muted-foreground: oklch(40% 0 0);
-  --color-border: oklch(91% 0 0);
-  --color-primary: oklch(11% 0 0);
-  --color-primary-foreground: oklch(98% 0 0);
-  --color-accent: oklch(96% 0 0);
-  --color-accent-foreground: oklch(11% 0 0);
+  /* Stitch palette */
+  --color-background:        #F5F5F4;  /* warm stone canvas */
+  --color-surface:           #FFFFFF;  /* paper white card surface */
+  --color-surface-inverted:  #1C1917;  /* hero + footer */
+  --color-foreground:        #1C1917;  /* primary ink */
+  --color-muted:             #FAFAF9;
+  --color-muted-foreground:  #78716C;  /* text-secondary */
+  --color-border:            #E7E5E4;
+  --color-primary:           #F97316;  /* accent orange */
+  --color-primary-foreground:#FFFFFF;
+  --color-secondary:         #EA580C;
+  --color-tertiary:          #FFEDD5;  /* peach */
+  --color-accent:            #F97316;
+  --color-accent-foreground: #FFFFFF;
+  --color-text-on-inverted:  #FAFAF9;
 
-  /* Aurora palette — used by the shader-style hero */
-  --color-aurora-dark:    #0a1a4a;
-  --color-aurora-mid:     #1e3a8a;
-  --color-aurora-violet:  #6b2ec7;
-  --color-aurora-magenta: #b8187a;
+  /* Hero shader glow palette (warm only — see design-stitch.md "Hero — Aurora Shader") */
+  --color-hero-glow-1: #F97316;
+  --color-hero-glow-2: #EA580C;
+  --color-hero-glow-3: #FFEDD5;
+  --color-hero-glow-4: #FB923C;
 }
 
-/* ===== Dark Mode Overrides ===== */
+/* ===== Dark Mode Overrides =====
+ * Stitch is a light-first system. Dark mode flips canvas/ink only —
+ * the orange accent and inverted hero stay warm.
+ */
 
 .dark {
-  --color-background: oklch(7% 0 0);
-  --color-foreground: oklch(98% 0 0);
-  --color-muted: oklch(13% 0 0);
-  --color-muted-foreground: oklch(65% 0 0);
-  --color-border: oklch(22% 0 0);
-  --color-primary: oklch(98% 0 0);
-  --color-primary-foreground: oklch(7% 0 0);
-  --color-accent: oklch(13% 0 0);
-  --color-accent-foreground: oklch(98% 0 0);
+  --color-background:        #0C0A09;
+  --color-surface:            #1C1917;
+  --color-foreground:         #FAFAF9;
+  --color-muted:              #1C1917;
+  --color-muted-foreground:   #A8A29E;
+  --color-border:             #292524;
+  --color-primary:            #F97316;
+  --color-primary-foreground: #1C1917;
+  --color-accent:             #FB923C;
+  --color-accent-foreground:  #1C1917;
 }
 
 /* ===== Base Styles ===== */
@@ -75,10 +64,12 @@
 
 body {
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.625;
   color: var(--color-foreground);
   background-color: var(--color-background);
+  font-feature-settings: 'cv11', 'ss01';
 }
 
 /* ===== Section Variants ===== */
@@ -209,17 +200,26 @@ html:not(.js) [data-animate] {
   will-change: transform;
 }
 
+/* Stitch hero blobs — warm palette only (see design-stitch.md "Hero — Aurora Shader").
+ * RGB equivalents for reference:
+ *   #F97316 → 249,115,22  (primary orange)
+ *   #EA580C → 234,88,12   (secondary)
+ *   #FB923C → 251,146,60  (lighter orange)
+ *   #FFEDD5 → 255,237,213 (peach)
+ *   #1C1917 → 28,25,23    (neutral dark — base of hero, not used as a glow)
+ */
+
 .blob--mid {
   top: -20%;
   right: -30%;
   width: 120vw;
   height: 70vh;
   background: radial-gradient(ellipse 50% 50% at 50% 50%,
-    var(--color-aurora-mid) 0%,
-    rgba(30, 58, 138, 0.8)  25%,
-    rgba(30, 58, 138, 0.4)  50%,
-    rgba(30, 58, 138, 0.12) 72%,
-    rgba(30, 58, 138, 0)    88%);
+    var(--color-hero-glow-1) 0%,
+    rgba(249, 115, 22, 0.7)  25%,
+    rgba(249, 115, 22, 0.35) 50%,
+    rgba(249, 115, 22, 0.1)  72%,
+    rgba(249, 115, 22, 0)    88%);
   animation: morph-mid 32s ease-in-out infinite;
 }
 
@@ -229,10 +229,10 @@ html:not(.js) [data-animate] {
   width: 100vw;
   height: 65vh;
   background: radial-gradient(ellipse 55% 45% at 50% 50%,
-    var(--color-aurora-dark) 0%,
-    rgba(10, 26, 74, 0.85) 28%,
-    rgba(10, 26, 74, 0.4)  55%,
-    rgba(10, 26, 74, 0)    80%);
+    var(--color-hero-glow-2) 0%,
+    rgba(234, 88, 12, 0.7)  28%,
+    rgba(234, 88, 12, 0.3)  55%,
+    rgba(234, 88, 12, 0)    80%);
   animation: morph-dark 40s ease-in-out infinite;
   animation-delay: -10s;
 }
@@ -243,10 +243,10 @@ html:not(.js) [data-animate] {
   width: 85vw;
   height: 55vh;
   background: radial-gradient(ellipse 55% 40% at 50% 50%,
-    rgba(100, 150, 230, 0.5) 0%,
-    rgba(75, 110, 200, 0.3)  30%,
-    rgba(50, 85, 165, 0.12)  60%,
-    rgba(0, 0, 0, 0)         85%);
+    rgba(255, 237, 213, 0.55) 0%,
+    rgba(255, 237, 213, 0.3)  30%,
+    rgba(255, 237, 213, 0.12) 60%,
+    rgba(0, 0, 0, 0)          85%);
   animation: morph-accent 48s ease-in-out infinite;
   animation-delay: -22s;
 }
@@ -257,11 +257,11 @@ html:not(.js) [data-animate] {
   width: 110vw;
   height: 70vh;
   background: radial-gradient(ellipse 50% 50% at 50% 50%,
-    var(--color-aurora-violet) 0%,
-    rgba(107, 46, 199, 0.7)  25%,
-    rgba(107, 46, 199, 0.35) 50%,
-    rgba(107, 46, 199, 0.1)  72%,
-    rgba(107, 46, 199, 0)    88%);
+    var(--color-hero-glow-4) 0%,
+    rgba(251, 146, 60, 0.65) 25%,
+    rgba(251, 146, 60, 0.3)  50%,
+    rgba(251, 146, 60, 0.08) 72%,
+    rgba(251, 146, 60, 0)    88%);
   animation: morph-violet 36s ease-in-out infinite;
   animation-delay: -14s;
 }
@@ -272,9 +272,9 @@ html:not(.js) [data-animate] {
   width: 75vw;
   height: 50vh;
   background: radial-gradient(ellipse 55% 40% at 50% 50%,
-    rgba(140, 75, 220, 0.55) 0%,
-    rgba(107, 46, 199, 0.3)  35%,
-    rgba(80, 30, 160, 0.1)   62%,
+    rgba(255, 237, 213, 0.5) 0%,
+    rgba(251, 146, 60, 0.25) 35%,
+    rgba(249, 115, 22, 0.08) 62%,
     rgba(0, 0, 0, 0)         85%);
   animation: morph-violet-2 44s ease-in-out infinite;
   animation-delay: -28s;
@@ -286,10 +286,10 @@ html:not(.js) [data-animate] {
   width: 55vw;
   height: 45vh;
   background: radial-gradient(ellipse 50% 45% at 50% 50%,
-    rgba(184, 24, 122, 0.75) 0%,
-    rgba(184, 24, 122, 0.4)  30%,
-    rgba(184, 24, 122, 0.15) 55%,
-    rgba(184, 24, 122, 0)    80%);
+    rgba(249, 115, 22, 0.7)  0%,
+    rgba(249, 115, 22, 0.35) 30%,
+    rgba(249, 115, 22, 0.12) 55%,
+    rgba(249, 115, 22, 0)    80%);
   animation: morph-magenta 42s ease-in-out infinite;
   animation-delay: -18s;
 }
@@ -300,25 +300,27 @@ html:not(.js) [data-animate] {
   width: 40vw;
   height: 35vh;
   background: radial-gradient(ellipse 55% 45% at 50% 50%,
-    rgba(220, 50, 140, 0.4) 0%,
-    rgba(184, 24, 122, 0.2) 35%,
-    rgba(140, 15, 95, 0.08) 62%,
-    rgba(0, 0, 0, 0)        85%);
+    rgba(251, 146, 60, 0.4)  0%,
+    rgba(249, 115, 22, 0.2)  35%,
+    rgba(234, 88, 12, 0.08)  62%,
+    rgba(0, 0, 0, 0)         85%);
   animation: morph-magenta-2 50s ease-in-out infinite;
   animation-delay: -32s;
 }
 
+/* "Shadow" blobs deepen the inverted surface so the warm glows pop;
+ * they ride the neutral dark (#1C1917) rather than introducing a new hue. */
 .blob--shadow {
   top: -15%;
   left: -25%;
   width: 95vw;
   height: 75vh;
   background: radial-gradient(ellipse 45% 55% at 50% 50%,
-    #000 0%,
-    rgba(0, 0, 0, 0.92) 30%,
-    rgba(0, 0, 0, 0.7)  55%,
-    rgba(0, 0, 0, 0.25) 75%,
-    rgba(0, 0, 0, 0)    88%);
+    rgba(12, 10, 9, 1)    0%,
+    rgba(12, 10, 9, 0.9)  30%,
+    rgba(12, 10, 9, 0.6)  55%,
+    rgba(12, 10, 9, 0.2)  75%,
+    rgba(12, 10, 9, 0)    88%);
   animation: morph-shadow 38s ease-in-out infinite;
   animation-delay: -12s;
 }
@@ -329,10 +331,10 @@ html:not(.js) [data-animate] {
   width: 75vw;
   height: 55vh;
   background: radial-gradient(ellipse 55% 45% at 50% 50%,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.6)  32%,
-    rgba(0, 0, 0, 0.2)  60%,
-    rgba(0, 0, 0, 0)    82%);
+    rgba(12, 10, 9, 0.85) 0%,
+    rgba(12, 10, 9, 0.55) 32%,
+    rgba(12, 10, 9, 0.18) 60%,
+    rgba(12, 10, 9, 0)    82%);
   animation: morph-shadow-2 46s ease-in-out infinite;
   animation-delay: -25s;
 }
