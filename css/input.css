@@ -477,8 +477,8 @@ html:not(.js) [data-animate] {
    * vertical hairlines are what actually define the panel. */
   background: rgba(255, 255, 255, 0.05);
   color: #FAFAFA;
-  padding-top: 96px;
-  padding-bottom: 96px;
+  padding-top: 144px;
+  padding-bottom: 144px;
   /* Three-sided hairlines: left, right, bottom. Top is bare so the
    * footer panel sits flush against the contact panel above and the
    * seam between them carries no visible border. The vertical edges
