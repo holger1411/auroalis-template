@@ -176,11 +176,12 @@
           </div>
         </div>
 
-        <!-- Bento grid — five cards, mixed sizes, Auroalis register -->
-        <div class="mt-24 grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-5 md:min-h-[760px]">
+        <!-- Bento grid — five cards on a 10-row grid so col 1 splits 6/4
+             (60/40), col 2 splits 5/5 (50/50), col 3 spans the full 10. -->
+        <div class="mt-24 grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-10 md:min-h-[800px]">
 
-          <!-- A: THE STUDIO — col 1, rows 1-3 (tall) -->
-          <article class="flex flex-col overflow-hidden rounded-2xl bg-[#1C1917] p-8 text-white md:row-span-3" data-animate data-delay="1">
+          <!-- A: THE STUDIO — col 1, rows 1-6 (tall, dark) -->
+          <article class="flex flex-col overflow-hidden rounded-2xl bg-[#1C1917] p-8 text-white md:row-span-6" data-animate data-delay="1">
             <div class="flex items-start justify-between gap-4">
               <h3 class="text-[30px] font-medium leading-[34px] tracking-[-0.02em]">
                 Ten dark winters.<br>
@@ -195,24 +196,24 @@
             <div class="card-wave card-wave--violet mt-auto h-44 rounded-xl"></div>
           </article>
 
-          <!-- C: FEEDBACK — col 2, rows 1-2 -->
-          <article class="flex flex-col rounded-2xl bg-[#1C1917] p-8 text-white md:row-span-2" data-animate data-delay="2">
+          <!-- C: FEEDBACK — col 2, rows 1-5 (white with border) -->
+          <article class="flex flex-col rounded-2xl border border-stone-300 bg-white p-8 text-stone-900 md:row-span-5" data-animate data-delay="2">
             <div class="flex items-start justify-between gap-4">
-              <p class="font-serif text-[22px] font-normal leading-[1.35] tracking-[-0.01em]">
+              <p class="font-serif text-[24px] font-normal leading-[1.35] tracking-[-0.01em]">
                 &ldquo;They read our data without flinching at &minus;40&deg;C. Twice.&rdquo;
               </p>
-              <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
+              <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-stone-300 bg-stone-100 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
                 <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
                 Feedback
               </span>
             </div>
-            <p class="mt-auto pt-6 font-sans text-sm text-white/55">
+            <p class="mt-auto pt-6 font-sans text-sm text-stone-500">
               Marit Eliasson &mdash; Kiruna Atmospheric Observatory
             </p>
           </article>
 
-          <!-- E: DEEP SKY — col 3, rows 1-5 (full height) -->
-          <article class="card-wave card-wave--blue relative flex flex-col overflow-hidden rounded-2xl p-8 text-white md:row-span-5" data-animate data-delay="3">
+          <!-- E: DEEP SKY — col 3, rows 1-10 (full height) -->
+          <article class="card-wave card-wave--blue relative flex flex-col overflow-hidden rounded-2xl p-8 text-white md:row-span-10" data-animate data-delay="3">
             <div class="flex justify-end">
               <span class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
                 <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
@@ -224,25 +225,25 @@
             </p>
           </article>
 
-          <!-- B: CONNECT — col 1, rows 4-5 -->
-          <article class="flex flex-col rounded-2xl bg-[#1C1917] p-8 text-white md:row-span-2" data-animate data-delay="4">
+          <!-- B: CONNECT — col 1, rows 7-10 (gray) -->
+          <article class="flex flex-col rounded-2xl bg-stone-200 p-8 text-stone-900 md:row-span-4" data-animate data-delay="4">
             <div class="flex items-start justify-between gap-4">
-              <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
+              <span class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
                 <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
                 Connect
               </span>
-              <a href="#contact" aria-label="Go to contact" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-[#1C1917] transition-colors hover:bg-stone-200">
+              <a href="#contact" aria-label="Go to contact" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#1C1917] text-white transition-colors hover:bg-stone-800">
                 <svg aria-hidden="true" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9"/></svg>
               </a>
             </div>
             <div class="mt-auto pt-6">
-              <p class="text-base text-white/85">open@auroalis.studio</p>
-              <p class="text-sm text-white/55">+47 779 40 22</p>
+              <p class="text-base text-stone-800">open@auroalis.studio</p>
+              <p class="text-sm text-stone-500">+47 779 40 22</p>
             </div>
           </article>
 
-          <!-- D: METRICS — col 2, rows 3-5 (tall) -->
-          <article class="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl bg-[#1C1917] p-8 text-center text-white md:row-span-3" data-animate data-delay="5">
+          <!-- D: METRICS — col 2, rows 6-10 (50% of grid, dark) -->
+          <article class="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl bg-[#1C1917] p-8 text-center text-white md:row-span-5" data-animate data-delay="5">
             <!-- Faded background text -->
             <div aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden whitespace-nowrap font-serif text-[140px] font-normal tracking-tighter text-white/[0.04]">
               aurora aurora
