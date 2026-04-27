@@ -8,10 +8,13 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ===== Theme: Nocturne (design-nocturne.md) =====
- * Paper white body, pure-black hero/footer, Aurora Blue (#1E3A8A) brand —
- * pulled from the hero shader's blob--mid layer. Two-family typography:
- * Newsreader serif for headings, Inter sans for body and chrome.
+/* ===== Theme: Auroalis (design-auroalis.md) =====
+ * Northern-lights identity for research / space / high-north narratives.
+ * Paper-white body wrapped by a pure-black Polar Night hero/footer.
+ * Aurora Violet (#6B2EC7) is the brand pull — pulled from the hero's
+ * blob--violet layer. Aurora Green (#3DDC97) is the oxygen-emission
+ * band of the real aurora and lives only in the hero's blob--green.
+ * Two-family typography: Newsreader serif for headings, Inter for chrome.
  */
 
 @theme {
@@ -37,9 +40,12 @@
   --color-accent-foreground:  #FFFFFF;
   --color-text-on-inverted:   #FFFFFF;
 
-  /* Hero shader glow palette — cool side of the spectrum */
+  /* Hero shader glow palette — the auroral spectrum.
+   * Order matches the real aurora borealis from horizon to high altitude:
+   * navy → arctic blue → oxygen green → violet → high-altitude magenta. */
   --color-aurora-dark:    #0a1a4a;
   --color-aurora-mid:     #1e3a8a;
+  --color-aurora-green:   #3ddc97;
   --color-aurora-violet:  #6b2ec7;
   --color-aurora-magenta: #b8187a;
 }
@@ -285,6 +291,25 @@ html:not(.js) [data-animate] {
   animation-delay: -28s;
 }
 
+/* Aurora Green — the oxygen-emission glow.
+ * One blob only. Smaller and tighter than the surrounding cool layers,
+ * centered-right inside the hero, painted last so it reads in the
+ * foreground in front of every other blob. Higher opacity at the core
+ * so the green clearly registers as the auroral signature. */
+.blob--green {
+  top: 28%;
+  right: 6%;
+  width: 46vw;
+  height: 42vh;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%,
+    rgba(61, 220, 151, 0.75) 0%,
+    rgba(61, 220, 151, 0.45) 26%,
+    rgba(61, 220, 151, 0.18) 52%,
+    rgba(61, 220, 151, 0)    80%);
+  animation: morph-green 46s ease-in-out infinite;
+  animation-delay: -16s;
+}
+
 .blob--magenta {
   top: 45%;
   right: 0%;
@@ -405,6 +430,17 @@ html:not(.js) [data-animate] {
   0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
   35%  { transform: translate(-14vw, -8vh) scale(1.35) rotate(40deg); }
   65%  { transform: translate(10vw, 6vh)   scale(0.75) rotate(-50deg); }
+  100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+}
+
+/* Green blob drifts gently around its centered-right anchor with
+ * moderate scale variation — an auroral pocket pulsing in place rather
+ * than a wandering layer. */
+@keyframes morph-green {
+  0%   { transform: translate(0, 0)        scale(1)    rotate(0deg); }
+  25%  { transform: translate(-6vw, 3vh)   scale(1.12) rotate(-6deg); }
+  55%  { transform: translate(5vw, -4vh)   scale(0.92) rotate(5deg); }
+  80%  { transform: translate(-3vw, 2vh)   scale(1.06) rotate(-3deg); }
   100% { transform: translate(0, 0)        scale(1)    rotate(0deg); }
 }
 

@@ -420,9 +420,6 @@
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
-  .max-w-\[16ch\] {
-    max-width: 16ch;
-  }
   .max-w-\[18ch\] {
     max-width: 18ch;
   }
@@ -732,6 +729,9 @@
   .font-sans {
     font-family: var(--font-sans);
   }
+  .font-serif {
+    font-family: var(--font-serif);
+  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -938,10 +938,6 @@
     --tw-drop-shadow: var(--tw-drop-shadow-size);
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
-  .grayscale {
-    --tw-grayscale: grayscale(100%);
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
@@ -981,13 +977,6 @@
   .placeholder\:text-neutral-400 {
     &::placeholder {
       color: var(--color-neutral-400);
-    }
-  }
-  .hover\:bg-\[\#162E6F\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #162E6F;
-      }
     }
   }
   .hover\:bg-\[\#5928A8\] {
@@ -1507,6 +1496,15 @@ html:not(.js) [data-animate] {
   animation: morph-violet-2 44s ease-in-out infinite;
   animation-delay: -28s;
 }
+.blob--green {
+  top: 28%;
+  right: 6%;
+  width: 46vw;
+  height: 42vh;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(61, 220, 151, 0.75) 0%, rgba(61, 220, 151, 0.45) 26%, rgba(61, 220, 151, 0.18) 52%, rgba(61, 220, 151, 0) 80%);
+  animation: morph-green 46s ease-in-out infinite;
+  animation-delay: -16s;
+}
 .blob--magenta {
   top: 45%;
   right: 0%;
@@ -1662,6 +1660,23 @@ html:not(.js) [data-animate] {
   }
   65% {
     transform: translate(10vw, 6vh) scale(0.75) rotate(-50deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+@keyframes morph-green {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translate(-6vw, 3vh) scale(1.12) rotate(-6deg);
+  }
+  55% {
+    transform: translate(5vw, -4vh) scale(0.92) rotate(5deg);
+  }
+  80% {
+    transform: translate(-3vw, 2vh) scale(1.06) rotate(-3deg);
   }
   100% {
     transform: translate(0, 0) scale(1) rotate(0deg);

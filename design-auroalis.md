@@ -1,12 +1,12 @@
 ---
 version: "alpha"
-name: "Nocturne — Aurora palette × Stitch system"
-description: "A hybrid identity: the Aurora cool-palette story (navy → blue → violet → magenta on near-black, neutral grayscale on white) wired into the Stitch typographic and component DNA (Inter, 88px display headlines, label-md uppercase eyebrows, 6px button radius, flat surfaces, minimal motion)."
+name: "Auroalis — Northern Lights Research Identity"
+description: "A space-and-high-north identity for research, observation, and exploration narratives. Named after the aurora borealis itself: a near-black hero/footer hosts an animated polar-sky shader (deep navy → arctic blue → aurora green → violet → magenta) wrapping a paper-white reading zone. Aurora Violet (#6B2EC7) anchors the brand below the hero. Newsreader serif for every heading H1–H6, Inter sans for body and chrome. Visual register: scientific instrument minimalism — like the typesetting of an observation log, with one moment of atmospheric motion theatre at the top of the page."
 colors:
   primary: "#6B2EC7"
   primary-hover: "#5928A8"
   secondary: "#1E3A8A"
-  tertiary: "#B8187A"
+  tertiary: "#3DDC97"
   neutral: "#FFFFFF"
   background: "#FFFFFF"
   surface: "#FFFFFF"
@@ -21,8 +21,9 @@ colors:
   accent: "#6B2EC7"
   hero-glow-1: "#0A1A4A"
   hero-glow-2: "#1E3A8A"
-  hero-glow-3: "#6B2EC7"
-  hero-glow-4: "#B8187A"
+  hero-glow-3: "#3DDC97"
+  hero-glow-4: "#6B2EC7"
+  hero-glow-5: "#B8187A"
 typography:
   display-lg:
     fontFamily: "Newsreader"
@@ -128,26 +129,32 @@ components:
 
 ## Overview
 
-Nocturne is a deliberate hybrid. It keeps the Aurora color story — a near-black hero/footer wrapping a paper-white reading zone, with a cool navy-to-magenta gradient as the only chromatic moment — and adds Aurora Violet (`#6B2EC7`) pulled directly from the hero's `blob--violet` layer as the brand primary. The typographic and component layer is borrowed from Stitch and refined into an editorial pair: **Newsreader** serif for every heading H1–H6, **Inter** sans for body, labels, and chrome. Buttons sit at 6px radius, surfaces stay flat, and the minimal motion budget is explicitly overridden by the hero shader.
+Auroalis is a research-and-exploration identity, named directly after the *aurora borealis* — the polar light show that gives this design system its hero. The page is built around a single dramatic premise: visitors arrive at a near-black night sky, a slow shader-driven aurora unfolding in deep navy, arctic blue, oxygen-green, violet, and the rare high-altitude magenta. Below that opening, the page settles into a paper-white research log: serif headlines, calm sans body, generous whitespace, a single brand violet pulled from the aurora itself. The narrative voice should match — quiet, observational, instrument-grade. Auroalis is for high-north research stations, atmospheric observatories, deep-space programs, and the kind of work that gets done at 3 AM when the sensors are recording and the sky is doing something rare.
+
+The system inherits its typographic and component DNA from Stitch (Inter sans + Newsreader serif, 88px display, 6px-radius buttons, flat surfaces, 4px spacing rhythm) but uses it in a more scientific register. Think field journal rather than magazine spread.
 
 - **Composition cues:**
   - Layout: Grid
   - Content Width: 1200px max, with 32px gutters
-  - Framing: Open at the top (full-bleed hero), closed at the bottom (full-bleed footer)
+  - Framing: Open at the top (full-bleed polar-sky hero), closed at the bottom (full-bleed footer that mirrors the hero's surface)
   - Grid: 1-col / 2-col / 3-col, with one signature `2fr 1fr` split in the hero
-  - Tone: Editorial, chromatically restrained, with one moment of motion theatre
+  - Tone: Observational, instrument-grade, chromatically restrained — with one moment of atmospheric motion theatre at the top of the page
+  - Voice cues for content: research, observation, atmospheric phenomena, the high north, low-light photography, quiet precision; avoid breathless startup language
 
 ## Colors
 
-The palette is anchored by a single brand color — Aurora Violet (`#6B2EC7`), pulled directly from the hero shader's `blob--violet` layer. Two material zones (paper white body, pure-black hero/footer) hold the page together; the brand violet is the one chromatic note that ties the body back to the hero. Navy, blue, and magenta remain in the hero's gradient as supporting hues but are not used as flat colors elsewhere.
+The palette reads the aurora itself: cold sky at the top of the spectrum (deep navy, arctic blue), then a vivid oxygen-green band — the visual signature of the real-world phenomenon — then the rarer violet and high-altitude magenta. The brand pull is **Aurora Violet** (`#6B2EC7`), drawn from the hero's `blob--violet` layer; the green is reserved for the hero gradient itself, where it does the work of making the night sky read as auroral rather than merely dark.
 
-- **Primary (#6B2EC7):** Aurora Violet — the brand color. Used for the primary action CTA on white surfaces, focus rings, link hover states, and any UI moment that needs to feel "Nocturne-branded". This violet exists in the hero blobs already, so when it appears flat below the hero, the whole page reads as the same identity.
+Two material zones (paper white body, pure-black hero/footer) hold the page together; the brand violet is the one chromatic note that ties the body back to the hero. Green, navy, blue, and magenta remain in the hero's gradient as supporting hues and are not used as flat colors elsewhere.
+
+- **Primary (#6B2EC7):** Aurora Violet — the brand color. Used for the primary action CTA on white surfaces, focus rings, link hover states, and any UI moment that needs to feel Auroalis-branded. This violet exists in the hero blobs already, so when it appears flat below the hero, the whole page reads as the same identity.
 - **Primary Hover (#5928A8):** A 1-step-darker violet for hover/pressed states on `button-accent`. Avoid using as a fill color anywhere else.
-- **Secondary (#1E3A8A):** Aurora dark blue. Optional accent for one moment per page if a second chromatic pull is needed (e.g. a quiet badge or tag). Not a default — most pages should ship without it.
-- **Tertiary (#B8187A):** Aurora magenta. Decorative only — lives inside the hero shader. Do not use as a flat color.
+- **Secondary (#1E3A8A):** Arctic Blue. Optional accent for one moment per page if a second chromatic pull is needed (e.g. a quiet badge, a chart line, a tag). Not a default — most pages should ship without it.
+- **Tertiary (#3DDC97):** Aurora Green — the oxygen-emission band of the real aurora borealis. Decorative only: it lives inside the hero shader's `blob--green` layer and nowhere else by default. Reserve as a flat color for a single, deliberate moment of "this is alive" — a live status dot, a sensor-reading indicator, a subtle data-viz highlight. Never as a button fill, never as body type.
+- **Quaternary / Magenta (#B8187A):** High-altitude aurora magenta. Decorative only — lives inside the hero shader. Do not use as a flat color.
 - **Neutral (#FFFFFF):** Paper white — the dominant body canvas.
-- **Surface Inverted (#000000):** Pure black hero/footer surface that hosts the shader gradients.
-- **Aurora hues (#0A1A4A, #1E3A8A, #6B2EC7, #B8187A):** Deep navy → blue → violet → magenta. Reserved for the animated hero blobs and the SVG noise grain.
+- **Surface Inverted (#000000):** Pure black hero/footer surface that hosts the shader gradients. This is the Polar Night.
+- **Aurora hues (#0A1A4A, #1E3A8A, #3DDC97, #6B2EC7, #B8187A):** Deep navy → arctic blue → aurora green → violet → magenta. The full spectrum of the visible aurora. Reserved for the animated hero blobs and the SVG noise grain.
 - **Text scale on white:** Primary text `#171717` (near-black ink, NOT the brand violet), Secondary `#404040`, Muted `#737373`. Use Muted for `label-md` eyebrows; Secondary for body copy under a heading; near-black for the heading itself. Headlines do not use the brand violet — type stays neutral, violet belongs to action.
 - **Borders:** `#D4D4D4` for input chrome and clear edges; `#E8E8E8` for subtle dividers.
 - **Accent (#6B2EC7):** Alias of `primary`. The same violet that lives in `blob--violet`. When it appears as a flat color (focus ring, accent button, link hover), it ties the body back to the hero.
@@ -246,10 +253,11 @@ This pattern is the system's spine. Reuse it for every white section instead of 
 
 The hero is the one place in this system where motion goes beyond "minimal". A shader-style field of cool radial-gradient blobs runs continuously behind the headline. Treat it as a single, isolated component at the very top of the page; nothing else inherits from it.
 
-- **Surface:** `surface-inverted` (`#000000`) full-bleed. The hero is the only pure-black surface in the system.
+- **Surface:** `surface-inverted` (`#000000`) full-bleed. The hero is the Polar Night — the only pure-black surface in the system.
 - **Foreground typography:** `text-on-inverted` (`#FFFFFF`) for headline and nav. Soft drop shadow `drop-shadow(0 2px 40px rgba(0,0,0,0.7))` on the headline only.
-- **Blob palette:** Cool only — `hero-glow-1` (`#0A1A4A` deep navy), `hero-glow-2` (`#1E3A8A` blue), `hero-glow-3` (`#6B2EC7` violet), `hero-glow-4` (`#B8187A` magenta). No warm hues. The arc reads as deep-night sky → distant violet → distant magenta, not as a sunrise.
-- **Layer count:** 6–9 absolutely-positioned blob divs, each 40–120vw wide and 35–75vh tall, single radial-gradient background (60–88% transparent at the edge), `filter: blur(60px)`, `pointer-events: none`.
+- **Blob palette:** Cool spectrum only — `hero-glow-1` (`#0A1A4A` deep navy), `hero-glow-2` (`#1E3A8A` arctic blue), `hero-glow-3` (`#3DDC97` aurora green — oxygen emission), `hero-glow-4` (`#6B2EC7` violet), `hero-glow-5` (`#B8187A` high-altitude magenta). Five hues, in the same order they appear in the real aurora. No warm hues.
+- **Green is singular.** Use exactly one `blob--green` per hero. It sits centered-right in the viewport (anchored ~6% from the right edge, ~28% from the top), is smaller and tighter than the surrounding cool layers (~46vw × 42vh), and is rendered LAST in the DOM so it paints in the foreground in front of every other blob. The green is the visual signature of the aurora — duplicating it dilutes the moment.
+- **Layer count:** 7–9 absolutely-positioned blob divs in total (typically: 2 shadow, 2–3 navy/blue, 2 violet, 2 magenta, 1 green). Each 40–120vw wide and 35–75vh tall, single radial-gradient background (60–88% transparent at the edge), `filter: blur(60px)`, `pointer-events: none`.
 - **Animation:** Each blob runs its own `morph-*` keyframe — translate ±8–18vw / ±4–12vh, scale 0.75–1.35, rotate ±20–60°. Cycles 32–50s, `ease-in-out`, `infinite`, with negative `animation-delay` to desynchronize. `will-change: transform`.
 - **Grain:** A 200×200 inline SVG `feTurbulence` tile (baseFrequency 0.9, 2 octaves, stitched), data-URL'd and overlaid at 5% opacity with `mix-blend-mode: overlay`.
 - **CTA inside hero:** `button-primary` (white surface, dark text, 6px radius, label-md typography) with the atmospheric glow shadow.
@@ -273,7 +281,8 @@ Use these constraints to keep future generations aligned with the current system
 ### Don't
 
 - Don't introduce drop shadows on white-surface cards. The system uses material contrast, not elevation.
-- Don't recolor the hero shader with warm hues (orange/red/amber). The blobs must stay inside the cool palette so the system reads as a night-sky identity, not a sunrise.
+- Don't recolor the hero shader with warm hues (orange/red/amber) or shift it toward dawn. The blobs must stay inside the auroral spectrum (navy → arctic blue → green → violet → magenta) so the page reads as a polar night, not a sunrise.
+- Don't use Aurora Green (`#3DDC97`) as a button fill, body text color, or section background. It is the visual signature of the hero's auroral band — its job is to live inside the shader. A single tiny indicator dot or sensor-reading highlight is the maximum allowed flat use per page.
 - Don't bold a display headline. The serif is set at weight 400; weight 500 is reserved for `heading-md` (h3 and below).
 - Don't introduce a third typeface. The system is exactly two families: Newsreader (every heading) and Inter (everything else). No display sans for headlines, no script accents, no UI serif for body.
 - Don't set body copy in Newsreader. The serif belongs to headings. Body, labels, navigation, and buttons stay in Inter.
