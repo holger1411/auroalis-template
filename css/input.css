@@ -419,6 +419,26 @@ html:not(.js) [data-animate] {
   border-bottom: 0;
 }
 
+/* Card wave — colored top half of a featured-study card.
+ * Reuses the hero blob palette (navy, arctic blue, violet, aurora
+ * green) layered as soft radial gradients over a deep linear base, so
+ * each card top reads as a miniature aurora. The bottom edge is
+ * trimmed with an SVG mask that creates a smooth wave, exposing the
+ * white card surface below. */
+.card-wave {
+  background:
+    radial-gradient(ellipse at 25% 32%, rgba(107, 46, 199, 0.65) 0%, transparent 55%),
+    radial-gradient(ellipse at 78% 58%, rgba(61, 220, 151, 0.55)  0%, transparent 58%),
+    radial-gradient(ellipse at 60% 18%, rgba(30, 58, 138, 0.5)    0%, transparent 60%),
+    linear-gradient(135deg, #0A1A4A 0%, #1E1B5A 100%);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'><path d='M0,0 L200,0 L200,82 Q180,92 160,82 T120,82 T80,82 T40,82 T0,82 Z' fill='black'/></svg>");
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'><path d='M0,0 L200,0 L200,82 Q180,92 160,82 T120,82 T80,82 T40,82 T0,82 Z' fill='black'/></svg>");
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
 @media (min-width: 1440px) {
   .content-panel { max-width: calc(1200px + 240px); }
 }
