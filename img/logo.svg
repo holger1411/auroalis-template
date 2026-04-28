@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-label="Auroalis">
+  <!-- Three concentric rings — observation polar plot -->
+  <circle cx="16" cy="16" r="14.5"/>
+  <circle cx="16" cy="16" r="10"/>
+  <circle cx="16" cy="16" r="5"/>
+  <!-- Cardinal fiducial ticks crossing the outer ring -->
+  <line x1="16" y1="0" x2="16" y2="3"/>
+  <line x1="16" y1="32" x2="16" y2="29"/>
+  <line x1="0" y1="16" x2="3" y2="16"/>
+  <line x1="32" y1="16" x2="29" y2="16"/>
+  <!-- Centre dot — observer position -->
+  <circle cx="16" cy="16" r="1" fill="currentColor" stroke="none"/>
+  <!-- Aurora event marker — NE on the outer ring -->
+  <circle cx="26.25" cy="5.75" r="1.25" fill="currentColor" stroke="none"/>
+</svg>
