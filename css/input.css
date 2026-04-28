@@ -419,6 +419,19 @@ html:not(.js) [data-animate] {
   border-bottom: 0;
 }
 
+/* Modifier: dark variant of .content-panel — same geometry as the
+ * white card but dark stone fill with light text and white-low-
+ * opacity hairlines (matching the footer panel's edge treatment).
+ * Used for the FAQ section so it reads as a dark moment in the
+ * gray content area. */
+.content-panel--dark {
+  background: #1C1917;
+  color: #FAFAFA;
+  border-left-color: rgba(255, 255, 255, 0.2);
+  border-right-color: rgba(255, 255, 255, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Card wave — colored top half of a featured-study card.
  * Each card carries an inline SVG background composed of a base
  * gradient plus two rising wavy bands of color drawn from the hero
