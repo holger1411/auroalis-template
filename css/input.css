@@ -486,11 +486,10 @@ html:not(.js) [data-animate] {
   margin-left: auto;
   margin-right: auto;
   max-width: calc(1200px + 96px);
-  /* White at 5% over the black outer footer — a barely-there lift
-   * that reads as the dark-mode equivalent of the white content
-   * panel (white over gray). Subtle enough that the 0.2-white
-   * vertical hairlines are what actually define the panel. */
-  background: rgba(255, 255, 255, 0.05);
+  /* White at 2.5% over the black outer footer — barely there. The
+   * 0.2-white vertical hairlines + the halo above carry the panel's
+   * definition; the fill itself is just the faintest cool lift. */
+  background: rgba(255, 255, 255, 0.025);
   color: #FAFAFA;
   padding-top: 144px;
   padding-bottom: 144px;
