@@ -203,6 +203,23 @@ html:not(.js) [data-animate] {
   }
 }
 
+/* ===== FAQ smooth open/close animation =====
+ * <details> default hides children with display:none when closed,
+ * which can't transition. Force the content wrapper to render even
+ * when closed (display: block) and animate its height. JS in main.js
+ * sets explicit pixel heights so height: 0 → auto can transition. */
+
+details.faq-item > .faq-content {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  transition: height 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+details.faq-item[open] > .faq-content {
+  height: auto;
+}
+
 /* ===== Card Carousel ===== */
 
 .carousel {

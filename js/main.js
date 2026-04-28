@@ -134,6 +134,61 @@
     }
   });
 
+  // ===== FAQ Smooth Open/Close Animation =====
+  // <details> opens/closes instantly by default. We intercept the
+  // summary click, animate the content's pixel height, and toggle
+  // the [open] attribute at the right moment so the height
+  // transition (CSS) plays in both directions.
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var items = document.querySelectorAll('details.faq-item');
+
+    items.forEach(function (details) {
+      var summary = details.querySelector('summary');
+      var content = details.querySelector('.faq-content');
+      if (!summary || !content) return;
+
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        if (details.open) {
+          // CLOSING: pin the current height, then animate to 0,
+          // then drop the [open] attribute when the transition ends.
+          content.style.height = content.scrollHeight + 'px';
+          // Force reflow so the pinned height takes effect before
+          // the next style change is treated as a transition.
+          // eslint-disable-next-line no-unused-expressions
+          content.offsetHeight;
+          content.style.height = '0px';
+
+          var onClose = function (ev) {
+            if (ev.propertyName !== 'height') return;
+            details.open = false;
+            content.style.height = '';
+            content.removeEventListener('transitionend', onClose);
+          };
+          content.addEventListener('transitionend', onClose);
+        } else {
+          // OPENING: open the details, start at 0, then animate up
+          // to the natural scrollHeight. Once the transition ends
+          // release the height back to auto so reflow on resize works.
+          details.open = true;
+          content.style.height = '0px';
+          // eslint-disable-next-line no-unused-expressions
+          content.offsetHeight;
+          content.style.height = content.scrollHeight + 'px';
+
+          var onOpen = function (ev) {
+            if (ev.propertyName !== 'height') return;
+            content.style.height = '';
+            content.removeEventListener('transitionend', onOpen);
+          };
+          content.addEventListener('transitionend', onOpen);
+        }
+      });
+    });
+  });
+
   // ===== Carousel Keyboard Navigation =====
 
   document.addEventListener('DOMContentLoaded', function () {
