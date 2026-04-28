@@ -65,6 +65,28 @@
   --color-accent-foreground:  #FFFFFF;
 }
 
+/* ===== Section vertical padding =====
+ * Single source of truth for the vertical breathing room inside every
+ * content panel (.content-panel, .content-panel--dark) and the flat
+ * Work section. The formula is a fixed base plus a viewport-height
+ * component, with a hard minimum so small screens still look generous:
+ *
+ *   max( 96px ,  40px + 10vh )
+ *
+ * Resulting values:
+ *   600vh tall  →  max(96, 100)  =  100px
+ *   800vh tall  →  max(96, 120)  =  120px
+ *   1000vh tall →  max(96, 140)  =  140px
+ *   1200vh tall →  max(96, 160)  =  160px
+ *   1400vh tall →  max(96, 180)  =  180px
+ *
+ * On phones / short viewports the 96px floor keeps the panel readable;
+ * on tall desktops the panel breathes with the screen.
+ */
+:root {
+  --section-padding-y: max(96px, calc(40px + 10vh));
+}
+
 /* ===== Headings: Newsreader serif by default for H1–H6 =====
  * design-nocturne.md mandates the serif on every heading. Using a base
  * rule here keeps markup clean — no per-element font class needed.
@@ -399,8 +421,8 @@ html:not(.js) [data-animate] {
   margin-right: auto;
   max-width: calc(1200px + 96px);
   background: var(--color-surface);
-  padding-top: 96px;
-  padding-bottom: 96px;
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
   /* Hairline borders on left, right, and bottom only — slightly darker
    * than the surrounding stone-100 canvas so the panel reads as a
    * defined card. Top is intentionally bare so the panel meets the
