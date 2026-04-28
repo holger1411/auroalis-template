@@ -481,6 +481,8 @@ html:not(.js) [data-animate] {
  * gray canvas. White text inside.
  */
 .footer-panel {
+  position: relative;
+  overflow: hidden;
   margin-left: auto;
   margin-right: auto;
   max-width: calc(1200px + 96px);
@@ -500,6 +502,30 @@ html:not(.js) [data-animate] {
   border-left:   1px solid rgba(255, 255, 255, 0.2);
   border-right:  1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Halbkreisförmiger Aurora-Halo — sits at the top of the footer panel,
+ * with its centre anchored above the panel edge so only the bottom half
+ * of the elliptical glow is visible. Reuses the hero blob palette
+ * (navy / arctic blue / violet / aurora green) so the page closes with
+ * an echo of the polar-sky shader at the top. */
+.footer-halo {
+  position: absolute;
+  top: -240px;
+  left: 50%;
+  width: 1200px;
+  max-width: 110%;
+  height: 480px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 22% 50%, rgba(30, 58, 138, 0.65)  0%, transparent 50%),
+    radial-gradient(circle at 48% 62%, rgba(107, 46, 199, 0.6)  0%, transparent 52%),
+    radial-gradient(circle at 75% 48%, rgba(61, 220, 151, 0.5)  0%, transparent 52%),
+    radial-gradient(circle at 50% 30%, rgba(10, 26, 74, 0.5)    0%, transparent 60%);
+  filter: blur(60px);
 }
 
 @media (min-width: 1440px) {
