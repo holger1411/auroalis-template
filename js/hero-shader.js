@@ -262,7 +262,7 @@
     //   t=0.571  #0A1A4A   deep navy
     //   t=0.714  #1E3A8A   arctic blue
     //   t=0.857  #6B2EC7   aurora violet
-    //   t=1.000  #50CC7C   aurora green (narrow accent at peak only)
+    //   t=1.000  #54CC74   aurora green (narrow accent at peak only)
     var palette = new Float32Array([
       0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
@@ -271,7 +271,7 @@
       10/255,  26/255,  74/255,
       30/255,  58/255,  138/255,
       107/255, 46/255,  199/255,
-      80/255,  204/255, 124/255
+      84/255,  204/255, 116/255
     ]);
     gl.uniform3fv(u_colors, palette);
     gl.uniform1i(u_colorsLength, 8);
