@@ -256,10 +256,10 @@
     //   t=0.571  #1E3A8A   arctic blue  ┐
     //   t=0.714  #1E3A8A   arctic blue  ┘ doubled — long blue plateau
     //   t=0.857  #6B2EC7   aurora violet (single — narrow violet band)
-    //   t=1.000  #2BB44A   aurora green sampled from a real Tromsø
-    //                       polar-night photograph (top-10% peak of the
-    //                       brightest curtain pixels — vivid, slightly
-    //                       yellow-leaning pure green at hue ~127°)
+    //   t=1.000  #4DCC83   aurora green — photo-sampled peak with a
+    //                       touch more white mixed in (RGB 77/204/131,
+    //                       hue ~141°, slight cyan lean for a softer,
+    //                       slightly turquoise-tinted green)
     var palette = new Float32Array([
       0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
@@ -268,7 +268,7 @@
       30/255,  58/255,  138/255,
       30/255,  58/255,  138/255,
       107/255, 46/255,  199/255,
-      43/255,  180/255, 74/255
+      77/255,  204/255, 131/255
     ]);
     gl.uniform3fv(u_colors, palette);
     gl.uniform1i(u_colorsLength, 8);
