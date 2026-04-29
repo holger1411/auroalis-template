@@ -180,110 +180,6 @@
             </p>
           </div>
         </div>
-
-        <!-- Bento grid — three columns, each managing its own height
-             split via nested flex so all three columns share an
-             identical total height. Col 1 splits 60/40, col 2 splits
-             50/50, col 3 is a single full-height card. -->
-        <div class="mt-32 grid grid-cols-1 gap-4 md:grid-cols-3 md:min-h-[800px]">
-
-          <!-- COL 1: 60/40 vertical split (Studio + Connect) -->
-          <div class="flex flex-col gap-4">
-
-            <!-- A: THE STUDIO — 60% of col, dark -->
-            <article class="flex flex-[6] flex-col overflow-hidden bg-[#1C1917] p-8 text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="1">
-              <div class="flex items-start justify-between gap-4">
-                <h3 class="text-[30px] font-medium leading-[34px] tracking-[-0.02em]">
-                  Ten dark winters.<br>
-                  Three field stations.<br>
-                  One quiet practice.
-                </h3>
-                <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                  The Studio
-                </span>
-              </div>
-              <img src="img/ac739b21-7073-418b-9a0f-d07f5d6224e0.jpg" alt="" loading="lazy" class="mt-auto h-44 w-full object-cover" />
-            </article>
-
-            <!-- B: CONNECT — 40% of col, gray -->
-            <article class="flex flex-[4] flex-col bg-stone-200 p-8 text-stone-900 shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="4">
-              <div class="flex items-start justify-between gap-4">
-                <span class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                  Connect
-                </span>
-                <a href="#contact" aria-label="Go to contact" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#1C1917] text-white transition-colors hover:bg-stone-800">
-                  <svg aria-hidden="true" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9"/></svg>
-                </a>
-              </div>
-              <div class="mt-auto pt-6">
-                <p class="text-base text-stone-800">open@auroalis.studio</p>
-                <p class="text-sm text-stone-500">+47 779 40 22</p>
-              </div>
-            </article>
-
-          </div>
-
-          <!-- COL 2: 50/50 vertical split (Feedback + Metrics) -->
-          <div class="flex flex-col gap-4">
-
-            <!-- C: FEEDBACK — 50% of col, white with border -->
-            <article class="flex flex-1 flex-col border border-stone-300 bg-white p-8 text-stone-900 shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="2">
-              <div class="flex items-start justify-between gap-4">
-                <p class="font-serif text-[24px] font-normal leading-[1.35] tracking-[-0.01em]">
-                  &ldquo;They read our data without flinching at &minus;40&deg;C. Twice.&rdquo;
-                </p>
-                <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-stone-300 bg-stone-100 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                  Feedback
-                </span>
-              </div>
-              <p class="mt-auto pt-6 font-sans text-sm text-stone-500">
-                Marit Eliasson &mdash; Kiruna Atmospheric Observatory
-              </p>
-            </article>
-
-            <!-- D: METRICS — 50% of col, dark -->
-            <article class="card-wave card-wave--green relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-[#1C1917] p-8 text-center text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="5">
-              <!-- Vertical dark gradient — transparent at the top so
-                   the aurora-green bg shows through, fading to black
-                   at the bottom so the centred number reads cleanly. -->
-              <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/85"></div>
-              <!-- Faded background text -->
-              <div aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden whitespace-nowrap font-serif text-[140px] font-normal tracking-tighter text-white/[0.06]">
-                aurora aurora
-              </div>
-              <div class="relative z-10">
-                <p class="font-serif text-[88px] font-medium leading-[0.9] tracking-[-0.04em] text-white">
-                  557.7
-                </p>
-                <p class="mt-4 font-sans text-sm leading-snug text-white/65">
-                  nm &mdash; the green<br>of an aurora
-                </p>
-              </div>
-              <span class="relative z-10 mt-8 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
-                <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                Metrics
-              </span>
-            </article>
-
-          </div>
-
-          <!-- COL 3: full height (Deep Sky) -->
-          <article class="card-wave card-wave--blue relative flex flex-col overflow-hidden p-8 text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="3">
-            <div class="flex justify-end">
-              <span class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
-                <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                Deep Sky
-              </span>
-            </div>
-            <p class="mt-auto text-[15px] leading-relaxed text-white/90">
-              From substorm cadence to mesospheric airglow &mdash; we engineer the instruments, write the protocols, and read the data. The work begins where the streetlights end and the polar night opens.
-            </p>
-          </article>
-
-        </div>
         </div>
       </div>
     </section>
@@ -548,6 +444,119 @@
       </div>
     </section>
     </template>
+
+    <!-- ===== Bento — five featured cards, white panel before the FAQ ===== -->
+    <section id="featured" class="bg-stone-100 px-8 py-0">
+      <div class="content-panel content-panel--bottom-flush">
+        <div class="mx-auto max-w-[1200px]">
+
+          <!-- Bento grid — three columns, each managing its own height
+               split via nested flex so all three columns share an
+               identical total height. Col 1 splits 60/40, col 2 splits
+               50/50, col 3 is a single full-height card. -->
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:min-h-[800px]">
+
+            <!-- COL 1: 60/40 vertical split (Studio + Connect) -->
+            <div class="flex flex-col gap-4">
+
+              <!-- A: THE STUDIO — 60% of col, dark -->
+              <article class="flex flex-[6] flex-col overflow-hidden bg-[#1C1917] p-8 text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="1">
+                <div class="flex items-start justify-between gap-4">
+                  <h3 class="text-[30px] font-medium leading-[34px] tracking-[-0.02em]">
+                    Ten dark winters.<br>
+                    Three field stations.<br>
+                    One quiet practice.
+                  </h3>
+                  <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
+                    The Studio
+                  </span>
+                </div>
+                <img src="img/ac739b21-7073-418b-9a0f-d07f5d6224e0.jpg" alt="" loading="lazy" class="mt-auto h-44 w-full object-cover" />
+              </article>
+
+              <!-- B: CONNECT — 40% of col, gray -->
+              <article class="flex flex-[4] flex-col bg-stone-200 p-8 text-stone-900 shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="4">
+                <div class="flex items-start justify-between gap-4">
+                  <span class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
+                    Connect
+                  </span>
+                  <a href="#contact" aria-label="Go to contact" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#1C1917] text-white transition-colors hover:bg-stone-800">
+                    <svg aria-hidden="true" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+                  </a>
+                </div>
+                <div class="mt-auto pt-6">
+                  <p class="text-base text-stone-800">open@auroalis.studio</p>
+                  <p class="text-sm text-stone-500">+47 779 40 22</p>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- COL 2: 50/50 vertical split (Feedback + Metrics) -->
+            <div class="flex flex-col gap-4">
+
+              <!-- C: FEEDBACK — 50% of col, white with border -->
+              <article class="flex flex-1 flex-col border border-stone-300 bg-white p-8 text-stone-900 shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="2">
+                <div class="flex items-start justify-between gap-4">
+                  <p class="font-serif text-[24px] font-normal leading-[1.35] tracking-[-0.01em]">
+                    &ldquo;They read our data without flinching at &minus;40&deg;C. Twice.&rdquo;
+                  </p>
+                  <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-stone-300 bg-stone-100 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
+                    Feedback
+                  </span>
+                </div>
+                <p class="mt-auto pt-6 font-sans text-sm text-stone-500">
+                  Marit Eliasson &mdash; Kiruna Atmospheric Observatory
+                </p>
+              </article>
+
+              <!-- D: METRICS — 50% of col, dark -->
+              <article class="card-wave card-wave--green relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-[#1C1917] p-8 text-center text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="5">
+                <!-- Vertical dark gradient — transparent at the top so
+                     the aurora-green bg shows through, fading to black
+                     at the bottom so the centred number reads cleanly. -->
+                <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/85"></div>
+                <!-- Faded background text -->
+                <div aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden whitespace-nowrap font-serif text-[140px] font-normal tracking-tighter text-white/[0.06]">
+                  aurora aurora
+                </div>
+                <div class="relative z-10">
+                  <p class="font-serif text-[88px] font-medium leading-[0.9] tracking-[-0.04em] text-white">
+                    557.7
+                  </p>
+                  <p class="mt-4 font-sans text-sm leading-snug text-white/65">
+                    nm &mdash; the green<br>of an aurora
+                  </p>
+                </div>
+                <span class="relative z-10 mt-8 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
+                  Metrics
+                </span>
+              </article>
+
+            </div>
+
+            <!-- COL 3: full height (Deep Sky) -->
+            <article class="card-wave card-wave--blue relative flex flex-col overflow-hidden p-8 text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="3">
+              <div class="flex justify-end">
+                <span class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
+                  Deep Sky
+                </span>
+              </div>
+              <p class="mt-auto text-[15px] leading-relaxed text-white/90">
+                From substorm cadence to mesospheric airglow &mdash; we engineer the instruments, write the protocols, and read the data. The work begins where the streetlights end and the polar night opens.
+              </p>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
 
     <!-- ===== FAQ — dark panel, 1/3 left intro + 2/3 right Q&A ===== -->
     <section id="faq" class="bg-stone-100 px-8 py-0">
