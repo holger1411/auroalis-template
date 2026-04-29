@@ -255,7 +255,7 @@
     //   t=0.50  #1E3A8A   arctic blue
     //   t=0.67  #1E3A8A   arctic blue (duplicated — long blue plateau)
     //   t=0.83  #6B2EC7   aurora violet
-    //   t=1.00  #4FDC78   aurora green (oxygen line — accent only)
+    //   t=1.00  #34A868   aurora green (oxygen line — darker accent)
     var palette = new Float32Array([
       0.000,  0.000,  0.000,
       0.000,  0.000,  0.000,
@@ -263,7 +263,7 @@
       30/255, 58/255, 138/255,
       30/255, 58/255, 138/255,
       107/255, 46/255, 199/255,
-      79/255, 220/255, 120/255,
+      52/255, 168/255, 104/255,
       0.000, 0.000, 0.000   // unused 8th slot, padded so the array fills NUM_COLORS
     ]);
     gl.uniform3fv(u_colors, palette);
