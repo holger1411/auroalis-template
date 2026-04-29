@@ -171,6 +171,11 @@
       '  float val = total / totalW;',
       '  val = clamp((val - 0.3) / 0.4, 0.0, 1.0);',
       '',
+      '  // Power-curve bias: pull most pixels toward 0 (black) so the',
+      '  // hero reads mostly-black, with the cool aurora colours only',
+      '  // emerging in the brightest pockets. pow(0.5, 1.5) ≈ 0.354.',
+      '  val = pow(val, 1.5);',
+      '',
       '  // Apply grain to the gradient lookup parameter, not the colour:',
       '  // each pixel shifts ±u_dither/2 along the palette ramp, so the',
       '  // grain takes on the surrounding colour and also dithers banding.',
@@ -245,26 +250,25 @@
     var u_exposure      = loc('u_exposure');
 
     // === Auroalis palette — sRGB 0..1 ===
-    // 8 weighted stops, heavily biased toward dark + blue. Black gets
-    // three slots so the page reads as polar night first; violet and
-    // green each get a single small region near the top of t:
+    // 8 stops, ~57% of the gradient ramp is pure black. Combined with
+    // the val^1.5 bias below in the fragment shader (which pulls most
+    // pixels toward 0), the hero reads as mostly-black with the cool
+    // aurora colours emerging only in the brightest pockets:
     //
     //   t=0.000  #000000   deep
-    //   t=0.143  #000000   deep  ┐
-    //   t=0.286  #000000   deep  ┘ tripled — large dark anchor
-    //   t=0.429  #0A1A4A   deep navy
-    //   t=0.571  #1E3A8A   arctic blue  ┐
-    //   t=0.714  #1E3A8A   arctic blue  ┘ doubled — long blue plateau
-    //   t=0.857  #6B2EC7   aurora violet (single — narrow violet band)
-    //   t=1.000  #50CC7C   aurora green — photo-sampled peak with white
-    //                       added then nudged back toward green (RGB
-    //                       80/204/124, hue ~136°, just past pure green)
+    //   t=0.143  #000000   deep   ┐
+    //   t=0.286  #000000   deep   ┤ quadrupled — dominant dark anchor
+    //   t=0.429  #000000   deep   ┘
+    //   t=0.571  #0A1A4A   deep navy
+    //   t=0.714  #1E3A8A   arctic blue
+    //   t=0.857  #6B2EC7   aurora violet
+    //   t=1.000  #50CC7C   aurora green (narrow accent at peak only)
     var palette = new Float32Array([
       0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
+      0.000,   0.000,   0.000,
       10/255,  26/255,  74/255,
-      30/255,  58/255,  138/255,
       30/255,  58/255,  138/255,
       107/255, 46/255,  199/255,
       80/255,  204/255, 124/255
