@@ -249,13 +249,13 @@
     //   #0A1A4A   deep navy
     //   #1E3A8A   arctic blue
     //   #6B2EC7   aurora violet (brand)
-    //   #3DDC97   aurora green (oxygen line)
+    //   #4FDC78   aurora green (oxygen line — pure green, not turquoise)
     var palette = new Float32Array([
       0.000, 0.000, 0.000,
       10/255, 26/255, 74/255,
       30/255, 58/255, 138/255,
       107/255, 46/255, 199/255,
-      61/255, 220/255, 151/255
+      79/255, 220/255, 120/255
     ]);
     gl.uniform3fv(u_colors, palette);
     gl.uniform1i(u_colorsLength, 5);
