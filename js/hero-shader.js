@@ -256,7 +256,7 @@
     //   t=0.571  #1E3A8A   arctic blue  ┐
     //   t=0.714  #1E3A8A   arctic blue  ┘ doubled — long blue plateau
     //   t=0.857  #6B2EC7   aurora violet (single — narrow violet band)
-    //   t=1.000  #EA580C   warm orange (single — narrow accent at peak)
+    //   t=1.000  #FB923C   warm amber-orange (single — narrow accent at peak)
     var palette = new Float32Array([
       0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
@@ -265,7 +265,7 @@
       30/255,  58/255,  138/255,
       30/255,  58/255,  138/255,
       107/255, 46/255,  199/255,
-      234/255, 88/255,  12/255
+      251/255, 146/255, 60/255
     ]);
     gl.uniform3fv(u_colors, palette);
     gl.uniform1i(u_colorsLength, 8);
