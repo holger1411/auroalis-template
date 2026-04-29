@@ -691,11 +691,11 @@
   .bg-\[\#1C1917\] {
     background-color: #1C1917;
   }
-  .bg-\[\#4DCC83\] {
-    background-color: #4DCC83;
-  }
   .bg-\[\#6B2EC7\] {
     background-color: #6B2EC7;
+  }
+  .bg-\[\#50CC7C\] {
+    background-color: #50CC7C;
   }
   .bg-background {
     background-color: var(--color-background);

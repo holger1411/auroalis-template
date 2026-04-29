@@ -12,7 +12,7 @@
  * Northern-lights identity for research / space / high-north narratives.
  * Paper-white body wrapped by a pure-black Polar Night hero/footer.
  * Aurora Violet (#6B2EC7) is the brand pull — pulled from the hero's
- * blob--violet layer. Aurora Green (#4DCC83) is the oxygen-emission
+ * blob--violet layer. Aurora Green (#50CC7C) is the oxygen-emission
  * band of the real aurora and lives only in the hero's blob--green.
  * Two-family typography: Newsreader serif for headings, Inter for chrome.
  */
@@ -45,7 +45,7 @@
    * navy → arctic blue → oxygen green → violet → high-altitude magenta. */
   --color-aurora-dark:    #0a1a4a;
   --color-aurora-mid:     #1e3a8a;
-  --color-aurora-green:   #4dcc83;
+  --color-aurora-green:   #50cc7c;
   --color-aurora-violet:  #6b2ec7;
   --color-aurora-magenta: #b8187a;
 }
@@ -485,7 +485,7 @@ details.faq-item[open] > .faq-content {
 
 /* Each variant carries a base linear gradient + blurred wavy color
  * bands + a soft top-edge shine + a fractal-noise grain layer, all
- * baked into a single inline SVG. Aurora green (#4DCC83) is present
+ * baked into a single inline SVG. Aurora green (#50CC7C) is present
  * in every variant as a clearly visible wave. */
 
 /* Variant 1 — Violet on navy with a prominent green wave. */
