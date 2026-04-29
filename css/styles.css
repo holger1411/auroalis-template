@@ -269,6 +269,12 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
+  .top-1\/2 {
+    top: calc(1/2 * 100%);
+  }
+  .left-1\/2 {
+    left: calc(1/2 * 100%);
+  }
   .left-6 {
     left: calc(var(--spacing) * 6);
   }
@@ -346,6 +352,9 @@
   }
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
   }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
@@ -493,6 +502,14 @@
   }
   .shrink-0 {
     flex-shrink: 0;
+  }
+  .-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-y-1\/2 {
+    --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -936,6 +953,9 @@
   .text-\[15px\] {
     font-size: 15px;
   }
+  .text-\[17px\] {
+    font-size: 17px;
+  }
   .text-\[20px\] {
     font-size: 20px;
   }
@@ -1056,6 +1076,9 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .text-\[\#6B2EC7\] {
+    color: #6B2EC7;
+  }
   .text-background {
     color: var(--color-background);
   }
@@ -1077,6 +1100,9 @@
   .text-neutral-700 {
     color: var(--color-neutral-700);
   }
+  .text-neutral-800 {
+    color: var(--color-neutral-800);
+  }
   .text-neutral-900 {
     color: var(--color-neutral-900);
   }
@@ -1088,6 +1114,9 @@
   }
   .text-secondary {
     color: var(--color-secondary);
+  }
+  .text-stone-300 {
+    color: var(--color-stone-300);
   }
   .text-stone-500 {
     color: var(--color-stone-500);
@@ -1301,6 +1330,13 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
         }
+      }
+    }
+  }
+  .hover\:text-\[\#5928A8\] {
+    &:hover {
+      @media (hover: hover) {
+        color: #5928A8;
       }
     }
   }
@@ -2122,6 +2158,21 @@ details.faq-item[open] > .faq-content {
     animation: none !important;
   }
 }
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -2386,6 +2437,9 @@ details.faq-item[open] > .faq-content {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-rotate-x: initial;
       --tw-rotate-y: initial;
       --tw-rotate-z: initial;
