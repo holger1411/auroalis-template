@@ -36,6 +36,7 @@
   </script>
 
   <script src="js/main.js" defer></script>
+  <script src="js/hero-shader.js" defer></script>
 </head>
 <body class="font-sans antialiased">
 
@@ -48,28 +49,18 @@
 
     <!-- ===== Hero Section (shader-style animated gradients + nav) ===== -->
     <section class="relative h-screen w-full overflow-hidden bg-black px-8 py-8 text-white">
-      <!-- Animated shader blobs — the auroral spectrum.
-           Stack order: shadows behind, then cool blues, then violet,
-           with the green oxygen-emission layers on top. -->
-      <div class="blob blob--shadow"></div>
-      <div class="blob blob--shadow-2"></div>
-      <div class="blob blob--mid"></div>
-      <div class="blob blob--dark"></div>
-      <div class="blob blob--accent"></div>
-      <div class="blob blob--violet"></div>
-      <div class="blob blob--violet-2"></div>
-      <div class="blob blob--green"></div>
+      <!-- WebGL shader hero — animated aurora gradient with in-shader
+           film-grain. Architecture and parameters in js/hero-shader.js.
+           Replaces the previous CSS-blob stack + SVG grain combo. -->
+      <canvas id="hero-canvas" class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
 
       <!-- Glass panel — sits behind the content container only.
-           Centered at the same 1200px max-width as the content so on
-           wider screens the aurora blobs are visible at the edges and
-           the glass appears as a frosted reading surface in the middle.
-           Painted above the blobs (DOM order) but below the content's
-           z-10 layer. -->
+           Centred at the same 1200px max-width as the content so on
+           wider screens the shader reads past the panel on either side
+           and the glass appears as a frosted reading surface in the
+           middle. Painted above the canvas (DOM order) but below the
+           content's z-10 layer. -->
       <div class="hero-glass-panel"></div>
-
-      <!-- Subtle SVG grain overlay -->
-      <div class="hero-grain"></div>
 
       <!-- Content: centered, boxed at 1200px, fills hero height -->
       <div class="relative z-10 mx-auto flex h-full w-full max-w-[1200px] flex-col">
