@@ -245,24 +245,25 @@
     var u_exposure      = loc('u_exposure');
 
     // === Auroalis palette — sRGB 0..1 ===
-    // 8 weighted stops so dark + blue + VIOLET dominate the gradient,
-    // and aurora green only emerges as a single small accent at t=1:
+    // 8 weighted stops, heavily biased toward dark + blue. Black gets
+    // three slots so the page reads as polar night first; violet and
+    // green each get a single small region near the top of t:
     //
     //   t=0.000  #000000   deep
-    //   t=0.143  #000000   deep (duplicated — broad dark anchor)
-    //   t=0.286  #0A1A4A   deep navy
-    //   t=0.429  #1E3A8A   arctic blue
-    //   t=0.571  #1E3A8A   arctic blue (duplicated — long blue plateau)
-    //   t=0.714  #6B2EC7   aurora violet
-    //   t=0.857  #6B2EC7   aurora violet (duplicated — wider violet area)
-    //   t=1.000  #34A868   aurora green (oxygen line — accent at peak)
+    //   t=0.143  #000000   deep  ┐
+    //   t=0.286  #000000   deep  ┘ tripled — large dark anchor
+    //   t=0.429  #0A1A4A   deep navy
+    //   t=0.571  #1E3A8A   arctic blue  ┐
+    //   t=0.714  #1E3A8A   arctic blue  ┘ doubled — long blue plateau
+    //   t=0.857  #6B2EC7   aurora violet (single — narrow violet band)
+    //   t=1.000  #34A868   aurora green  (single — narrow accent at peak)
     var palette = new Float32Array([
+      0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
       0.000,   0.000,   0.000,
       10/255,  26/255,  74/255,
       30/255,  58/255,  138/255,
       30/255,  58/255,  138/255,
-      107/255, 46/255,  199/255,
       107/255, 46/255,  199/255,
       52/255,  168/255, 104/255
     ]);
