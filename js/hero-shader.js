@@ -245,33 +245,33 @@
     var u_exposure      = loc('u_exposure');
 
     // === Auroalis palette — sRGB 0..1 ===
-    // 7 stops (with deliberate duplicates) so the gradient ramp gives
-    // most of its real estate to the dark / blue / violet range and
-    // saves the green for a small accent near the very top of t=1:
+    // 8 weighted stops so dark + blue + VIOLET dominate the gradient,
+    // and aurora green only emerges as a single small accent at t=1:
     //
-    //   t=0.00  #000000   deep
-    //   t=0.17  #000000   deep (duplicated — broadens the dark anchor)
-    //   t=0.33  #0A1A4A   deep navy
-    //   t=0.50  #1E3A8A   arctic blue
-    //   t=0.67  #1E3A8A   arctic blue (duplicated — long blue plateau)
-    //   t=0.83  #6B2EC7   aurora violet
-    //   t=1.00  #34A868   aurora green (oxygen line — darker accent)
+    //   t=0.000  #000000   deep
+    //   t=0.143  #000000   deep (duplicated — broad dark anchor)
+    //   t=0.286  #0A1A4A   deep navy
+    //   t=0.429  #1E3A8A   arctic blue
+    //   t=0.571  #1E3A8A   arctic blue (duplicated — long blue plateau)
+    //   t=0.714  #6B2EC7   aurora violet
+    //   t=0.857  #6B2EC7   aurora violet (duplicated — wider violet area)
+    //   t=1.000  #34A868   aurora green (oxygen line — accent at peak)
     var palette = new Float32Array([
-      0.000,  0.000,  0.000,
-      0.000,  0.000,  0.000,
-      10/255, 26/255, 74/255,
-      30/255, 58/255, 138/255,
-      30/255, 58/255, 138/255,
-      107/255, 46/255, 199/255,
-      52/255, 168/255, 104/255,
-      0.000, 0.000, 0.000   // unused 8th slot, padded so the array fills NUM_COLORS
+      0.000,   0.000,   0.000,
+      0.000,   0.000,   0.000,
+      10/255,  26/255,  74/255,
+      30/255,  58/255,  138/255,
+      30/255,  58/255,  138/255,
+      107/255, 46/255,  199/255,
+      107/255, 46/255,  199/255,
+      52/255,  168/255, 104/255
     ]);
     gl.uniform3fv(u_colors, palette);
-    gl.uniform1i(u_colorsLength, 7);
+    gl.uniform1i(u_colorsLength, 8);
 
     // === Tasteful defaults — slow, soft, just enough grain ===
     gl.uniform1f(u_seed,     23.0);
-    gl.uniform1f(u_speed,    0.55);
+    gl.uniform1f(u_speed,    0.32);
     gl.uniform1f(u_scale,    0.85);
     gl.uniform1f(u_turbAmp,  1.0);
     gl.uniform1f(u_turbFreq, 0.18);
