@@ -45,7 +45,7 @@
       'in vec2 v_uv;',
       'out vec4 fragColor;',
       '',
-      '#define NUM_COLORS 5',
+      '#define NUM_COLORS 8',
       '',
       'uniform vec3  u_colors[NUM_COLORS];',
       'uniform int   u_colorsLength;',
@@ -245,20 +245,29 @@
     var u_exposure      = loc('u_exposure');
 
     // === Auroalis palette — sRGB 0..1 ===
-    //   #000000   deep — anchor 0.0
-    //   #0A1A4A   deep navy
-    //   #1E3A8A   arctic blue
-    //   #6B2EC7   aurora violet (brand)
-    //   #4FDC78   aurora green (oxygen line — pure green, not turquoise)
+    // 7 stops (with deliberate duplicates) so the gradient ramp gives
+    // most of its real estate to the dark / blue / violet range and
+    // saves the green for a small accent near the very top of t=1:
+    //
+    //   t=0.00  #000000   deep
+    //   t=0.17  #000000   deep (duplicated — broadens the dark anchor)
+    //   t=0.33  #0A1A4A   deep navy
+    //   t=0.50  #1E3A8A   arctic blue
+    //   t=0.67  #1E3A8A   arctic blue (duplicated — long blue plateau)
+    //   t=0.83  #6B2EC7   aurora violet
+    //   t=1.00  #4FDC78   aurora green (oxygen line — accent only)
     var palette = new Float32Array([
-      0.000, 0.000, 0.000,
+      0.000,  0.000,  0.000,
+      0.000,  0.000,  0.000,
       10/255, 26/255, 74/255,
       30/255, 58/255, 138/255,
+      30/255, 58/255, 138/255,
       107/255, 46/255, 199/255,
-      79/255, 220/255, 120/255
+      79/255, 220/255, 120/255,
+      0.000, 0.000, 0.000   // unused 8th slot, padded so the array fills NUM_COLORS
     ]);
     gl.uniform3fv(u_colors, palette);
-    gl.uniform1i(u_colorsLength, 5);
+    gl.uniform1i(u_colorsLength, 7);
 
     // === Tasteful defaults — slow, soft, just enough grain ===
     gl.uniform1f(u_seed,     23.0);
