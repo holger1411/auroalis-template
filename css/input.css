@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 /* Inter (body, labels, chrome) and Newsreader (headings H1–H6) are loaded
- * via <link> in index.html (Google Fonts). See design-nocturne.md.
+ * via <link> in the page <head> (Google Fonts).
  */
 
 /* ===== Dark Mode Variant ===== */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ===== Theme: Auroalis (design-auroalis.md) =====
+/* ===== Theme: Auroalis =====
  * Northern-lights identity for research / space / high-north narratives.
  * Paper-white body wrapped by a pure-black Polar Night hero/footer.
  * Aurora Violet (#6B2EC7) is the brand pull — pulled from the hero's
@@ -88,7 +88,7 @@
 }
 
 /* ===== Headings: Newsreader serif by default for H1–H6 =====
- * design-nocturne.md mandates the serif on every heading. Using a base
+ * The design uses the serif on every heading. Using a base
  * rule here keeps markup clean — no per-element font class needed.
  */
 
@@ -652,5 +652,105 @@ details.faq-item[open] > .faq-content {
 @media (prefers-reduced-motion: reduce) {
   .blob {
     animation: none !important;
+  }
+}
+
+/* ===== Smooth in-page scrolling for nav jump links ===== */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== Popover / modal =====
+ * A single reusable overlay opened by footer links. The page behind
+ * stays visible but blurred so focus shifts clearly to the card. Fade
+ * + lift timings mirror the [data-animate] reveal (0.6s ease-out) and
+ * the FAQ height transition (cubic-bezier(0.4,0,0.2,1)), so the popover
+ * feels like part of the same motion language. */
+
+.popover-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(10, 10, 10, 0.45);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-out, visibility 0s linear 0.4s;
+}
+
+.popover-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease-out, visibility 0s linear 0s;
+}
+
+.popover-card {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: min(88vh, 760px);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  transition: opacity 0.4s ease-out,
+              transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.popover-overlay.is-open .popover-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.popover-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 9999px;
+  color: var(--color-muted-foreground);
+  background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.popover-close:hover {
+  background: var(--color-muted);
+  color: var(--color-foreground);
+}
+.popover-close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.popover-body {
+  overflow-y: auto;
+  padding: 2.25rem;
+  padding-top: 2.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popover-overlay,
+  .popover-card {
+    transition: opacity 0.01ms linear !important;
+    transform: none !important;
   }
 }

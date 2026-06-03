@@ -1,8 +1,8 @@
 {
-  "name": "aurora-template",
+  "name": "auroalis-template",
   "version": "1.0.0",
   "private": true,
-  "description": "Aurora — a clean, minimal OnePager HTML template built on Tailwind CSS 4",
+  "description": "Auroalis — a clean, content-rich HTML landing page + article template built with Tailwind CSS 4",
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
     "build": "npx @tailwindcss/cli -i css/input.css -o css/styles.css --minify",
