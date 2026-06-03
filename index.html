@@ -9,6 +9,9 @@
   <!-- Favicon — Auroalis polar-plot mark -->
   <link rel="icon" type="image/svg+xml" href="img/logo.svg">
 
+  <!-- Canonical — replace example.com with your production domain -->
+  <link rel="canonical" href="https://example.com/">
+
   <!-- Open Graph -->
   <meta property="og:title" content="Auroalis — Research from the high north">
   <meta property="og:description" content="Auroalis — a research and observation studio working at the intersection of atmospheric science, deep-sky optics, and high-latitude exploration.">
@@ -19,23 +22,15 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts: Inter (body) + Newsreader (headings H1–H6). See design-nocturne.md. -->
+  <!-- Fonts: Inter (body) + Newsreader (headings H1–H6) via Google Fonts. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
 
-  <!-- FOUC-free dark mode: must run before first paint -->
-  <script>
-    (function() {
-      var t = localStorage.getItem('theme') || 'system';
-      var d = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      if (d) document.documentElement.classList.add('dark');
-    })();
-  </script>
-
   <script src="js/main.js" defer></script>
+  <script src="js/hero-shader.js" defer></script>
 </head>
 <body class="font-sans antialiased">
 
@@ -48,72 +43,72 @@
 
     <!-- ===== Hero Section (shader-style animated gradients + nav) ===== -->
     <section class="relative h-screen w-full overflow-hidden bg-black px-8 py-8 text-white">
-      <!-- Animated shader blobs — the auroral spectrum.
-           Stack order: shadows behind, then cool blues, then violet,
-           with the green oxygen-emission layers on top. -->
-      <div class="blob blob--shadow"></div>
-      <div class="blob blob--shadow-2"></div>
-      <div class="blob blob--mid"></div>
-      <div class="blob blob--dark"></div>
-      <div class="blob blob--accent"></div>
-      <div class="blob blob--violet"></div>
-      <div class="blob blob--violet-2"></div>
-      <div class="blob blob--green"></div>
+      <!-- WebGL shader hero — animated aurora gradient with in-shader
+           film-grain. Architecture and parameters in js/hero-shader.js.
+           Replaces the previous CSS-blob stack + SVG grain combo. -->
+      <canvas id="hero-canvas" class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
 
       <!-- Glass panel — sits behind the content container only.
-           Centered at the same 1200px max-width as the content so on
-           wider screens the aurora blobs are visible at the edges and
-           the glass appears as a frosted reading surface in the middle.
-           Painted above the blobs (DOM order) but below the content's
-           z-10 layer. -->
+           Centred at the same 1200px max-width as the content so on
+           wider screens the shader reads past the panel on either side
+           and the glass appears as a frosted reading surface in the
+           middle. Painted above the canvas (DOM order) but below the
+           content's z-10 layer. -->
       <div class="hero-glass-panel"></div>
-
-      <!-- Subtle SVG grain overlay -->
-      <div class="hero-grain"></div>
 
       <!-- Content: centered, boxed at 1200px, fills hero height -->
       <div class="relative z-10 mx-auto flex h-full w-full max-w-[1200px] flex-col">
 
         <!-- Navigation -->
-        <nav class="flex items-center justify-between text-[0.95rem]">
+        <nav class="relative flex items-center justify-between text-[0.95rem]">
           <a href="/" class="flex items-center gap-3 font-serif text-2xl font-normal tracking-[-0.02em]">
-            <svg class="h-7 w-7" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <svg class="h-7 w-7" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M28.2411 14.0891C28.5599 13.6951 28.8222 13.2586 29.0205 12.7921C29.2129 12.3421 29.3459 11.869 29.416 11.3846C29.5292 10.5777 29.4656 9.75589 29.2296 8.97605C28.9935 8.19622 28.5907 7.47705 28.049 6.86841C27.5073 6.25978 26.8397 5.77624 26.0926 5.45133C25.3454 5.12641 24.5364 4.9679 23.7219 4.98677C23.6647 4.48361 23.5395 3.99055 23.3497 3.52108C23.1722 3.06618 22.9335 2.63763 22.6401 2.24733C22.1509 1.5944 21.5253 1.05597 20.8067 0.669536C20.0882 0.283102 19.2941 0.0579594 18.4796 0.00979121C17.6652 -0.0383769 16.8501 0.0915874 16.091 0.390631C15.3319 0.689675 14.6472 1.15061 14.0844 1.74132C13.3032 1.11861 12.3692 0.716894 11.3799 0.578083C10.5725 0.464752 9.75018 0.528486 8.96992 0.76486C8.18966 1.00123 7.47019 1.40459 6.86145 1.94691C6.25271 2.48924 5.7693 3.15755 5.44476 3.90546C5.12022 4.65336 4.96234 5.46293 4.98207 6.27797C4.47966 6.33586 3.98694 6.45904 3.51639 6.64439C2.64578 6.99421 1.87687 7.55692 1.28013 8.28096C0.68339 9.005 0.277891 9.86722 0.100789 10.7886C-0.0763141 11.71 -0.0193568 12.6611 0.266442 13.5548C0.55224 14.4485 1.05774 15.2561 1.73663 15.9038C1.11391 16.685 0.712196 17.619 0.573385 18.6083C0.457988 19.416 0.520263 20.2392 0.755863 21.0203C0.991463 21.8015 1.39471 22.5218 1.93746 23.131C2.4802 23.7402 3.14937 24.2236 3.89824 24.5475C4.64712 24.8714 5.45765 25.0279 6.27327 25.0062C6.3809 26.0018 6.75458 26.95 7.35508 27.7514C7.84454 28.4044 8.47065 28.9427 9.18968 29.3287C9.90872 29.7146 10.7033 29.939 11.5181 29.9861C12.3328 30.0332 13.148 29.9018 13.9067 29.6012C14.6654 29.3006 15.3493 28.8381 15.9107 28.2458C16.3048 28.5646 16.7413 28.8269 17.2077 29.0252C17.6577 29.2176 18.1309 29.3506 18.6153 29.4207C19.4216 29.5341 20.2429 29.4706 21.0222 29.2345C21.8015 28.9983 22.52 28.5953 23.1278 28.0534C23.7355 27.5115 24.218 26.8438 24.5416 26.0965C24.8651 25.3493 25.0221 24.5406 25.0015 23.7266C26.0643 23.6104 27.0717 23.1924 27.9046 22.522C28.7375 21.8516 29.3612 20.9569 29.7019 19.9434C30.0425 18.9299 30.086 17.8401 29.8272 16.8028C29.5683 15.7654 29.0179 14.8237 28.2411 14.0891ZM26.3973 20.8476C26.019 21.1299 25.5847 21.3282 25.1236 21.4292C24.8797 21.4872 24.6298 21.5165 24.3791 21.5164H18.4815L16.2364 23.7557H22.7564C22.7725 24.2466 22.6807 24.7351 22.4877 25.1868C22.2946 25.6384 22.005 26.0423 21.639 26.37C21.2731 26.6976 20.8398 26.9412 20.3697 27.0834C19.8995 27.2256 19.4039 27.263 18.9177 27.193C18.4505 27.1264 18.0026 26.9619 17.6032 26.7103C17.3944 26.5749 17.1996 26.419 17.0216 26.245L12.8456 22.0981H9.66993L14.2822 26.7045C13.9463 27.0633 13.5358 27.3442 13.0797 27.5272C12.6235 27.7102 12.1327 27.791 11.642 27.7638C11.1512 27.7366 10.6724 27.6022 10.2392 27.3699C9.80603 27.1377 9.42906 26.8132 9.13484 26.4195C8.85446 26.04 8.65636 25.6062 8.55322 25.1457C8.49522 24.9018 8.46595 24.652 8.46598 24.4013V18.4862L6.22092 16.2411V22.7611C5.73028 22.7761 5.24228 22.6837 4.7911 22.4903C4.33992 22.297 3.93648 22.0073 3.60902 21.6416C3.28156 21.2759 3.03801 20.843 2.89542 20.3733C2.75282 19.9036 2.71464 19.4084 2.78354 18.9224C2.85235 18.4548 3.01882 18.007 3.2721 17.6079C3.4024 17.3955 3.55871 17.2001 3.7374 17.0263L7.90762 12.8561V9.67463L3.29537 14.2869C2.93837 13.95 2.6592 13.5392 2.47735 13.0833C2.29549 12.6273 2.21534 12.1372 2.24247 11.647C2.26961 11.1569 2.40339 10.6786 2.63446 10.2455C2.86554 9.81242 3.18835 9.43499 3.58036 9.13954C3.96046 8.86018 4.39407 8.66219 4.85411 8.55792C5.09802 8.49992 5.34788 8.47064 5.59859 8.47068H11.502L13.7413 6.22562H7.22131C7.20152 5.61488 7.34856 5.01029 7.64664 4.47686C7.94471 3.94343 8.38254 3.50134 8.91306 3.1981C9.44357 2.89487 10.0467 2.74196 10.6576 2.75583C11.2685 2.7697 11.8641 2.94981 12.3803 3.2768C12.593 3.4068 12.7884 3.56313 12.9619 3.7421L17.1379 7.91232H20.3078L15.6955 3.30007C16.1133 2.85535 16.6442 2.5327 17.2313 2.36671C17.8184 2.20073 18.4397 2.19767 19.0284 2.35785C19.6172 2.51804 20.1512 2.83544 20.5733 3.27602C20.9954 3.7166 21.2897 4.26375 21.4245 4.85881C21.4825 5.10272 21.5118 5.35258 21.5117 5.60329V11.5067L23.751 13.746V7.22601C24.3615 7.20714 24.9656 7.35465 25.4987 7.65276C26.0318 7.95087 26.4737 8.38835 26.7773 8.91836C27.0808 9.44837 27.2345 10.051 27.2219 10.6616C27.2093 11.2723 27.0308 11.868 26.7056 12.385C26.5717 12.5949 26.4157 12.7899 26.2403 12.9666L22.0934 17.1426V20.3125L26.6823 15.7002C27.0411 16.0356 27.3219 16.4456 27.5049 16.9013C27.6879 17.357 27.7686 17.8473 27.7414 18.3376C27.7143 18.8279 27.5798 19.3063 27.3476 19.739C27.1153 20.1717 26.791 20.5481 26.3973 20.8418V20.8476Z"/>
             </svg>
             <span>Auroalis</span>
           </a>
 
-          <!-- Desktop links -->
-          <div class="hidden items-center gap-10 md:flex">
-            <a href="#about" class="opacity-90 transition-opacity hover:opacity-100">About</a>
-            <a href="#services" class="opacity-90 transition-opacity hover:opacity-100">Services</a>
+          <!-- Desktop links — centered -->
+          <div class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 md:flex">
             <a href="#work" class="opacity-90 transition-opacity hover:opacity-100">Work</a>
-            <a href="#pricing" class="opacity-90 transition-opacity hover:opacity-100">Pricing</a>
+            <a href="#people" class="opacity-90 transition-opacity hover:opacity-100">People</a>
+            <a href="#faq" class="opacity-90 transition-opacity hover:opacity-100">FAQ</a>
             <a href="#contact" class="opacity-90 transition-opacity hover:opacity-100">Contact</a>
           </div>
 
-          <!-- Mobile menu button -->
-          <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" class="flex h-9 w-9 items-center justify-center rounded-md transition-colors hover:bg-white/10 md:hidden">
-            <span class="sr-only">Open menu</span>
-            <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-          </button>
+          <!-- Right: external "Get this template" link + mobile menu button -->
+          <div class="flex items-center gap-3">
+            <a href="https://templatedeck.com" target="_blank" rel="noopener" class="hidden items-center gap-1.5 opacity-90 transition-opacity hover:opacity-100 md:inline-flex">
+              Get this template
+              <svg aria-hidden="true" class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" class="flex h-9 w-9 items-center justify-center rounded-md transition-colors hover:bg-white/10 md:hidden">
+              <span class="sr-only">Open menu</span>
+              <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+            </button>
+          </div>
         </nav>
 
         <!-- Mobile menu (collapses below nav when open) -->
         <div id="mobile-menu" aria-hidden="true" class="mt-4 hidden rounded-lg border border-white/10 bg-black/60 p-6 backdrop-blur-md md:hidden">
           <div class="flex flex-col gap-4">
-            <a href="#about" class="text-sm opacity-90 transition-opacity hover:opacity-100">About</a>
-            <a href="#services" class="text-sm opacity-90 transition-opacity hover:opacity-100">Services</a>
             <a href="#work" class="text-sm opacity-90 transition-opacity hover:opacity-100">Work</a>
-            <a href="#pricing" class="text-sm opacity-90 transition-opacity hover:opacity-100">Pricing</a>
+            <a href="#people" class="text-sm opacity-90 transition-opacity hover:opacity-100">People</a>
+            <a href="#faq" class="text-sm opacity-90 transition-opacity hover:opacity-100">FAQ</a>
             <a href="#contact" class="text-sm opacity-90 transition-opacity hover:opacity-100">Contact</a>
+            <a href="https://templatedeck.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm opacity-90 transition-opacity hover:opacity-100">
+              Get this template
+              <svg aria-hidden="true" class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
           </div>
         </div>
 
         <!-- Hero body: bottom of hero, 2fr title / 1fr subtitle+CTA -->
         <div class="mt-auto grid grid-cols-1 items-center gap-8 pb-16 md:grid-cols-[2fr_1fr] md:gap-16">
           <h1 class="max-w-[18ch] text-5xl font-normal leading-[1.05] tracking-[-0.02em] drop-shadow-[0_2px_40px_rgba(0,0,0,0.7)] sm:text-6xl md:text-7xl lg:text-[88px] lg:leading-[92px] lg:tracking-[-0.03em]">
-            Field notes from the night sky, the high north, and the edge of what we can measure
+            We sharpen the edge of what science can measure
           </h1>
 
           <div class="flex flex-col gap-5">
@@ -122,7 +117,7 @@
               intersection of atmospheric science<br>
               and deep-sky optics.
             </p>
-            <a href="#contact" class="block w-full rounded-md border border-white bg-white px-7 py-3 text-center font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-900 shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-colors hover:bg-neutral-100">
+            <a href="#contact" data-popover="begin-study" class="block w-full rounded-md border border-white bg-white px-7 py-3 text-center font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-900 shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-colors hover:bg-neutral-100">
               Begin a study
             </a>
           </div>
@@ -130,30 +125,13 @@
       </div>
     </section>
 
-    <!-- ===== Trust / Logo Bar ===== -->
-    <template data-archived-section="trust-bar">
-    <section class="border-y border-border py-12">
-      <div class="mx-auto max-w-7xl px-6">
-        <p class="text-center text-sm font-medium text-muted-foreground" data-animate="fade">Trusted by leading teams worldwide</p>
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-6" data-animate="fade" data-delay="1">
-          <!-- 6 placeholder logos (simple rectangles with text) -->
-          <div class="h-8 w-24 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-medium">Logo</div>
-          <div class="h-8 w-20 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-medium">Logo</div>
-          <div class="h-8 w-28 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-medium">Logo</div>
-          <div class="h-8 w-24 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-medium">Logo</div>
-          <div class="h-8 w-20 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-medium">Logo</div>
-          <div class="h-8 w-28 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground font-medium">Logo</div>
-        </div>
-      </div>
-    </section>
-    </template>
 
     <!-- ===== First Content Section (white panel on gray canvas) ===== -->
-    <section id="about" class="bg-stone-100 px-8 py-0 text-neutral-900">
+    <section id="work" class="bg-stone-100 px-8 py-0 text-neutral-900">
       <div class="content-panel">
         <div class="mx-auto max-w-[1200px]">
         <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>The work</p>
-        <h2 class="mb-12 max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
+        <h2 class="mb-12 max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] md:text-5xl lg:text-[64px] lg:leading-[70px]" data-animate data-delay="1">
           Quiet instruments, patient observers, long exposures
         </h2>
         <p class="max-w-[60ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
@@ -161,78 +139,74 @@
         </p>
 
         <div class="mt-16 grid gap-12 md:grid-cols-3">
-          <div data-animate data-delay="1">
-            <h3 class="mb-3 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Atmospheric observation</h3>
-            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
-              Long-baseline studies of auroral emissions, mesospheric airglow, and high-latitude weather signatures. We design the field protocols, the capture stack, and the way the data is read &mdash; from the magnetometer planted in the snow to the dashboard the principal investigator opens at 8 AM. Multi-year programs are the norm; we don&rsquo;t do drive-by science, and we don&rsquo;t leave instruments unattended for a season because someone underbid the budget.
-            </p>
-          </div>
-          <div data-animate data-delay="2">
-            <h3 class="mb-3 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Deep-sky optics</h3>
-            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
-              Calibration tooling, image-stack pipelines, and software that respects the instrument. Built so the observer spends time observing, not maintaining the rig. We keep tooling small, well-documented, offline-first &mdash; because the moments worth capturing don&rsquo;t wait for a network handshake. Software stays close to the data, never leaves the station unannounced, and never silently changes a calibration coefficient. If a value moves, you&rsquo;ll know which commit moved it.
-            </p>
-          </div>
-          <div data-animate data-delay="3">
-            <h3 class="mb-3 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Polar expedition support</h3>
-            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
-              Field-tested interfaces for low-light, high-latitude, gloved-finger conditions. Every screen is rated to be read at &minus;30&nbsp;&deg;C through a frosted lens, every interaction designed for tired hands at 03:00. We deploy with the team, train the rotating field cohort, and stay close while the season runs &mdash; most engagements include three site visits and a written end-of-season debrief that names what worked, what didn&rsquo;t, and what we&rsquo;d change in year two.
-            </p>
-          </div>
-        </div>
-
-        <!-- Pull quote with researcher portrait — centered stack -->
-        <figure class="mt-24 flex flex-col items-center text-center md:mt-32" data-animate>
-          <img src="img/14f1fb2be1403fad2d2bdc56b87f13ad_1776419133816.jpeg" alt="Portrait of Dr. Anja Dahl" loading="lazy" width="64" height="64" class="h-16 w-16 rounded-full object-cover" />
-          <blockquote class="mt-8 max-w-[60ch]">
-            <p class="font-serif text-[28px] font-normal leading-[1.3] tracking-[-0.01em] text-neutral-900 md:text-[34px] md:leading-[1.25]">
-              &ldquo;Auroalis showed up in February with three calibration rigs and a quiet patience that held our team together through a difficult instrument season. They left us with cleaner data than we&rsquo;d had in five years &mdash; and a written protocol the next observer could actually follow.&rdquo;
-            </p>
-            <figcaption class="mt-8 font-sans text-sm leading-relaxed">
-              <span class="font-medium text-neutral-900">Dr. Anja Dahl</span>
-              <span class="text-neutral-500">&nbsp;&mdash;&nbsp;Senior Atmospheric Researcher, Troms&oslash; Geophysical Observatory</span>
-            </figcaption>
-          </blockquote>
-        </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== About / Content Block ===== -->
-    <template data-archived-section="about">
-    <section id="about" class="section-muted py-20 md:py-28">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div data-animate="slide-left">
-            <p class="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Why Acme</p>
-            <h2 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Built by engineers,<br>designed for everyone</h2>
-            <p class="mt-6 text-muted-foreground leading-relaxed">
-              We started Acme because we were tired of stitching together five different tools just to ship a feature. Our platform replaces the chaos with a single, cohesive workflow that your entire team can rally around.
-            </p>
-            <p class="mt-4 text-muted-foreground leading-relaxed">
-              From the first commit to production deploy, every step lives in one place. No more lost context, no more tab overload.
-            </p>
-          </div>
-          <div data-animate="slide-right" data-delay="2">
-            <div class="img-placeholder aspect-[4/3] rounded-xl border border-border">
-              <svg aria-hidden="true" class="h-16 w-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v13.5A1.5 1.5 0 003.75 21z"/></svg>
+          <div class="flex flex-col" data-animate data-delay="1">
+            <div class="mb-5 aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
+              <img src="img/atmospheric-observation.webp" alt="Weather-station mast and all-sky camera dome on an Arctic snowfield beneath a faint aurora" loading="lazy" class="h-full w-full object-cover" />
             </div>
+            <h3 class="mb-3 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Atmospheric observation</h3>
+            <p class="mb-4 text-[17px] leading-relaxed text-neutral-800">
+              Long programs that watch the polar sky breathe.
+            </p>
+            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
+              Long-baseline studies of auroral emissions, mesospheric airglow, and high-latitude weather signatures. We design the field protocols, the capture stack, and the way the data is read &mdash; from the magnetometer planted in the snow to the dashboard the principal investigator opens at 8&nbsp;AM. Multi-year programs are the norm; we don&rsquo;t do drive-by science.
+            </p>
+            <a href="#contact" class="mt-6 inline-block py-1 font-sans text-xs font-medium uppercase tracking-[0.3px] text-[#6B2EC7] transition-colors hover:text-[#5928A8]">
+              Read the field protocols &rarr;
+            </a>
           </div>
+          <div class="flex flex-col" data-animate data-delay="2">
+            <div class="mb-5 aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
+              <img src="img/deep-sky-optics.webp" alt="Research telescope on an equatorial mount under the polar night sky and the Milky Way" loading="lazy" class="h-full w-full object-cover" />
+            </div>
+            <h3 class="mb-3 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Deep-sky optics</h3>
+            <p class="mb-4 text-[17px] leading-relaxed text-neutral-800">
+              Calibration tooling and pipelines that respect the instrument.
+            </p>
+            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
+              Image-stack pipelines and software built so the observer spends time observing, not maintaining the rig. We keep tooling small, well-documented, and offline-first &mdash; the moments worth capturing don&rsquo;t wait for a network handshake. Calibration coefficients never move silently; if a value changes, you&rsquo;ll know which commit moved it.
+            </p>
+            <a href="#contact" class="mt-6 inline-block py-1 font-sans text-xs font-medium uppercase tracking-[0.3px] text-[#6B2EC7] transition-colors hover:text-[#5928A8]">
+              See the build notes &rarr;
+            </a>
+          </div>
+          <div class="flex flex-col" data-animate data-delay="3">
+            <div class="mb-5 aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
+              <img src="img/polar-expedition-support.webp" alt="Field researcher reading a ruggedized device beside a weather station in the Arctic night" loading="lazy" class="h-full w-full object-cover" />
+            </div>
+            <h3 class="mb-3 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Polar expedition support</h3>
+            <p class="mb-4 text-[17px] leading-relaxed text-neutral-800">
+              Interfaces built for &minus;30&nbsp;&deg;C, frosted lenses, and tired hands.
+            </p>
+            <p class="text-[0.95rem] leading-relaxed text-neutral-600">
+              We deploy with the team, train the rotating field cohort, and stay close while the season runs &mdash; most engagements include three site visits and a written end-of-season debrief that names what worked, what didn&rsquo;t, and what we&rsquo;d change in year two. Every screen is rated to be read at &minus;30&nbsp;&deg;C through a frosted lens.
+            </p>
+            <a href="#contact" class="mt-6 inline-block py-1 font-sans text-xs font-medium uppercase tracking-[0.3px] text-[#6B2EC7] transition-colors hover:text-[#5928A8]">
+              Open a deployment brief &rarr;
+            </a>
+          </div>
+        </div>
         </div>
       </div>
     </section>
-    </template>
+
 
     <!-- ===== Card Carousel (over-the-edge) ===== -->
-    <section id="work" class="bg-stone-100 px-8 text-neutral-900 [padding-block:var(--section-padding-y)]">
-      <div class="mx-auto mb-12 max-w-[1200px]">
-        <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Field log</p>
-        <h2 class="max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
-          Studies, instruments, and expeditions from the past year
-        </h2>
-      </div>
-      <!-- Wrapper aligns left edge with 1200px container, breaks past right edge via negative margin -->
-      <div class="mx-auto max-w-[1200px]">
+    <section id="people" class="relative overflow-hidden bg-stone-100 px-8 text-neutral-900 [padding-block:var(--section-padding-y)]">
+      <!-- Auroalis logo watermark — centered, mid-grey, ~512px square -->
+      <svg aria-hidden="true" viewBox="-1 -1 32 32" overflow="visible" fill="none" stroke="currentColor" stroke-width="0.15" stroke-linejoin="round" class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible text-stone-900" style="height: min(80%, 90vw, 720px); aspect-ratio: 1 / 1; opacity: 0.1;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28.2411 14.0891C28.5599 13.6951 28.8222 13.2586 29.0205 12.7921C29.2129 12.3421 29.3459 11.869 29.416 11.3846C29.5292 10.5777 29.4656 9.75589 29.2296 8.97605C28.9935 8.19622 28.5907 7.47705 28.049 6.86841C27.5073 6.25978 26.8397 5.77624 26.0926 5.45133C25.3454 5.12641 24.5364 4.9679 23.7219 4.98677C23.6647 4.48361 23.5395 3.99055 23.3497 3.52108C23.1722 3.06618 22.9335 2.63763 22.6401 2.24733C22.1509 1.5944 21.5253 1.05597 20.8067 0.669536C20.0882 0.283102 19.2941 0.0579594 18.4796 0.00979121C17.6652 -0.0383769 16.8501 0.0915874 16.091 0.390631C15.3319 0.689675 14.6472 1.15061 14.0844 1.74132C13.3032 1.11861 12.3692 0.716894 11.3799 0.578083C10.5725 0.464752 9.75018 0.528486 8.96992 0.76486C8.18966 1.00123 7.47019 1.40459 6.86145 1.94691C6.25271 2.48924 5.7693 3.15755 5.44476 3.90546C5.12022 4.65336 4.96234 5.46293 4.98207 6.27797C4.47966 6.33586 3.98694 6.45904 3.51639 6.64439C2.64578 6.99421 1.87687 7.55692 1.28013 8.28096C0.68339 9.005 0.277891 9.86722 0.100789 10.7886C-0.0763141 11.71 -0.0193568 12.6611 0.266442 13.5548C0.55224 14.4485 1.05774 15.2561 1.73663 15.9038C1.11391 16.685 0.712196 17.619 0.573385 18.6083C0.457988 19.416 0.520263 20.2392 0.755863 21.0203C0.991463 21.8015 1.39471 22.5218 1.93746 23.131C2.4802 23.7402 3.14937 24.2236 3.89824 24.5475C4.64712 24.8714 5.45765 25.0279 6.27327 25.0062C6.3809 26.0018 6.75458 26.95 7.35508 27.7514C7.84454 28.4044 8.47065 28.9427 9.18968 29.3287C9.90872 29.7146 10.7033 29.939 11.5181 29.9861C12.3328 30.0332 13.148 29.9018 13.9067 29.6012C14.6654 29.3006 15.3493 28.8381 15.9107 28.2458C16.3048 28.5646 16.7413 28.8269 17.2077 29.0252C17.6577 29.2176 18.1309 29.3506 18.6153 29.4207C19.4216 29.5341 20.2429 29.4706 21.0222 29.2345C21.8015 28.9983 22.52 28.5953 23.1278 28.0534C23.7355 27.5115 24.218 26.8438 24.5416 26.0965C24.8651 25.3493 25.0221 24.5406 25.0015 23.7266C26.0643 23.6104 27.0717 23.1924 27.9046 22.522C28.7375 21.8516 29.3612 20.9569 29.7019 19.9434C30.0425 18.9299 30.086 17.8401 29.8272 16.8028C29.5683 15.7654 29.0179 14.8237 28.2411 14.0891ZM26.3973 20.8476C26.019 21.1299 25.5847 21.3282 25.1236 21.4292C24.8797 21.4872 24.6298 21.5165 24.3791 21.5164H18.4815L16.2364 23.7557H22.7564C22.7725 24.2466 22.6807 24.7351 22.4877 25.1868C22.2946 25.6384 22.005 26.0423 21.639 26.37C21.2731 26.6976 20.8398 26.9412 20.3697 27.0834C19.8995 27.2256 19.4039 27.263 18.9177 27.193C18.4505 27.1264 18.0026 26.9619 17.6032 26.7103C17.3944 26.5749 17.1996 26.419 17.0216 26.245L12.8456 22.0981H9.66993L14.2822 26.7045C13.9463 27.0633 13.5358 27.3442 13.0797 27.5272C12.6235 27.7102 12.1327 27.791 11.642 27.7638C11.1512 27.7366 10.6724 27.6022 10.2392 27.3699C9.80603 27.1377 9.42906 26.8132 9.13484 26.4195C8.85446 26.04 8.65636 25.6062 8.55322 25.1457C8.49522 24.9018 8.46595 24.652 8.46598 24.4013V18.4862L6.22092 16.2411V22.7611C5.73028 22.7761 5.24228 22.6837 4.7911 22.4903C4.33992 22.297 3.93648 22.0073 3.60902 21.6416C3.28156 21.2759 3.03801 20.843 2.89542 20.3733C2.75282 19.9036 2.71464 19.4084 2.78354 18.9224C2.85235 18.4548 3.01882 18.007 3.2721 17.6079C3.4024 17.3955 3.55871 17.2001 3.7374 17.0263L7.90762 12.8561V9.67463L3.29537 14.2869C2.93837 13.95 2.6592 13.5392 2.47735 13.0833C2.29549 12.6273 2.21534 12.1372 2.24247 11.647C2.26961 11.1569 2.40339 10.6786 2.63446 10.2455C2.86554 9.81242 3.18835 9.43499 3.58036 9.13954C3.96046 8.86018 4.39407 8.66219 4.85411 8.55792C5.09802 8.49992 5.34788 8.47064 5.59859 8.47068H11.502L13.7413 6.22562H7.22131C7.20152 5.61488 7.34856 5.01029 7.64664 4.47686C7.94471 3.94343 8.38254 3.50134 8.91306 3.1981C9.44357 2.89487 10.0467 2.74196 10.6576 2.75583C11.2685 2.7697 11.8641 2.94981 12.3803 3.2768C12.593 3.4068 12.7884 3.56313 12.9619 3.7421L17.1379 7.91232H20.3078L15.6955 3.30007C16.1133 2.85535 16.6442 2.5327 17.2313 2.36671C17.8184 2.20073 18.4397 2.19767 19.0284 2.35785C19.6172 2.51804 20.1512 2.83544 20.5733 3.27602C20.9954 3.7166 21.2897 4.26375 21.4245 4.85881C21.4825 5.10272 21.5118 5.35258 21.5117 5.60329V11.5067L23.751 13.746V7.22601C24.3615 7.20714 24.9656 7.35465 25.4987 7.65276C26.0318 7.95087 26.4737 8.38835 26.7773 8.91836C27.0808 9.44837 27.2345 10.051 27.2219 10.6616C27.2093 11.2723 27.0308 11.868 26.7056 12.385C26.5717 12.5949 26.4157 12.7899 26.2403 12.9666L22.0934 17.1426V20.3125L26.6823 15.7002C27.0411 16.0356 27.3219 16.4456 27.5049 16.9013C27.6879 17.357 27.7686 17.8473 27.7414 18.3376C27.7143 18.8279 27.5798 19.3063 27.3476 19.739C27.1153 20.1717 26.791 20.5481 26.3973 20.8418V20.8476Z"/>
+      </svg>
+
+      <!-- Inner container aligned to the 1200px grid. The card row
+           deliberately breaks past the RIGHT edge (negative margin
+           below) so the open right side reads as "over the edge". -->
+      <div class="relative z-10 mx-auto max-w-[1200px]">
+        <div class="mb-12">
+          <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Partners</p>
+          <h2 class="max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] md:text-5xl lg:text-[64px] lg:leading-[70px]" data-animate data-delay="1">
+            The teams who trust the long night to us
+          </h2>
+        </div>
         <div
           class="carousel -mr-[calc(50vw-50%)] snap-x snap-mandatory overflow-x-auto scroll-smooth pb-4 pr-4"
           role="region"
@@ -242,67 +216,67 @@
           <div class="flex gap-6">
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="1">
               <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-                <img src="img/woman-working-at-desk.jpg" alt="Polaris Records identity system" loading="lazy" class="h-full w-full object-cover" />
+                <img src="img/woman-working-at-desk.webp" alt="Dr. Lena Voss, Earth-observation scientist at ESA" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Identity</p>
-                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Polaris Records</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A modular visual language spanning album art, event posters, and digital platforms.</p>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">ESA &middot; European Space Agency</p>
+                <h3 class="mt-2 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Dr. Lena Voss</h3>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Earth-observation scientist. We tune the atmospheric-retrieval pipeline for her team&rsquo;s polar satellite overpasses.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="2">
               <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-                <img src="img/man-laughing-at-laptop.jpg" alt="Rivet analytics dashboard" loading="lazy" class="h-full w-full object-cover" />
+                <img src="img/man-laughing-at-laptop.webp" alt="Dr. Marcus Reed, heliophysicist at NASA Goddard" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Product</p>
-                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Rivet — operations dashboard</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600">An operations command center built around the three questions operators actually ask.</p>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">NASA &middot; Goddard</p>
+                <h3 class="mt-2 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Dr. Marcus Reed</h3>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Heliophysics Division. Brings us substorm campaigns that need ground truth from the Arctic night.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="3">
               <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-                <img src="img/woman-executive-portrait.jpg" alt="Field &amp; Form storefront redesign" loading="lazy" class="h-full w-full object-cover" />
+                <img src="img/woman-executive-portrait.webp" alt="Dr. Sofia Marchetti, operations lead at the European Southern Observatory" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">E-commerce</p>
-                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Field &amp; Form</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A storefront that lets the product photography do the work. +28% conversion in ninety days.</p>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">ESO &middot; Southern Observatory</p>
+                <h3 class="mt-2 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Dr. Sofia Marchetti</h3>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Operations lead. Trusts us with calibration runs between observing seasons, year after year.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="4">
               <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-                <img src="img/17df7053-a8e3-4561-8eff-9cb87098fa49.jpg" alt="Atlas Quarterly editorial platform" loading="lazy" class="h-full w-full object-cover" />
+                <img src="img/17df7053-a8e3-4561-8eff-9cb87098fa49.webp" alt="Dr. Ingrid Solberg, who completed her PhD with Auroalis&rsquo; support" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Editorial</p>
-                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Atlas Quarterly</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A reading experience that treats long-form writing as a craft, not a feed.</p>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">University of Troms&oslash;</p>
+                <h3 class="mt-2 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Dr. Ingrid Solberg</h3>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Completed her PhD on auroral substorm dynamics with our instruments and field support &mdash; from her first night shift to a defended thesis.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate data-delay="5">
               <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-                <img src="img/woman-presenting-whiteboard.jpg" alt="Mossline field app for ecologists" loading="lazy" class="h-full w-full object-cover" />
+                <img src="img/woman-presenting-whiteboard.webp" alt="Dr. Marit Eliasson of the Kiruna Atmospheric Observatory" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Mobile</p>
-                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Mossline</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Field data collection for ecologists working in places without cell service.</p>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">EISCAT &middot; Kiruna Observatory</p>
+                <h3 class="mt-2 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Dr. Marit Eliasson</h3>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Atmospheric observatory. Runs the radar campaigns we build cold-rated field tooling for.</p>
               </div>
             </article>
 
             <article class="w-80 flex-shrink-0 snap-start sm:w-96" data-animate>
               <div class="aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-                <img src="img/69b075bf-a322-4950-8b47-6f30df277b92.jpg" alt="Meridian hospitality brand refresh" loading="lazy" class="h-full w-full object-cover" />
+                <img src="img/69b075bf-a322-4950-8b47-6f30df277b92.webp" alt="Dr. Yuki Tanaka, Max Planck Institute for Solar System Research" loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pt-5">
-                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Brand</p>
-                <h3 class="mt-2 text-[22px] font-medium leading-[30px] tracking-[-0.01em]">Meridian</h3>
-                <p class="mt-1 text-sm leading-relaxed text-neutral-600">A hospitality group repositioning itself for a more discerning audience.</p>
+                <p class="font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500">Max Planck Institute</p>
+                <h3 class="mt-2 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Dr. Yuki Tanaka</h3>
+                <p class="mt-1 text-sm leading-relaxed text-neutral-600">Solar System Research. Partners with us on long-baseline mesospheric programs across the polar winter.</p>
               </div>
             </article>
 
@@ -313,275 +287,29 @@
       </div>
     </section>
 
-    <!-- ===== Testimonials ===== -->
-    <template data-archived-section="testimonials">
-    <section class="section-muted py-20 md:py-28">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto max-w-2xl text-center" data-animate>
-          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Loved by teams everywhere</h2>
-        </div>
-        <div class="mt-16 grid gap-8 md:grid-cols-3">
-          <!-- Testimonial 1 -->
-          <blockquote class="rounded-xl border border-border bg-background p-8" data-animate data-delay="1">
-            <p class="text-sm leading-relaxed text-muted-foreground">"Acme cut our deploy time from 20 minutes to under 2. The team has never shipped this fast — and we're a 50-person engineering org."</p>
-            <div class="mt-6 flex items-center gap-3">
-              <div class="img-placeholder h-10 w-10 rounded-full">
-                <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-              </div>
-              <div>
-                <p class="text-sm font-semibold">Sarah Chen</p>
-                <p class="text-xs text-muted-foreground">VP Engineering, Raycast</p>
-              </div>
-            </div>
-          </blockquote>
-          <!-- Testimonial 2 -->
-          <blockquote class="rounded-xl border border-border bg-background p-8" data-animate data-delay="2">
-            <p class="text-sm leading-relaxed text-muted-foreground">"We evaluated 12 tools before choosing Acme. Nothing else came close in terms of developer experience. It just works."</p>
-            <div class="mt-6 flex items-center gap-3">
-              <div class="img-placeholder h-10 w-10 rounded-full">
-                <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-              </div>
-              <div>
-                <p class="text-sm font-semibold">Marcus Rivera</p>
-                <p class="text-xs text-muted-foreground">CTO, Basecamp</p>
-              </div>
-            </div>
-          </blockquote>
-          <!-- Testimonial 3 -->
-          <blockquote class="rounded-xl border border-border bg-background p-8" data-animate data-delay="3">
-            <p class="text-sm leading-relaxed text-muted-foreground">"The built-in analytics alone saved us $2k/month. Add the deployment speed and team features, and Acme is an absolute no-brainer."</p>
-            <div class="mt-6 flex items-center gap-3">
-              <div class="img-placeholder h-10 w-10 rounded-full">
-                <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-              </div>
-              <div>
-                <p class="text-sm font-semibold">Aisha Patel</p>
-                <p class="text-xs text-muted-foreground">Head of Product, Linear</p>
-              </div>
-            </div>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-    </template>
 
-    <!-- ===== Pricing ===== -->
-    <template data-archived-section="pricing">
-    <section id="pricing" class="py-20 md:py-28">
-      <div class="mx-auto max-w-7xl px-6">
-        <div class="mx-auto max-w-2xl text-center" data-animate>
-          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Simple, transparent pricing</h2>
-          <p class="mt-4 text-lg text-muted-foreground">Start free. Upgrade when you're ready.</p>
-        </div>
-        <div class="mt-16 grid gap-8 lg:grid-cols-3">
-          <!-- Free -->
-          <div class="rounded-xl border border-border p-8" data-animate data-delay="1">
-            <h3 class="text-lg font-semibold">Starter</h3>
-            <p class="mt-2 text-sm text-muted-foreground">For individuals and small projects.</p>
-            <p class="mt-6"><span class="text-4xl font-bold">$0</span><span class="text-sm text-muted-foreground">/month</span></p>
-            <ul class="mt-8 space-y-3 text-sm text-muted-foreground">
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Up to 3 projects</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>1 GB storage</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Community support</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex w-full items-center justify-center rounded-md border border-border px-6 py-3 text-sm font-medium text-foreground hover:bg-muted transition-colors">Get started</a>
-          </div>
-          <!-- Pro (recommended) -->
-          <div class="relative rounded-xl border-2 border-foreground p-8" data-animate data-delay="2">
-            <span class="absolute -top-3 left-6 rounded-full bg-foreground px-3 py-0.5 text-xs font-medium text-background">Most popular</span>
-            <h3 class="text-lg font-semibold">Pro</h3>
-            <p class="mt-2 text-sm text-muted-foreground">For growing teams that need more power.</p>
-            <p class="mt-6"><span class="text-4xl font-bold">$29</span><span class="text-sm text-muted-foreground">/month</span></p>
-            <ul class="mt-8 space-y-3 text-sm text-muted-foreground">
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Unlimited projects</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>50 GB storage</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Priority support</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Team collaboration</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex w-full items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm hover:opacity-90 transition-opacity">Start free trial</a>
-          </div>
-          <!-- Enterprise -->
-          <div class="rounded-xl border border-border p-8" data-animate data-delay="3">
-            <h3 class="text-lg font-semibold">Enterprise</h3>
-            <p class="mt-2 text-sm text-muted-foreground">For organizations with advanced needs.</p>
-            <p class="mt-6"><span class="text-4xl font-bold">Custom</span></p>
-            <ul class="mt-8 space-y-3 text-sm text-muted-foreground">
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Pro</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>SSO &amp; SAML</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager</li>
-              <li class="flex items-center gap-2"><svg aria-hidden="true" class="h-4 w-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom SLA</li>
-            </ul>
-            <a href="#contact" class="mt-8 inline-flex w-full items-center justify-center rounded-md border border-border px-6 py-3 text-sm font-medium text-foreground hover:bg-muted transition-colors">Contact sales</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    </template>
 
-    <!-- ===== FAQ ===== -->
-    <template data-archived-section="faq">
-    <section id="faq" class="section-muted py-20 md:py-28">
-      <div class="mx-auto max-w-3xl px-6">
-        <div class="text-center" data-animate>
-          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Frequently asked questions</h2>
-        </div>
-        <div class="mt-12 space-y-4">
-          <details class="group rounded-xl border border-border bg-background" data-animate data-delay="1">
-            <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:rounded-xl [&::-webkit-details-marker]:hidden">
-              How long does setup take?
-              <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-            </summary>
-            <div class="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">Most teams are up and running in under 10 minutes. Connect your repo, configure your build settings, and push — that's it. No infrastructure to provision.</div>
-          </details>
-          <details class="group rounded-xl border border-border bg-background" data-animate data-delay="2">
-            <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:rounded-xl [&::-webkit-details-marker]:hidden">
-              Can I use my own domain?
-              <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-            </summary>
-            <div class="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">Yes. Add your custom domain in the dashboard and we handle SSL certificates automatically. Wildcard domains are supported on Pro and Enterprise plans.</div>
-          </details>
-          <details class="group rounded-xl border border-border bg-background" data-animate data-delay="3">
-            <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:rounded-xl [&::-webkit-details-marker]:hidden">
-              What happens when I exceed the free tier limits?
-              <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-            </summary>
-            <div class="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">We'll notify you before you hit any limits. Your projects will continue to run — we never take your site down. You can upgrade or optimize at your own pace.</div>
-          </details>
-          <details class="group rounded-xl border border-border bg-background" data-animate data-delay="4">
-            <summary class="flex cursor-pointer items-center justify-between px-6 py-5 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:rounded-xl [&::-webkit-details-marker]:hidden">
-              Do you offer refunds?
-              <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-            </summary>
-            <div class="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">Yes. If you're not happy within the first 30 days of a paid plan, we'll refund you in full — no questions asked.</div>
-          </details>
-        </div>
-      </div>
-    </section>
-    </template>
 
-    <!-- ===== Bento — five featured cards, white panel before the FAQ ===== -->
-    <section id="featured" class="bg-stone-100 px-8 py-0">
+    <!-- ===== Pull quote — standalone white panel between Field log and bento ===== -->
+    <section id="quote" class="bg-stone-100 px-8 py-0">
       <div class="content-panel content-panel--bottom-flush">
         <div class="mx-auto max-w-[1200px]">
-
-          <!-- Section header: eyebrow + headline + lead paragraph -->
-          <div class="mb-16 max-w-[60ch]">
-            <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>In view</p>
-            <h2 class="mb-6 max-w-[22ch] text-4xl font-normal leading-[1.1] tracking-[-0.025em] text-neutral-900 md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
-              The studio, in one frame
-            </h2>
-            <p class="text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
-              Five lenses on Auroalis, all visible at once: how the practice talks about itself, how a partner talks about us, the constant we listen for, the work we describe to clients in a single paragraph, and the line you can call when the sky is doing something rare.
-            </p>
-          </div>
-
-          <!-- Bento grid — three columns, each managing its own height
-               split via nested flex so all three columns share an
-               identical total height. Col 1 splits 60/40, col 2 splits
-               50/50, col 3 is a single full-height card. -->
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:min-h-[800px]">
-
-            <!-- COL 1: 60/40 vertical split (Studio + Connect) -->
-            <div class="flex flex-col gap-4">
-
-              <!-- A: THE STUDIO — 60% of col, dark -->
-              <article class="flex flex-[6] flex-col overflow-hidden bg-[#1C1917] p-8 text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="1">
-                <div class="flex items-start justify-between gap-4">
-                  <h3 class="text-[30px] font-medium leading-[34px] tracking-[-0.02em]">
-                    Ten dark winters.<br>
-                    Three field stations.<br>
-                    One quiet practice.
-                  </h3>
-                  <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                    The Studio
-                  </span>
-                </div>
-                <img src="img/ac739b21-7073-418b-9a0f-d07f5d6224e0.jpg" alt="" loading="lazy" class="mt-auto h-44 w-full object-cover" />
-              </article>
-
-              <!-- B: CONNECT — 40% of col, gray -->
-              <article class="flex flex-[4] flex-col bg-stone-200 p-8 text-stone-900 shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="4">
-                <div class="flex items-start justify-between gap-4">
-                  <span class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                    Connect
-                  </span>
-                  <a href="#contact" aria-label="Go to contact" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#1C1917] text-white transition-colors hover:bg-stone-800">
-                    <svg aria-hidden="true" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9"/></svg>
-                  </a>
-                </div>
-                <div class="mt-auto pt-6">
-                  <p class="text-base text-stone-800">open@auroalis.studio</p>
-                  <p class="text-sm text-stone-500">+47 779 40 22</p>
-                </div>
-              </article>
-
-            </div>
-
-            <!-- COL 2: 50/50 vertical split (Feedback + Metrics) -->
-            <div class="flex flex-col gap-4">
-
-              <!-- C: FEEDBACK — 50% of col, white with border -->
-              <article class="flex flex-1 flex-col border border-stone-300 bg-white p-8 text-stone-900 shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="2">
-                <div class="flex items-start justify-between gap-4">
-                  <p class="font-serif text-[24px] font-normal leading-[1.35] tracking-[-0.01em]">
-                    &ldquo;They read our data without flinching at &minus;40&deg;C. Twice.&rdquo;
-                  </p>
-                  <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-stone-300 bg-stone-100 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px] text-stone-700">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                    Feedback
-                  </span>
-                </div>
-                <p class="mt-auto pt-6 font-sans text-sm text-stone-500">
-                  Marit Eliasson &mdash; Kiruna Atmospheric Observatory
-                </p>
-              </article>
-
-              <!-- D: METRICS — 50% of col, dark -->
-              <article class="card-wave card-wave--green relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-[#1C1917] p-8 text-center text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="5">
-                <!-- Vertical dark gradient — transparent at the top so
-                     the aurora-green bg shows through, fading to black
-                     at the bottom so the centred number reads cleanly. -->
-                <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/85"></div>
-                <!-- Faded background text -->
-                <div aria-hidden="true" class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden whitespace-nowrap font-serif text-[140px] font-normal tracking-tighter text-white/[0.06]">
-                  aurora aurora
-                </div>
-                <div class="relative z-10">
-                  <p class="font-serif text-[88px] font-medium leading-[0.9] tracking-[-0.04em] text-white">
-                    557.7
-                  </p>
-                  <p class="mt-4 font-sans text-sm leading-snug text-white/65">
-                    nm &mdash; the green<br>of an aurora
-                  </p>
-                </div>
-                <span class="relative z-10 mt-8 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                  Metrics
-                </span>
-              </article>
-
-            </div>
-
-            <!-- COL 3: full height (Deep Sky) -->
-            <article class="card-wave card-wave--blue relative flex flex-col overflow-hidden p-8 text-white shadow-[0_32px_60px_-24px_rgba(28,25,23,0.22)]" data-animate data-delay="3">
-              <div class="flex justify-end">
-                <span class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm px-3.5 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.3px]">
-                  <span class="h-1.5 w-1.5 rounded-full bg-[#3DDC97]"></span>
-                  Deep Sky
-                </span>
-              </div>
-              <p class="mt-auto text-[15px] leading-relaxed text-white/90">
-                From substorm cadence to mesospheric airglow &mdash; we engineer the instruments, write the protocols, and read the data. The work begins where the streetlights end and the polar night opens.
+          <figure class="flex flex-col items-center text-center" data-animate>
+            <img src="img/14f1fb2be1403fad2d2bdc56b87f13ad_1776419133816.webp" alt="Portrait of Dr. Anja Dahl" loading="lazy" width="64" height="64" class="h-16 w-16 rounded-full object-cover" />
+            <blockquote class="mt-8 max-w-[60ch]">
+              <p class="font-serif text-[28px] font-normal leading-[1.3] tracking-[-0.01em] text-neutral-900 md:text-[34px] md:leading-[1.25]">
+                &ldquo;Auroalis showed up in February with three calibration rigs and a quiet patience that held our team together through a difficult instrument season. They left us with cleaner data than we&rsquo;d had in five years &mdash; and a written protocol the next observer could actually follow.&rdquo;
               </p>
-            </article>
-
-          </div>
-
+            </blockquote>
+            <figcaption class="mt-8 font-sans text-sm leading-relaxed">
+              <span class="font-medium text-neutral-900">Dr. Anja Dahl</span>
+              <span class="text-neutral-500">&nbsp;&mdash;&nbsp;Senior Atmospheric Researcher, Troms&oslash; Geophysical Observatory</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
+
 
     <!-- ===== FAQ — dark panel, 1/3 left intro + 2/3 right Q&A ===== -->
     <section id="faq" class="bg-stone-100 px-8 py-0">
@@ -592,7 +320,7 @@
             <!-- 1/3 left: eyebrow + headline + subtext -->
             <div>
               <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-white/55" data-animate>Field manual</p>
-              <h2 class="mb-6 max-w-[14ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
+              <h2 class="mb-6 max-w-[14ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[64px] lg:leading-[70px]" data-animate data-delay="1">
                 Questions we hear at 3&nbsp;AM
               </h2>
               <p class="max-w-[36ch] text-[15px] leading-relaxed text-white/65" data-animate data-delay="2">
@@ -710,7 +438,7 @@
         <div class="mx-auto grid max-w-[1200px] items-center gap-12 md:grid-cols-[3fr_2fr]">
           <div>
             <p class="mb-6 font-sans text-xs font-medium uppercase tracking-[0.3px] text-neutral-500" data-animate>Open a study</p>
-            <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[56px] lg:leading-[62px]" data-animate data-delay="1">
+            <h2 class="max-w-[18ch] text-4xl font-normal leading-[1.05] tracking-[-0.025em] md:text-5xl lg:text-[64px] lg:leading-[70px]" data-animate data-delay="1">
               Send a signal. We listen for it.
             </h2>
             <p class="mt-6 max-w-[48ch] text-lg leading-relaxed text-neutral-700" data-animate data-delay="2">
@@ -750,48 +478,73 @@
         <!-- Brand -->
         <div>
           <a href="/" class="flex items-center gap-3 font-serif text-2xl font-normal tracking-[-0.02em]">
-            <svg class="h-7 w-7" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <svg class="h-7 w-7" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M28.2411 14.0891C28.5599 13.6951 28.8222 13.2586 29.0205 12.7921C29.2129 12.3421 29.3459 11.869 29.416 11.3846C29.5292 10.5777 29.4656 9.75589 29.2296 8.97605C28.9935 8.19622 28.5907 7.47705 28.049 6.86841C27.5073 6.25978 26.8397 5.77624 26.0926 5.45133C25.3454 5.12641 24.5364 4.9679 23.7219 4.98677C23.6647 4.48361 23.5395 3.99055 23.3497 3.52108C23.1722 3.06618 22.9335 2.63763 22.6401 2.24733C22.1509 1.5944 21.5253 1.05597 20.8067 0.669536C20.0882 0.283102 19.2941 0.0579594 18.4796 0.00979121C17.6652 -0.0383769 16.8501 0.0915874 16.091 0.390631C15.3319 0.689675 14.6472 1.15061 14.0844 1.74132C13.3032 1.11861 12.3692 0.716894 11.3799 0.578083C10.5725 0.464752 9.75018 0.528486 8.96992 0.76486C8.18966 1.00123 7.47019 1.40459 6.86145 1.94691C6.25271 2.48924 5.7693 3.15755 5.44476 3.90546C5.12022 4.65336 4.96234 5.46293 4.98207 6.27797C4.47966 6.33586 3.98694 6.45904 3.51639 6.64439C2.64578 6.99421 1.87687 7.55692 1.28013 8.28096C0.68339 9.005 0.277891 9.86722 0.100789 10.7886C-0.0763141 11.71 -0.0193568 12.6611 0.266442 13.5548C0.55224 14.4485 1.05774 15.2561 1.73663 15.9038C1.11391 16.685 0.712196 17.619 0.573385 18.6083C0.457988 19.416 0.520263 20.2392 0.755863 21.0203C0.991463 21.8015 1.39471 22.5218 1.93746 23.131C2.4802 23.7402 3.14937 24.2236 3.89824 24.5475C4.64712 24.8714 5.45765 25.0279 6.27327 25.0062C6.3809 26.0018 6.75458 26.95 7.35508 27.7514C7.84454 28.4044 8.47065 28.9427 9.18968 29.3287C9.90872 29.7146 10.7033 29.939 11.5181 29.9861C12.3328 30.0332 13.148 29.9018 13.9067 29.6012C14.6654 29.3006 15.3493 28.8381 15.9107 28.2458C16.3048 28.5646 16.7413 28.8269 17.2077 29.0252C17.6577 29.2176 18.1309 29.3506 18.6153 29.4207C19.4216 29.5341 20.2429 29.4706 21.0222 29.2345C21.8015 28.9983 22.52 28.5953 23.1278 28.0534C23.7355 27.5115 24.218 26.8438 24.5416 26.0965C24.8651 25.3493 25.0221 24.5406 25.0015 23.7266C26.0643 23.6104 27.0717 23.1924 27.9046 22.522C28.7375 21.8516 29.3612 20.9569 29.7019 19.9434C30.0425 18.9299 30.086 17.8401 29.8272 16.8028C29.5683 15.7654 29.0179 14.8237 28.2411 14.0891ZM26.3973 20.8476C26.019 21.1299 25.5847 21.3282 25.1236 21.4292C24.8797 21.4872 24.6298 21.5165 24.3791 21.5164H18.4815L16.2364 23.7557H22.7564C22.7725 24.2466 22.6807 24.7351 22.4877 25.1868C22.2946 25.6384 22.005 26.0423 21.639 26.37C21.2731 26.6976 20.8398 26.9412 20.3697 27.0834C19.8995 27.2256 19.4039 27.263 18.9177 27.193C18.4505 27.1264 18.0026 26.9619 17.6032 26.7103C17.3944 26.5749 17.1996 26.419 17.0216 26.245L12.8456 22.0981H9.66993L14.2822 26.7045C13.9463 27.0633 13.5358 27.3442 13.0797 27.5272C12.6235 27.7102 12.1327 27.791 11.642 27.7638C11.1512 27.7366 10.6724 27.6022 10.2392 27.3699C9.80603 27.1377 9.42906 26.8132 9.13484 26.4195C8.85446 26.04 8.65636 25.6062 8.55322 25.1457C8.49522 24.9018 8.46595 24.652 8.46598 24.4013V18.4862L6.22092 16.2411V22.7611C5.73028 22.7761 5.24228 22.6837 4.7911 22.4903C4.33992 22.297 3.93648 22.0073 3.60902 21.6416C3.28156 21.2759 3.03801 20.843 2.89542 20.3733C2.75282 19.9036 2.71464 19.4084 2.78354 18.9224C2.85235 18.4548 3.01882 18.007 3.2721 17.6079C3.4024 17.3955 3.55871 17.2001 3.7374 17.0263L7.90762 12.8561V9.67463L3.29537 14.2869C2.93837 13.95 2.6592 13.5392 2.47735 13.0833C2.29549 12.6273 2.21534 12.1372 2.24247 11.647C2.26961 11.1569 2.40339 10.6786 2.63446 10.2455C2.86554 9.81242 3.18835 9.43499 3.58036 9.13954C3.96046 8.86018 4.39407 8.66219 4.85411 8.55792C5.09802 8.49992 5.34788 8.47064 5.59859 8.47068H11.502L13.7413 6.22562H7.22131C7.20152 5.61488 7.34856 5.01029 7.64664 4.47686C7.94471 3.94343 8.38254 3.50134 8.91306 3.1981C9.44357 2.89487 10.0467 2.74196 10.6576 2.75583C11.2685 2.7697 11.8641 2.94981 12.3803 3.2768C12.593 3.4068 12.7884 3.56313 12.9619 3.7421L17.1379 7.91232H20.3078L15.6955 3.30007C16.1133 2.85535 16.6442 2.5327 17.2313 2.36671C17.8184 2.20073 18.4397 2.19767 19.0284 2.35785C19.6172 2.51804 20.1512 2.83544 20.5733 3.27602C20.9954 3.7166 21.2897 4.26375 21.4245 4.85881C21.4825 5.10272 21.5118 5.35258 21.5117 5.60329V11.5067L23.751 13.746V7.22601C24.3615 7.20714 24.9656 7.35465 25.4987 7.65276C26.0318 7.95087 26.4737 8.38835 26.7773 8.91836C27.0808 9.44837 27.2345 10.051 27.2219 10.6616C27.2093 11.2723 27.0308 11.868 26.7056 12.385C26.5717 12.5949 26.4157 12.7899 26.2403 12.9666L22.0934 17.1426V20.3125L26.6823 15.7002C27.0411 16.0356 27.3219 16.4456 27.5049 16.9013C27.6879 17.357 27.7686 17.8473 27.7414 18.3376C27.7143 18.8279 27.5798 19.3063 27.3476 19.739C27.1153 20.1717 26.791 20.5481 26.3973 20.8418V20.8476Z"/>
             </svg>
             <span>Auroalis</span>
           </a>
-          <p class="mt-3 text-sm text-white/60">Research, observation, and design from the high north.</p>
+          <p class="mt-3 max-w-[28ch] text-sm text-white/60">Research, observation, and design from the high north.</p>
+          <div class="mt-6 flex gap-4">
+            <a href="#" class="inline-flex p-1 text-white/60 transition-colors hover:text-white" aria-label="GitHub">
+              <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <a href="#" class="inline-flex p-1 text-white/60 transition-colors hover:text-white" aria-label="Email">
+              <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            </a>
+          </div>
         </div>
-        <!-- Product -->
+        <!-- Studio -->
         <div>
-          <p class="text-sm font-semibold">Product</p>
+          <p class="text-sm font-semibold">Studio</p>
           <ul class="mt-4 space-y-3 text-sm text-white/60">
-            <li><a href="#features" class="transition-colors hover:text-white">Features</a></li>
-            <li><a href="#pricing" class="transition-colors hover:text-white">Pricing</a></li>
-            <li><a href="#faq" class="transition-colors hover:text-white">FAQ</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Field protocols</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Instruments</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Calibration</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Publications</a></li>
           </ul>
         </div>
         <!-- Company -->
         <div>
           <p class="text-sm font-semibold">Company</p>
           <ul class="mt-4 space-y-3 text-sm text-white/60">
-            <li><a href="#about" class="transition-colors hover:text-white">About</a></li>
-            <li><a href="legal.html" class="transition-colors hover:text-white">Legal</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">About</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Careers</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Press</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Partners</a></li>
           </ul>
         </div>
-        <!-- Social -->
+        <!-- Resources -->
         <div>
-          <p class="text-sm font-semibold">Connect</p>
-          <div class="mt-4 flex gap-4">
-            <a href="#" class="text-white/60 transition-colors hover:text-white" aria-label="GitHub">
-              <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            </a>
-            <a href="#" class="text-white/60 transition-colors hover:text-white" aria-label="Email">
-              <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-            </a>
-          </div>
+          <p class="text-sm font-semibold">Resources</p>
+          <ul class="mt-4 space-y-3 text-sm text-white/60">
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Documentation</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Data policy</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Field status</a></li>
+            <li><a href="content.html" class="inline-block py-1 transition-colors hover:text-white">Legal &amp; imprint</a></li>
+          </ul>
         </div>
       </div>
-          <p class="mt-20 text-sm text-white/40">&copy; 2026 Auroalis Observation Studio. All rights reserved.</p>
+          <p class="mt-20 text-sm text-white/60">&copy; 2026 Auroalis Observation Studio. All rights reserved.</p>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- ===== Popover / modal =====
+       Opened by the hero "Begin a study" CTA (see js/main.js). The page
+       behind stays visible but blurred so focus shifts to the card.
+       Content is injected per data-popover key. -->
+  <div id="popover-overlay" class="popover-overlay" aria-hidden="true">
+    <div class="popover-card" role="dialog" aria-modal="true" aria-labelledby="popover-title" tabindex="-1">
+      <button type="button" class="popover-close" data-popover-close aria-label="Close">
+        <svg aria-hidden="true" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="popover-body">
+        <h2 id="popover-title" class="text-2xl font-normal tracking-[-0.01em]"></h2>
+        <div id="popover-content" class="mt-4 space-y-4 text-[15px] leading-relaxed text-neutral-600"></div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
