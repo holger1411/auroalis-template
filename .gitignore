@@ -4,3 +4,4 @@ node_modules/
 
 # vibe2prod audit artifacts
 .vibe2prod/
+.vercel
