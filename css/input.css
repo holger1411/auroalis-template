@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
-/* Inter (body, labels, chrome) and Newsreader (headings H1–H6) are loaded
- * via <link> in the page <head> (Google Fonts).
- */
+/* Inter (body, labels, chrome) and Newsreader (headings H1–H6) are self-hosted
+ * (no external CDN). Variable woff2, latin subset, with font-display: swap so
+ * text paints immediately with the fallback and swaps in without blocking render.
+ * The page <head> preloads both files. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('fonts/inter-latin-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('fonts/newsreader-latin-var.woff2') format('woff2');
+}
 
 /* ===== Dark Mode Variant ===== */
 

@@ -22,10 +22,9 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts: Inter (body) + Newsreader (headings H1–H6) via Google Fonts. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <!-- Fonts: Inter (body) + Newsreader (headings) — self-hosted, no external CDN. -->
+  <link rel="preload" href="css/fonts/newsreader-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="css/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/styles.css">
 
@@ -141,7 +140,7 @@
         <div class="mt-16 grid gap-12 md:grid-cols-3">
           <div class="flex flex-col" data-animate data-delay="1">
             <div class="mb-5 aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-              <img src="img/atmospheric-observation.webp" alt="Weather-station mast and all-sky camera dome on an Arctic snowfield beneath a faint aurora" loading="lazy" class="h-full w-full object-cover" />
+              <img src="img/atmospheric-observation-card.webp" alt="Weather-station mast and all-sky camera dome on an Arctic snowfield beneath a faint aurora" loading="lazy" width="760" height="568" class="h-full w-full object-cover" />
             </div>
             <h3 class="mb-3 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Atmospheric observation</h3>
             <p class="mb-4 text-[17px] leading-relaxed text-neutral-800">
@@ -156,7 +155,7 @@
           </div>
           <div class="flex flex-col" data-animate data-delay="2">
             <div class="mb-5 aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-              <img src="img/deep-sky-optics.webp" alt="Research telescope on an equatorial mount under the polar night sky and the Milky Way" loading="lazy" class="h-full w-full object-cover" />
+              <img src="img/deep-sky-optics-card.webp" alt="Research telescope on an equatorial mount under the polar night sky and the Milky Way" loading="lazy" width="760" height="568" class="h-full w-full object-cover" />
             </div>
             <h3 class="mb-3 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Deep-sky optics</h3>
             <p class="mb-4 text-[17px] leading-relaxed text-neutral-800">
@@ -171,7 +170,7 @@
           </div>
           <div class="flex flex-col" data-animate data-delay="3">
             <div class="mb-5 aspect-[4/3] overflow-hidden rounded-lg bg-neutral-200">
-              <img src="img/polar-expedition-support.webp" alt="Field researcher reading a ruggedized device beside a weather station in the Arctic night" loading="lazy" class="h-full w-full object-cover" />
+              <img src="img/polar-expedition-support-card.webp" alt="Field researcher reading a ruggedized device beside a weather station in the Arctic night" loading="lazy" width="760" height="570" class="h-full w-full object-cover" />
             </div>
             <h3 class="mb-3 text-[26px] font-medium leading-[34px] tracking-[-0.01em]">Polar expedition support</h3>
             <p class="mb-4 text-[17px] leading-relaxed text-neutral-800">
