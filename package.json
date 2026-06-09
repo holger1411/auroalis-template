@@ -1,6 +1,6 @@
 {
   "name": "auroalis-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Auroalis — a clean, content-rich HTML landing page + article template built with Tailwind CSS 4",
   "scripts": {
